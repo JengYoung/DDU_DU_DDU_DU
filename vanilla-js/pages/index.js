@@ -1,0 +1,1 @@
+export { deafult as Home } from './Home';
