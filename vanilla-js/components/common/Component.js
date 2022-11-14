@@ -1,24 +1,37 @@
+import { createElem } from "../../utils/query-selectors";
+
 export default class Component {
 
-  constructor($target, props) {
+  constructor($parent, $root, props) {
+    this.$parent = $parent;
+    this.$root = $root;
     this.isMounted = false;
-    this.target = target;
-
-    this.$container = document.createElement('div');
-    this.props = props;
-
-    this.render(true);
+    
+    this.state = { ...props };
   }
 
   shouldUpdate() {
-    this.$container.innerHTML = '';
+    this.$root.innerHTML = '';
+    this.isMounted = false;
   }
 
-  setState(newState) {}
+  setState(nextState, shouldUpdate = false) {
+    this.state = {
+      ...this.state,
+      ...nextState
+    }
+
+    this.render(shouldUpdate);
+  }
 
   render(shouldUpdate) {
     if (shouldUpdate) {
       this.shouldUpdate()
+    }
+
+    if (!this.isMounted) {
+      this.$parent.appendChild(this.$root);
+      this.isMounted = true;
     }
   }
 }

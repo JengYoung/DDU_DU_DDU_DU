@@ -3,10 +3,10 @@ class Router {
   #ROUTE_REPLACE_EVENT = 'update:route-replace';
   #ROUTE_PUSH_EVENT = 'udpate:route-push';
   
-  constructor(pages) {
+  constructor(props) {
     this.state = {
+      ...props,
       pathname: window.location.pathname,
-      pages
     }
   }
 
@@ -17,7 +17,7 @@ class Router {
     }
   }
 
-  routePage() {
+  routePage({ from, to }) {
     /**
      * page들의 조건에 맞게 작성한다.
      * 
@@ -25,6 +25,16 @@ class Router {
      * [ ] 여러 페이지들의 path를 기본적으로 받는 state가 있어야 할 것이다.
      * [ ] 이를 정규표현식을 통해 걸러낼 수 있어야 한다.
      */
+    const page = this.state.pages.find(page => {
+      const pathnameArr = page.routeHistory.pathname.split('/');
+      const toArr = to.split('/')
+      
+      return toArr.every((path, idx) => 
+        new RegExp('(^:)|' + `^${path}$`).test(pathnameArr[idx])
+      )
+    })
+
+    return page;
   }
 
   back() {
@@ -55,12 +65,22 @@ class Router {
 
     const event = new CustomEvent(type, { 
       from: this.state.pathname, 
-      next: nextUrl, 
-      meta: {} 
+      to: nextUrl, 
+      meta: {}
     }); 
 
     this.setState({ pathname: nextUrl })
     dispatchEvent(event);
+
+    this.routePage({ 
+      from: this.state.pathname, 
+      to: nextUrl, 
+    })
+  }
+
+  /* Page에 맞춰서 맞는 페이지 컴포넌트로 전달해주는 역할을 한다. */
+  async route() {
+    this.state.pages.filter(page => page.pathname.match())
   }
 }
 

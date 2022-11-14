@@ -1,10 +1,10 @@
 import Component from "../components/common/Component";
 
-class HomePage extends Component {
+class DetailPage extends Component {
   constructor($parent, $root, props, route) {
     super($parent, $root, props);
     this.routeHistory = route;
   }
 }
 
-export default HomePage
+export default DetailPage

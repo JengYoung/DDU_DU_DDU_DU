@@ -9,7 +9,6 @@ const API_END_POINT = "/web/";
  * }
  */
 export const request = async (url) => {
-  console.log('hi, res');
   try {
     const res = await fetch(`${API_END_POINT}${url}`);
 
