@@ -8,6 +8,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
     "prettier": "^2.8.0"
@@ -16,5 +18,10 @@
     "*.{tsx,ts,js,vue}": [
       "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
