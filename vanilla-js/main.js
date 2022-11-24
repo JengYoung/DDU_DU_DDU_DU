@@ -1,6 +1,6 @@
 import { Home, Detail } from './pages/index';
 import Router from './router/index';
-import './style.css'
+import './style.css';
 import { $, createElem } from './utils/query-selectors';
 
 class App {
@@ -9,26 +9,26 @@ class App {
     this.router = new Router({
       pages: [
         new Home(
-          this.$app, 
+          this.$app,
           createElem('section', 'index-page', null),
-          {}, 
-          { 
-            name: 'Home', 
-            pathname: '/', 
-            meta: {} 
+          {},
+          {
+            name: 'Home',
+            pathname: '/',
+            meta: {},
           }
         ),
         new Detail(
-          this.$app, 
+          this.$app,
           createElem('section', 'detail-page', null),
-          {}, 
-          { 
-            name: 'Detail', 
+          {},
+          {
+            name: 'Detail',
             pathname: '/detail/:id',
-            meta: {} 
+            meta: {},
           }
         ),
-      ]
+      ],
     });
 
     this.render();
@@ -41,10 +41,10 @@ class App {
       const page = await this.router.routePage({
         from: null,
         to: window.location.pathname,
-      })
+      });
 
       page.render(true);
-    } 
+    }
 
     route.apply(this);
   }

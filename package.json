@@ -1,7 +1,7 @@
 {
   "scripts": {
     "postinstall": "husky install",
-    "prettier:all": "prettier --write **/*.{js} --ignore-unknown"
+    "prettier:all": "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown"
   },
   "name": "ddu-du-ddu-du",
   "packageManager": "yarn@3.3.0",
@@ -13,6 +13,8 @@
     "prettier": "^2.8.0"
   },
   "lint-staged": {
-    "*.{tsx,ts,js,vue}": []
+    "*.{tsx,ts,js,vue}": [
+      "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown"
+    ]
   }
 }

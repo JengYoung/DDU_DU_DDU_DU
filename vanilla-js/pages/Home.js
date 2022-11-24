@@ -1,4 +1,4 @@
-import Component from "../components/common/Component";
+import Component from '../components/common/Component';
 
 class HomePage extends Component {
   constructor($parent, $root, props, route) {
@@ -7,4 +7,4 @@ class HomePage extends Component {
   }
 }
 
-export default HomePage
+export default HomePage;

@@ -1,4 +1,4 @@
-const API_END_POINT = "/web/";
+const API_END_POINT = '/web/';
 
 /**
  * @param
@@ -13,7 +13,7 @@ export const request = async (url) => {
     const res = await fetch(`${API_END_POINT}${url}`);
 
     if (!res.ok) {
-      throw new Error("API Call Failed");
+      throw new Error('API Call Failed');
     }
 
     return await res.json();
