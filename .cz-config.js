@@ -12,4 +12,17 @@ module.exports = {
     { value: 'move', name: 'move | 디렉토리, 파일이나 코드를 새로운 위치로 이동시켜요.' },
     { value: 'remove', name: 'revert | 쓸모없는 디렉토리, 파일이나 코드를 삭제해요.' },
   ],
+  scopes: [
+    'component',
+    'store',
+    'lib',
+    'util',
+    'dom',
+    'hook',
+    'package',
+    'workflow',
+    'lint',
+    'formatting',
+  ],
+  allowCustomScopes: true,
 };
