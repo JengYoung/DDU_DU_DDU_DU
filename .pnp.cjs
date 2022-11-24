@@ -31,7 +31,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/cli", "npm:17.3.0"],\
             ["@commitlint/config-conventional", "npm:17.3.0"],\
             ["commitizen", "npm:4.2.5"],\
-            ["cz-conventional-changelog", "npm:3.3.0"],\
             ["cz-customizable", "npm:7.0.0"],\
             ["husky", "npm:8.0.2"],\
             ["lint-staged", "npm:13.0.3"],\
@@ -845,7 +844,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],\
       ["commitizen", [\
         ["npm:4.2.5", {\
-          "packageLocation": "./.yarn/unplugged/commitizen-npm-4.2.5-926ae634bf/node_modules/commitizen/",\
+          "packageLocation": "./.yarn/cache/commitizen-npm-4.2.5-926ae634bf-28f5d10cf3.zip/node_modules/commitizen/",\
           "packageDependencies": [\
             ["commitizen", "npm:4.2.5"],\
             ["cachedir", "npm:2.3.0"],\
@@ -1018,7 +1017,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],\
       ["cz-customizable", [\
         ["npm:7.0.0", {\
-          "packageLocation": "./.yarn/cache/cz-customizable-npm-7.0.0-1704ad9243-657ae421f9.zip/node_modules/cz-customizable/",\
+          "packageLocation": "./.yarn/unplugged/cz-customizable-npm-7.0.0-1704ad9243/node_modules/cz-customizable/",\
           "packageDependencies": [\
             ["cz-customizable", "npm:7.0.0"],\
             ["editor", "npm:1.0.0"],\
@@ -1048,7 +1047,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@commitlint/cli", "npm:17.3.0"],\
             ["@commitlint/config-conventional", "npm:17.3.0"],\
             ["commitizen", "npm:4.2.5"],\
-            ["cz-conventional-changelog", "npm:3.3.0"],\
             ["cz-customizable", "npm:7.0.0"],\
             ["husky", "npm:8.0.2"],\
             ["lint-staged", "npm:13.0.3"],\

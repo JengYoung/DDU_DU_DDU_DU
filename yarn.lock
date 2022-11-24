@@ -846,7 +846,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cz-conventional-changelog@npm:3.3.0, cz-conventional-changelog@npm:^3.3.0":
+"cz-conventional-changelog@npm:3.3.0":
   version: 3.3.0
   resolution: "cz-conventional-changelog@npm:3.3.0"
   dependencies:
@@ -895,13 +895,12 @@ __metadata:
     "@commitlint/cli": ^17.3.0
     "@commitlint/config-conventional": ^17.3.0
     commitizen: ^4.2.5
-    cz-conventional-changelog: ^3.3.0
     cz-customizable: ^7.0.0
     husky: ^8.0.2
     lint-staged: ^13.0.3
     prettier: ^2.8.0
   dependenciesMeta:
-    commitizen@4.2.5:
+    cz-customizable@7.0.0:
       unplugged: true
   languageName: unknown
   linkType: soft
