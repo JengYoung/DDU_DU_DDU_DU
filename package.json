@@ -1,11 +1,15 @@
 {
+  "name": "ddu-du-ddu-du",
+  "packageManager": "yarn@3.3.0",
+  "workspaces": [
+    "vanilla-js"
+  ],
   "scripts": {
     "postinstall": "husky install",
     "prettier:all": "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown",
-    "commit": "cz-customizable"
+    "commit": "cz-customizable",
+    "dev:vanilla-js": "yarn workspace vanilla-js dev"
   },
-  "name": "ddu-du-ddu-du",
-  "packageManager": "yarn@3.3.0",
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
@@ -15,6 +19,11 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.8.0"
   },
+  "dependenciesMeta": {
+    "cz-customizable@7.0.0": {
+      "unplugged": true
+    }
+  },
   "lint-staged": {
     "*.{tsx,ts,js,vue}": [
       "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown"
@@ -23,11 +32,6 @@
   "config": {
     "commitizen": {
       "path": "cz-customizable"
-    }
-  },
-  "dependenciesMeta": {
-    "cz-customizable@7.0.0": {
-      "unplugged": true
     }
   }
 }
