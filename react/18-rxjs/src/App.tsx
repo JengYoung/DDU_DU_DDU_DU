@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import IndexPage from './pages/IndexPage';
-import TodoDetailPage from './pages/TodoDetailPage';
+import TodoPage from './pages/TodoPage';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<IndexPage />} />
-          <Route path="/todo" element={<TodoDetailPage />} />
+          <Route path="/todo" element={<TodoPage />} />
         </Routes>
       </BrowserRouter>
     </div>
