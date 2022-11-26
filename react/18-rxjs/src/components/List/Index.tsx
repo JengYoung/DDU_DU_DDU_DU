@@ -1,6 +1,6 @@
 import React from 'react';
 import { TodoInterface } from '../../stores/TodoStore';
-import './list.scss';
+import styles from './list.module.scss';
 
 interface ListInterface {
   className: string;
@@ -8,7 +8,15 @@ interface ListInterface {
 }
 
 const List = ({ className, children }: ListInterface) => {
-  return <ul className={`list ${className}`}>{children}</ul>;
+  const nowClassName =
+    styles.list +
+    ' ' +
+    className
+      .split(' ')
+      .map((name) => styles[name])
+      .join('');
+
+  return <ul className={nowClassName}>{children}</ul>;
 };
 
 export default List;
