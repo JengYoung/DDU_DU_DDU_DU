@@ -21,23 +21,25 @@ export const todoData$: Observable<InitialTodoStoreState> = todoStoreState$.asOb
 
 export const addTodo = (content: string) => {
   todoStoreState$.next({
-    ...initialState,
-    id: initialState.id + 1,
-    todos: [...initialState.todos, { content, id: initialState.id + 1, isDone: false }],
+    id: todoStoreState$.value.id + 1,
+    todos: [
+      ...todoStoreState$.value.todos,
+      { content, id: todoStoreState$.value.id + 1, isDone: false },
+    ],
   });
 };
 
 export const deleteTodo = (id: number) => {
   todoStoreState$.next({
-    ...initialState,
-    todos: initialState.todos.filter((todo) => todo.id !== id),
+    ...todoStoreState$.value,
+    todos: todoStoreState$.value.todos.filter((todo) => todo.id !== id),
   });
 };
 
 export const toggleTodo = (id: number, checked: boolean) => {
   todoStoreState$.next({
-    ...initialState,
-    todos: initialState.todos.map((todo) =>
+    ...todoStoreState$.value,
+    todos: todoStoreState$.value.todos.map((todo) =>
       todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
     ),
   });

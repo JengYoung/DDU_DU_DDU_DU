@@ -3,10 +3,12 @@ import styles from './page.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 import List from '../components/List/Index';
-import { InitialTodoStoreState, todoData$, TodoInterface } from '../stores/TodoStore';
+import { addTodo, InitialTodoStoreState, todoData$, TodoInterface } from '../stores/TodoStore';
 import Input from '../components/Input/Input';
+import Button from '../components/Button/Index';
 
 const TodoPage = () => {
+  const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState<TodoInterface[]>([]);
 
   useEffect(() => {
@@ -17,10 +19,27 @@ const TodoPage = () => {
     return () => todo$.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    console.log(todos);
+  }, [todos]);
+
+  const onSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addTodo(inputValue);
+  };
+
   return (
     <section className={styles.page}>
       <div className={styles['page__inner']}>
-        <Input className="todo-input" />
+        <form className={styles['todo-form']}>
+          <Input
+            className="todo-search__input todo-input"
+            onInput={(e: React.FormEvent) => setInputValue((e.target as HTMLInputElement).value)}
+          />
+          <Button className={styles['todo-form__form-button']} onClick={onSubmit}>
+            할 일 추가
+          </Button>
+        </form>
         <List className="todo-list"></List>
       </div>
     </section>

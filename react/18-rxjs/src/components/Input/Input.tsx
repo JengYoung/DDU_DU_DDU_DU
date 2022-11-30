@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './input.module.scss';
 
-const Input = ({ className }: { className: string }) => {
+interface InputInterface {
+  onInput?: (e: React.FormEvent) => void;
+  className: string;
+}
+const Input = ({ onInput, className }: InputInterface) => {
   const nowClassName =
     styles.input +
     ' ' +
@@ -10,7 +14,7 @@ const Input = ({ className }: { className: string }) => {
       .map((name) => styles[name])
       .join('');
 
-  return <input className={nowClassName} />;
+  return <input onInput={onInput} className={nowClassName} />;
 };
 
 export default Input;

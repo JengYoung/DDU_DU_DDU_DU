@@ -15,6 +15,7 @@ module.exports = {
   scopes: [
     'component',
     'store',
+    'css-style',
     'lib',
     'util',
     'dom',

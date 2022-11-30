@@ -15,3 +15,13 @@
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
 }
+
+
+.todo-form {
+  display: flex;
+  justify-content: center;
+}
+
+.todo-form__form-button {
+  margin-left: 0.5rem;
+}
