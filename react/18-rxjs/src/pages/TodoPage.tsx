@@ -3,9 +3,16 @@ import styles from './page.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Subscription } from 'rxjs';
 import List from '../components/List/Index';
-import { addTodo, InitialTodoStoreState, todoData$, TodoInterface } from '../stores/TodoStore';
+import {
+  addTodo,
+  toggleTodo,
+  InitialTodoStoreState,
+  todoData$,
+  TodoInterface,
+} from '../stores/TodoStore';
 import Input from '../components/Input/Input';
 import Button from '../components/Button/Index';
+import TodoCard from '../components/Card/TodoCard';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -40,7 +47,11 @@ const TodoPage = () => {
             할 일 추가
           </Button>
         </form>
-        <List className="todo-list"></List>
+        <List className="todo-list">
+          {todos.map((todo) => (
+            <TodoCard key={todo.id} todo={todo} toggleTodo={toggleTodo}></TodoCard>
+          ))}
+        </List>
       </div>
     </section>
   );

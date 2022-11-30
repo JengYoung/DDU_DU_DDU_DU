@@ -5,6 +5,6 @@ export const getClassName = <T>(styles: T, base: keyof T, className?: string) =>
         className
           .split(' ')
           .map((name) => styles[name as keyof T] ?? name)
-          .join('')
+          .join(' ')
     : styles[base];
 };

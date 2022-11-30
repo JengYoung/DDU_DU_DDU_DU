@@ -1,0 +1,17 @@
+.todo__card {
+  box-sizing: border-box;
+  text-align: left;
+  width: 420px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  padding: 0 1rem;
+
+  input {
+    margin-right: 1rem;
+  }
+}

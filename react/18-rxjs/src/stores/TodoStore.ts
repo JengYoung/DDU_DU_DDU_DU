@@ -36,7 +36,8 @@ export const deleteTodo = (id: number) => {
   });
 };
 
-export const toggleTodo = (id: number, checked: boolean) => {
+export type toggleTodoType = (id: number) => void;
+export const toggleTodo: toggleTodoType = (id: number) => {
   todoStoreState$.next({
     ...todoStoreState$.value,
     todos: todoStoreState$.value.todos.map((todo) =>
