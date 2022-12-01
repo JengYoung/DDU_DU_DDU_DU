@@ -32,7 +32,10 @@ const TodoPage = () => {
 
   const onSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (!inputValue) return;
+
     addTodo(inputValue);
+    setInputValue(() => '');
   };
 
   return (
@@ -40,9 +43,11 @@ const TodoPage = () => {
       <div className={styles['page__inner']}>
         <form className={styles['todo-form']}>
           <Input
+            value={inputValue}
             className="todo-search__input todo-input"
             onInput={(e: React.FormEvent) => setInputValue((e.target as HTMLInputElement).value)}
           />
+
           <Button className={styles['todo-form__form-button']} onClick={onSubmit}>
             할 일 추가
           </Button>

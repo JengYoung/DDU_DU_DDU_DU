@@ -12,6 +12,19 @@
   padding: 0 1rem;
 
   input {
+    fill: red;
     margin-right: 1rem;
+    background-color: red;
+  }
+  .card__remove-button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: red;
+    margin-left: auto;
   }
 }
