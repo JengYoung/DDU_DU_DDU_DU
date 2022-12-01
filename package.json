@@ -2,13 +2,15 @@
   "name": "ddu-du-ddu-du",
   "packageManager": "yarn@3.3.0",
   "workspaces": [
-    "vanilla-js"
+    "vanilla-js",
+    "react/*"
   ],
   "scripts": {
     "postinstall": "husky install",
     "prettier:all": "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown",
     "commit": "cz-customizable",
-    "dev:vanilla-js": "yarn workspace vanilla-js dev"
+    "dev:vanilla-js": "yarn workspace vanilla-js dev",
+    "dev:react-18-rxjs": "yarn workspace react-18-rxjs dev"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",

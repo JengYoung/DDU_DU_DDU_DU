@@ -1,0 +1,34 @@
+.user-todo-card {
+  cursor: pointer;
+  position: relative;
+
+  list-style: none;
+  padding: 1rem; 
+  border: 1px solid lightgray;
+  border-radius: 20px;
+
+  transition: all 0.3s;
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+  }
+
+  &:hover, &:active, &:focus {
+    background-color: lightgray;
+  }
+
+  &__user-id {
+    margin: 0 0 1rem 0;
+  }
+
+  &__is-done {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    &.user-todo-card__is-done--not-done {
+      color: red;
+    }
+    &.user-todo-card__is-done--done {
+      color: #029725;
+    }
+  }
+}
