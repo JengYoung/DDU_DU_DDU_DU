@@ -16,8 +16,10 @@ import Input from '../components/Input/Input';
 import Button from '../components/Button/Index';
 import TodoCard from '../components/Card/TodoCard';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useParams } from 'react-router-dom';
 
 const TodoPage = () => {
+  const { userId } = useParams();
   const { localStorage, getItem, setItem } = useLocalStorage();
   const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState<TodoInterface[]>([]);
@@ -39,9 +41,9 @@ const TodoPage = () => {
 
   const onSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (!inputValue) return;
+    if (!inputValue || !userId) return;
 
-    addTodo(inputValue);
+    addTodo(inputValue, userId);
     setInputValue(() => '');
   };
 

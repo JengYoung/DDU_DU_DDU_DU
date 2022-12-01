@@ -2,6 +2,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export interface TodoInterface {
+  userId: string;
   id: number;
   content: string;
   isDone: boolean;
@@ -28,12 +29,12 @@ export const initTodo = (todos: TodoInterface[]) => {
   });
 };
 
-export const addTodo = (content: string) => {
+export const addTodo = (content: string, userId: string) => {
   todoStoreState$.next({
     id: new Date().getTime() + todoStoreState$.value.id + 1,
     todos: [
       ...todoStoreState$.value.todos,
-      { content, id: todoStoreState$.value.id + 1, isDone: false },
+      { content, userId, id: todoStoreState$.value.id + 1, isDone: false },
     ],
   });
 };

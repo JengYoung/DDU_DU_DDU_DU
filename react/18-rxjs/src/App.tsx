@@ -9,7 +9,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<IndexPage />} />
-          <Route path="/todo" element={<TodoPage />} />
+          <Route path="/todo">
+            <Route path=":userId" element={<TodoPage />}></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
