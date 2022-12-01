@@ -1,4 +1,5 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 export interface TodoInterface {
   id: number;
@@ -10,8 +11,9 @@ export interface InitialTodoStoreState {
   id: number;
   todos: TodoInterface[];
 }
+
 const initialState: InitialTodoStoreState = {
-  id: 0,
+  id: new Date().getTime() + 0,
   todos: [],
 };
 
@@ -19,9 +21,16 @@ const todoStoreState$ = new BehaviorSubject(initialState);
 
 export const todoData$: Observable<InitialTodoStoreState> = todoStoreState$.asObservable();
 
+export const initTodo = (todos: TodoInterface[]) => {
+  todoStoreState$.next({
+    id: new Date().getTime() + todoStoreState$.value.id + 1,
+    todos,
+  });
+};
+
 export const addTodo = (content: string) => {
   todoStoreState$.next({
-    id: todoStoreState$.value.id + 1,
+    id: new Date().getTime() + todoStoreState$.value.id + 1,
     todos: [
       ...todoStoreState$.value.todos,
       { content, id: todoStoreState$.value.id + 1, isDone: false },

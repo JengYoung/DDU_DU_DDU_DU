@@ -10,26 +10,32 @@ import {
   todoData$,
   TodoInterface,
   deleteTodo,
+  initTodo,
 } from '../stores/TodoStore';
 import Input from '../components/Input/Input';
 import Button from '../components/Button/Index';
 import TodoCard from '../components/Card/TodoCard';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const TodoPage = () => {
+  const { localStorage, getItem, setItem } = useLocalStorage();
   const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState<TodoInterface[]>([]);
 
   useEffect(() => {
     const todo$: Subscription = todoData$.subscribe((v: InitialTodoStoreState) => {
-      setTodos(() => v.todos);
+      setTodos(() => {
+        if (localStorage) {
+          setItem('rxjs-react-18-todo', v.todos);
+        }
+        return v.todos;
+      });
     });
 
-    return () => todo$.unsubscribe();
-  }, []);
+    initTodo(getItem('rxjs-react-18-todo', []));
 
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+    return () => todo$.unsubscribe();
+  }, [localStorage]);
 
   const onSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,6 +43,14 @@ const TodoPage = () => {
 
     addTodo(inputValue);
     setInputValue(() => '');
+  };
+
+  const onToggle = (id: number) => {
+    toggleTodo(id);
+  };
+
+  const onDelete = (id: number) => {
+    deleteTodo(id);
   };
 
   return (
@@ -58,8 +72,8 @@ const TodoPage = () => {
             <TodoCard
               key={todo.id}
               todo={todo}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
+              toggleTodo={onToggle}
+              deleteTodo={onDelete}
             ></TodoCard>
           ))}
         </List>
