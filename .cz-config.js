@@ -17,6 +17,7 @@ module.exports = {
     'store',
     'css-style',
     'lib',
+    'api',
     'util',
     'dom',
     'hook',
