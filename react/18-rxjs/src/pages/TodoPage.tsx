@@ -9,6 +9,7 @@ import {
   InitialTodoStoreState,
   todoData$,
   TodoInterface,
+  deleteTodo,
 } from '../stores/TodoStore';
 import Input from '../components/Input/Input';
 import Button from '../components/Button/Index';
@@ -54,7 +55,12 @@ const TodoPage = () => {
         </form>
         <List className="todo-list">
           {todos.map((todo) => (
-            <TodoCard key={todo.id} todo={todo} toggleTodo={toggleTodo}></TodoCard>
+            <TodoCard
+              key={todo.id}
+              todo={todo}
+              toggleTodo={toggleTodo}
+              deleteTodo={deleteTodo}
+            ></TodoCard>
           ))}
         </List>
       </div>

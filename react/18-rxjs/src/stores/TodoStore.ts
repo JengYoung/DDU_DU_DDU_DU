@@ -29,7 +29,8 @@ export const addTodo = (content: string) => {
   });
 };
 
-export const deleteTodo = (id: number) => {
+export type deleteTodoType = (id: number) => void;
+export const deleteTodo: deleteTodoType = (id) => {
   todoStoreState$.next({
     ...todoStoreState$.value,
     todos: todoStoreState$.value.todos.filter((todo) => todo.id !== id),
