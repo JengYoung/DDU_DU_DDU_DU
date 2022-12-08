@@ -1,6 +1,11 @@
 import { css } from 'styled-components';
 
+import { alignCenter } from './alignCenter';
+import { justifyCenter } from './justifyCenter';
+
 export const flexCenter = css`
-  justify-content: center;
-  align-items: center;
+  display: flex;
+
+  ${justifyCenter}
+  ${alignCenter}
 `;

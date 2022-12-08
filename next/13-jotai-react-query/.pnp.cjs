@@ -36,6 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:13.0.6"],\
             ["jotai", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:1.11.1"],\
             ["next", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:13.0.6"],\
+            ["prettier", "npm:2.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:18.2.0"],\
             ["react-query", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:3.39.2"],\
@@ -58,6 +59,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-next", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:13.0.6"],\
             ["jotai", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:1.11.1"],\
             ["next", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:13.0.6"],\
+            ["prettier", "npm:2.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:18.2.0"],\
             ["react-query", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:3.39.2"],\
@@ -3099,6 +3101,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/prelude-ls-npm-1.2.1-3e4d272a55-cd192ec0d0.zip/node_modules/prelude-ls/",\
           "packageDependencies": [\
             ["prelude-ls", "npm:1.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["prettier", [\
+        ["npm:2.8.1", {\
+          "packageLocation": "./.yarn/cache/prettier-npm-2.8.1-be60b51821-4f21a0f126.zip/node_modules/prettier/",\
+          "packageDependencies": [\
+            ["prettier", "npm:2.8.1"]\
           ],\
           "linkType": "HARD"\
         }]\

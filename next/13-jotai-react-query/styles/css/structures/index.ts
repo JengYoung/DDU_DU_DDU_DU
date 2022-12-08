@@ -1,2 +1,8 @@
 export { fixedFullScreen } from './fixed/fullScreen';
-export { flexCenter } from './flex/center';
+export * from './flex';
+
+export * from './width';
+export * from './height';
+
+export * from './margin';
+export * from './padding';
