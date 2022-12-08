@@ -6,6 +6,6 @@ export const pxMargin = (
   type: '' | 'top' | 'right' | 'bottom' | 'left' = ''
 ) => css`
   ${type
-    ? `margin-${type}: ${typeof mg === 'number' ? mg : mg.join('px; ')}px;`
-    : `margin: ${typeof mg === 'number' ? mg : mg.join('px; ')}px;`}
+    ? `margin-${type}: ${typeof mg === 'number' ? mg : mg.join('px ')}px;`
+    : `margin: ${typeof mg === 'number' ? mg : mg.join('px ')}px;`}
 `;

@@ -1,10 +1,10 @@
-import styled, { DefaultTheme, ThemedCssFunction } from 'styled-components';
-import { flexCenter } from '../css/structures';
+import styled from 'styled-components';
+import { flex, flexCenter } from '../css/structures';
 
 export const HStack = styled.div<{ center: true; height?: string }>`
   width: 100%;
-  display: flex;
+  height: ${({ height }) => height ?? 'auto'};
+  ${flex}
 
   ${({ center }) => center && flexCenter}
-  height: ${({ height }) => height ?? 'auto'};
 `;

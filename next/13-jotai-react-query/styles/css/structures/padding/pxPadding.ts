@@ -6,6 +6,6 @@ export const pxPadding = (
   type: '' | 'top' | 'right' | 'bottom' | 'left' = ''
 ) => css`
   ${type
-    ? `margin-${type}: ${typeof pd === 'number' ? pd : pd.join('px; ')}px;`
-    : `margin: ${typeof pd === 'number' ? pd : pd.join('px; ')}px;`}
+    ? `padding-${type}: ${typeof pd === 'number' ? pd : pd.join('px ')}px;`
+    : `padding: ${typeof pd === 'number' ? pd : pd.join('px ')}px;`}
 `;
