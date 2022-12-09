@@ -5,6 +5,7 @@ export const VStack = styled.div<{ center: true; width?: string }>`
   display: flex;
   flex-direction: column;
 
+  width: ${({ width }) => width ?? '100%'};
+
   ${({ center }) => center && flexCenter}
-  width: ${({ width }) => width ?? '100%'}
 `;

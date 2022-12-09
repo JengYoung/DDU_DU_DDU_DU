@@ -7,4 +7,9 @@ export const globalTheme = {
     sm: '0.875rem',
     xs: '0.75rem',
   },
+  colors: {
+    page: '#feffef',
+    primary: '#752bed',
+    borderColor: '#ddd',
+  },
 };
