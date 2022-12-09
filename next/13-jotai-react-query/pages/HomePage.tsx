@@ -1,19 +1,34 @@
 'use client';
 
 import React from 'react';
+import { Page } from '@/styles/styled/Page';
 
-import { flexFull, fullHeight } from '@/styles/css/structures';
 import '@/styles/globals.css';
-import styled from 'styled-components';
+import { css, useTheme } from 'styled-components';
+import Head from '@/components/Text/Head';
+import { flexCenter } from '@/styles/css/structures';
 
-const StyledPage = styled.section`
-  ${fullHeight}
-  ${flexFull};
-  background-color: ${(props) => props.theme.colors.page};
-`;
-
+const Structures = {
+  head: css`
+    font-size: 100px;
+  `,
+};
+const Skins = {
+  page: {
+    color: css`
+      color: ${(props) => props.theme.colors.white};
+    `,
+  },
+};
 const HomePage = () => {
-  return <StyledPage>pages</StyledPage>;
+  const theme = useTheme();
+  return (
+    <Page bg={theme.colors.primary} css={[flexCenter, Skins.page.color]}>
+      <Head tag="h1" css={Structures.head}>
+        JengYoung&apos;s TODOLIST 🙆🏻
+      </Head>
+    </Page>
+  );
 };
 
 export default HomePage;

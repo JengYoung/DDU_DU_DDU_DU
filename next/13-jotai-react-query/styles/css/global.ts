@@ -1,3 +1,5 @@
+export type GlobalThemeType = typeof globalTheme;
+
 export const globalTheme = {
   fontSizes: {
     xxl: '2rem',
@@ -11,5 +13,11 @@ export const globalTheme = {
     page: '#f7f7f7',
     primary: '#752bed',
     borderColor: '#ddd',
+    white: '#fff',
   },
-};
+  layout: {
+    header: {
+      height: '4rem',
+    },
+  },
+} as const;

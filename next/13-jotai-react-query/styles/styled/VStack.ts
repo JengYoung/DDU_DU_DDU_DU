@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { flexCenter } from '../css/structures';
 
-export const VStack = styled.div<{ center: true; width?: string }>`
+export const VStack = styled.div<{ center?: boolean; width?: string }>`
   display: flex;
   flex-direction: column;
 

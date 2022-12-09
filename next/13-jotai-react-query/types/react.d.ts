@@ -1,6 +1,12 @@
-import { CSSProp } from 'styled-components';
+import { CSSProp, DefaultTheme } from 'styled-components';
+import { GlobalThemeType } from '@/styles/css/global';
+import 'styled-components';
 
-interface MyTheme {} // declare custom theme type
+interface MyTheme extends GlobalThemeType {}
+
+declare module 'styled-components' {
+  interface DefaultTheme extends MyTheme {}
+}
 
 declare module 'react' {
   interface Attributes {

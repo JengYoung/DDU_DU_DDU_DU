@@ -13,7 +13,6 @@ const StyledHead = styled.div<{ center: boolean }>`
 `;
 
 const Head = ({ tag, center = false, children, ...props }: HeadPropsInterface) => {
-  console.log(props);
   return (
     <StyledHead {...props} center={center} as={tag}>
       {children}

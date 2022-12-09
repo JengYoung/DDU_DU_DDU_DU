@@ -1,5 +1,5 @@
-import styled from 'styled-components';
+import { css } from 'styled-components';
 
-export const fullHeight = styled.div`
+export const fullHeight = css`
   height: 100%;
 `;
