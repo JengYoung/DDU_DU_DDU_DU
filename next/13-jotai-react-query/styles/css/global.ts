@@ -8,7 +8,7 @@ export const globalTheme = {
     xs: '0.75rem',
   },
   colors: {
-    page: '#feffef',
+    page: '#f7f7f7',
     primary: '#752bed',
     borderColor: '#ddd',
   },

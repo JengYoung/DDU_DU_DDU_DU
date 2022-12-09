@@ -6,3 +6,4 @@ export * from './height';
 
 export * from './margin';
 export * from './padding';
+export * from './text';
