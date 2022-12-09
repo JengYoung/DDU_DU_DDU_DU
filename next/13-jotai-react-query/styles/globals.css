@@ -17,6 +17,15 @@ a {
   box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+  margin: 0;
+}
 /**
   * Next13
   * If you navigate inside nested layouts, Next.js needs to restore the scroll position or scroll the loaded element into view.

@@ -1,5 +1,6 @@
 'use client';
 
+import '@/styles/globals.css';
 import { fullHeight } from '@/styles/css/structures';
 import { VStack } from '@/styles/styled';
 import { useEffect, useState } from 'react';

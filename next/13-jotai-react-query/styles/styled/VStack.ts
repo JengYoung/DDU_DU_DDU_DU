@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { flexCenter } from '../css/structures';
+import { alignCenter, justifyCenter } from '../css/structures';
 
 export const VStack = styled.div<{ center?: boolean; width?: string }>`
   display: flex;
@@ -7,5 +7,10 @@ export const VStack = styled.div<{ center?: boolean; width?: string }>`
 
   width: ${({ width }) => width ?? '100%'};
 
-  ${({ center }) => center && flexCenter}
+  ${({ center }) =>
+    center &&
+    `
+      ${justifyCenter}
+      ${alignCenter}
+    `}
 `;

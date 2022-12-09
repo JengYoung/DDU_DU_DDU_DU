@@ -1,7 +1,8 @@
-export type GlobalThemeType = typeof globalTheme;
+import { css } from 'styled-components';
 
 export const globalTheme = {
   fontSizes: {
+    mainCopy: '100px',
     xxl: '2rem',
     xl: '1.5rem',
     lg: '1.25rem',
@@ -21,3 +22,5 @@ export const globalTheme = {
     },
   },
 } as const;
+
+export type GlobalThemeType = typeof globalTheme;
