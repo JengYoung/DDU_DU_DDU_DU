@@ -42,10 +42,12 @@ const Header = () => {
     <HStack
       center
       height={theme.layout.header.height}
-      css={[pxPadding([0, 16, 0, 16]), borderDefault('bottom'), Skins.header]}
+      css={[flexShrink, pxPadding([0, 16, 0, 16]), borderDefault('bottom'), Skins.header]}
     >
       <Block width="200px" height="100%" css={[flexShrink, flex, alignCenter]}>
-        <Head tag="h4">NextJS 13</Head>
+        <Link href={Links[0].href}>
+          <Head tag="h4">NextJS 13</Head>
+        </Link>
       </Block>
 
       <HStack center css={pxMargin([0, 100, 0, 100])}>

@@ -1,6 +1,7 @@
 import TodosPage from '@/pages/TodosPage';
+import { TodoAPIDataInterface } from '@/types/todo';
 import { Suspense } from 'react';
-import Loading from './loading';
+import Loading from '@/pages/LoadingPage';
 
 export interface TodoInterface {
   id: number;
@@ -9,7 +10,7 @@ export interface TodoInterface {
   userId: number;
 }
 
-async function getData(): Promise<TodoInterface[]> {
+async function getData(): Promise<TodoAPIDataInterface> {
   const res = await fetch('https://dummyjson.com/todos');
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -30,13 +31,13 @@ export default async function Page() {
     new Promise((resolve) =>
       setTimeout(() => {
         resolve(undefined);
-      }, 1000)
+      }, 3500)
     ),
   ]);
 
   return (
-    <Suspense fallback={Loading()}>
-      <TodosPage data={result[0]}></TodosPage>
+    <Suspense fallback={<Loading />}>
+      <TodosPage serverData={result[0]}></TodosPage>
     </Suspense>
   );
 }

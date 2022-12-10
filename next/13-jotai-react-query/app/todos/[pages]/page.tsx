@@ -41,13 +41,13 @@ export default async function Page({ params }: { params: IParams }) {
     new Promise((resolve) =>
       setTimeout(() => {
         resolve(undefined);
-      }, 1000)
+      }, 500)
     ),
   ]);
 
   return (
     <Suspense fallback={Loading()}>
-      <TodosPage data={result[0]}></TodosPage>
+      <TodosPage serverData={result[0]}></TodosPage>
     </Suspense>
   );
 }

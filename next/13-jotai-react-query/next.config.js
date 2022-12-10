@@ -2,6 +2,10 @@
 const nextConfig = {
   experimental: {
     appDir: true,
+    /**
+     * @see: https://github.com/vercel/next.js/issues/41853
+     */
+    enableUndici: false,
   },
   reactStrictMode: true,
   swcMinify: true,
