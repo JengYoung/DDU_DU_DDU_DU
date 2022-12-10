@@ -1,11 +1,28 @@
 'use client';
 
+import Card from '@/components/Card/Card';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { TodoAPIDataInterface } from '@/types/todo';
+import { flexWrap, fullWidth, pxMargin } from '@/styles/css/structures';
+import { HStack } from '@/styles/styled';
+import { TodoAPIDataInterface, TodoInterface } from '@/types/todo';
 import React, { Suspense, useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { css } from 'styled-components';
 import Loading from './LoadingPage';
 
+const Structures = {
+  todoCard: css`
+    width: calc(25% - 20px);
+    height: 120px;
+  `,
+};
+const TodoCard = ({ todo }: { todo: TodoInterface }) => {
+  return (
+    <div css={[pxMargin(10), fullWidth, Structures.todoCard]}>
+      <Card todo={todo} />
+    </div>
+  );
+};
 const TodosPage = ({ serverData }: { serverData: TodoAPIDataInterface }) => {
   const todosQuery = useQuery<TodoAPIDataInterface, Error>(
     'todosData',
@@ -26,6 +43,7 @@ const TodosPage = ({ serverData }: { serverData: TodoAPIDataInterface }) => {
       initialData: serverData,
       suspense: true,
       refetchOnWindowFocus: false,
+      staleTime: 5000,
     }
   );
 
@@ -33,11 +51,11 @@ const TodosPage = ({ serverData }: { serverData: TodoAPIDataInterface }) => {
     <Suspense fallback={<Loading />}>
       <ErrorBoundary>
         {todosQuery.status === 'success' && (
-          <section>
+          <HStack css={flexWrap}>
             {todosQuery.data.todos?.map((todo) => (
-              <div key={todo.id}>{todo.todo}</div>
+              <TodoCard key={todo.id} todo={todo} />
             ))}
-          </section>
+          </HStack>
         )}
       </ErrorBoundary>
     </Suspense>

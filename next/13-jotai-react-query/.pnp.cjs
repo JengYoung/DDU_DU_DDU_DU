@@ -39,6 +39,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:18.2.0"],\
+            ["react-icons", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:4.7.1"],\
             ["react-query", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:3.39.2"],\
             ["styled-components", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:5.3.6"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
@@ -62,6 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier", "npm:2.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:18.2.0"],\
+            ["react-icons", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:4.7.1"],\
             ["react-query", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:3.39.2"],\
             ["styled-components", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:5.3.6"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
@@ -3170,6 +3172,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["loose-envify", "npm:1.4.0"],\
             ["react", "npm:18.2.0"],\
             ["scheduler", "npm:0.23.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-icons", [\
+        ["npm:4.7.1", {\
+          "packageLocation": "./.yarn/cache/react-icons-npm-4.7.1-27c284b383-ed3cbdc5fc.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "npm:4.7.1"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:4.7.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-icons-virtual-c4a1331832/0/cache/react-icons-npm-4.7.1-27c284b383-ed3cbdc5fc.zip/node_modules/react-icons/",\
+          "packageDependencies": [\
+            ["react-icons", "virtual:d1ec3c07eb9cb1dcfea29b19e4892203d1cb9b314c7437f384bfb9c0406918d05edf0809155a393b24c5a2271506b63754f69f35d795ffc4e7a807827d4039cf#npm:4.7.1"],\
+            ["@types/react", "npm:18.0.26"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\

@@ -15,6 +15,7 @@ export const globalTheme = {
     primary: '#752bed',
     borderColor: '#ddd',
     white: '#fff',
+    text: '#222',
   },
   layout: {
     header: {
