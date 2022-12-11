@@ -5,7 +5,7 @@ import { Block, FullWidth, HStack } from '@/styles/styled';
 import Head from '@/components/Text/Head';
 import { css, useTheme } from 'styled-components';
 import Link from 'next/link';
-import { borderDefault } from '@/styles/css/structures/border/default';
+import { borderWidth } from '@/styles/css/structures/border/width';
 import { usePathname, useRouter } from 'next/navigation';
 
 const Skins = {
@@ -21,28 +21,18 @@ interface LinkInterface {
 }
 
 const Header = () => {
-  const pathname = usePathname();
-  const [randomNum, setRandomNum] = useState<number | undefined>();
-
   const theme = useTheme();
   const Links: readonly LinkInterface[] = [
     { id: 'link-home', href: '/', name: 'HOME' },
-    { id: 'link-todos', href: '/todos' + `/${randomNum ?? ''}`, name: 'TODOS' },
+    { id: 'link-todos', href: '/todos', name: 'TODOS' },
     { id: 'link-write', href: '/write', name: 'WRITE' },
   ];
-
-  /**
-   * NOTE: JUST FOR Testing pre-fetching
-   */
-  useEffect(() => {
-    setRandomNum(() => Math.floor(Math.random() * 4) + 1);
-  }, [pathname]);
 
   return (
     <HStack
       center
       height={theme.layout.header.height}
-      css={[flexShrink, pxPadding([0, 16, 0, 16]), borderDefault('bottom'), Skins.header]}
+      css={[flexShrink, pxPadding([0, 16, 0, 16]), borderWidth('bottom'), Skins.header]}
     >
       <Block width="200px" height="100%" css={[flexShrink, flex, alignCenter]}>
         <Link href={Links[0].href}>

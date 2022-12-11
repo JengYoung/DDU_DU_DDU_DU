@@ -31,7 +31,7 @@ const Loading = () => {
   return (
     <VStack center css={[Structures.loading, Skins.loading]}>
       <RiTodoFill css={[Structures.todoListIcon, Skins.todoListIcon]} />
-      <Head tag="h3">서버에서 선택하신 할 일을 불러오고 있어요. 🙇🏻‍♂️</Head>
+      <Head tag="h3">서버에서 투두리스트를 불러오고 있어요. 🙇🏻‍♂️</Head>
     </VStack>
   );
 };

@@ -1,7 +1,10 @@
 import React from 'react';
 
-const LoadingPage = () => {
-  return <div>TODOS loading...📗</div>;
+interface ILoadingPage {
+  children?: React.ReactNode;
+}
+const LoadingPage = ({ children }: ILoadingPage) => {
+  return <div>{children}</div>;
 };
 
 export default LoadingPage;

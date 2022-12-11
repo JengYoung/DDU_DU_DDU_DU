@@ -1,7 +1,7 @@
 import TodosPage from '@/pages/TodosPage';
 import { TodoAPIDataInterface } from '@/types/todo';
 import { Suspense } from 'react';
-import Loading from '@/pages/LoadingPage';
+import Loading from './loading';
 
 export interface TodoInterface {
   id: number;
@@ -31,7 +31,7 @@ export default async function Page() {
     new Promise((resolve) =>
       setTimeout(() => {
         resolve(undefined);
-      }, 3500)
+      }, 500)
     ),
   ]);
 

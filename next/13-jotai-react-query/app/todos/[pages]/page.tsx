@@ -1,25 +1,14 @@
-import TodosPage from '@/pages/TodosPage';
-import { TodoAPIDataInterface } from '@/types/todo';
+import TodoPage from '@/pages/TodoPage';
+import { TodoAPIDataInterface, TodoInterface } from '@/types/todo';
 import { Suspense } from 'react';
 import Loading from './loading';
 
-interface IParams {
+export interface ITodoPageParams {
   pages: string;
 }
 
-async function getData(params: IParams): Promise<TodoAPIDataInterface> {
-  const paramsNum = +params.pages;
-  const listCount = paramsNum * 30;
-
-  const url =
-    'https://dummyjson.com/todos' +
-    (paramsNum
-      ? '?' +
-        new URLSearchParams({
-          skip: `${listCount}`,
-          limit: '30',
-        })
-      : '');
+async function getData(params: ITodoPageParams): Promise<TodoInterface> {
+  const url = `https://dummyjson.com/todos/${params.pages}`;
   const res = await fetch(url, { cache: 'no-store' });
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -33,7 +22,7 @@ async function getData(params: IParams): Promise<TodoAPIDataInterface> {
   return res.json();
 }
 
-export default async function Page({ params }: { params: IParams }) {
+export default async function Page({ params }: { params: ITodoPageParams }) {
   const todosdata = getData(params);
 
   const result = await Promise.all([
@@ -44,10 +33,11 @@ export default async function Page({ params }: { params: IParams }) {
       }, 500)
     ),
   ]);
+  console.log(result);
 
   return (
-    <Suspense fallback={Loading()}>
-      <TodosPage serverData={result[0]}></TodosPage>
+    <Suspense fallback={<Loading />}>
+      <TodoPage serverData={result[0]} params={params}></TodoPage>
     </Suspense>
   );
 }

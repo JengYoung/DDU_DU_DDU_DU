@@ -1,2 +1,2 @@
-export { borderDefault } from './default';
+export { borderWidth } from './width';
 export { borderRadius } from './radius';

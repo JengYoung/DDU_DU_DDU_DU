@@ -1,12 +1,13 @@
 'use client';
 
+import { ITodoPageParams } from '@/app/todos/[pages]/page';
 import Card from '@/components/Card/Card';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import { flexWrap, fullWidth, pxMargin } from '@/styles/css/structures';
 import { HStack } from '@/styles/styled';
 import { TodoAPIDataInterface, TodoInterface } from '@/types/todo';
-import { useRouter } from 'next/navigation';
-import React, { Suspense } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { Suspense, useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 import { css } from 'styled-components';
 import Loading from './LoadingPage';
@@ -31,16 +32,23 @@ const TodoCard = ({ todo }: { todo: TodoInterface }) => {
     </div>
   );
 };
-const TodosPage = ({ serverData }: { serverData: TodoAPIDataInterface }) => {
-  const todosQuery = useQuery<TodoAPIDataInterface, Error>(
-    'todosData',
+
+const TodoPage = ({
+  serverData,
+  params,
+}: {
+  serverData: TodoInterface;
+  params: ITodoPageParams;
+}) => {
+  const todoQuery = useQuery<TodoInterface, Error>(
+    ['todo', params.pages],
     () => {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(undefined);
         }, 1000);
       }).then(() => {
-        return fetch('https://dummyjson.com/todos')
+        return fetch(`https://dummyjson.com/todos/${params.pages}`)
           .then((res) => res.json())
           .catch((e) => {
             throw new Error(e);
@@ -51,26 +59,23 @@ const TodosPage = ({ serverData }: { serverData: TodoAPIDataInterface }) => {
       initialData: serverData,
       suspense: true,
       refetchOnWindowFocus: false,
-      refetchOnMount: false,
-      staleTime: 1000000,
-      cacheTime: 10000000,
+      staleTime: 600 * 1000,
+      cacheTime: 600 * 1000,
+      // refetchOnMount: false,
     }
   );
+  console.log(todoQuery);
 
   return (
     <Suspense fallback={<Loading />}>
       <ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={false} />
-        {todosQuery.status === 'success' && (
-          <HStack css={flexWrap}>
-            {todosQuery.data.todos?.map((todo) => (
-              <TodoCard key={todo.id} todo={todo} />
-            ))}
-          </HStack>
+        {todoQuery.status === 'success' && (
+          <TodoCard key={todoQuery.data.id} todo={todoQuery.data} />
         )}
       </ErrorBoundary>
     </Suspense>
   );
 };
 
-export default TodosPage;
+export default TodoPage;

@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-export const borderDefault = (type?: 'left' | 'right' | 'up' | 'bottom') => css`
+export const borderWidth = (type?: 'left' | 'right' | 'up' | 'bottom') => css`
   ${type
     ? `
       border-${type}-width: 1px;
