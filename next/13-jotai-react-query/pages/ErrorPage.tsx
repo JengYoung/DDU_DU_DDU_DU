@@ -18,11 +18,11 @@ const Structures = {
     ${fullHeight}
   `,
   backgroundDim: css`
-    ${absoluteFull}
-    ${flexCenter}
     filter: brightness(0.5);
+    ${absoluteFull}
     ${zIndex(1)};
-    width: 100%;
+    ${flexCenter}
+    ${fullWidth}
   `,
   mainCopy: css`
     font-size: ${(props) => props.theme.fontSizes.mainCopy};

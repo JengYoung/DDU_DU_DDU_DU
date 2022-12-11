@@ -1,9 +1,10 @@
 'use client';
-import HomePage from '@/pages/HomePage';
+
+import WritePage from '@/pages/WritePage';
 import { fullHeight } from '@/styles/css/structures';
 
 const pages = () => {
-  return <HomePage css={fullHeight}></HomePage>;
+  return <WritePage css={fullHeight}></WritePage>;
 };
 
 export default pages;
