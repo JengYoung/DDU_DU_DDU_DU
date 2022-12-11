@@ -1,12 +1,12 @@
 import { borderRadius } from '@/styles/css/structures';
 import React, { FormEvent } from 'react';
 import { css } from 'styled-components';
-import { useResetAtom } from 'jotai/utils';
-import { inputAtom } from '@/atoms/todos/inputAtom';
+import { TodoInterface } from '@/app/todos/page';
 
 interface InputValueInterface {
   onInput: (T: string) => void;
   inputValue: string;
+  mock: TodoInterface | undefined;
 }
 
 const Structures = {

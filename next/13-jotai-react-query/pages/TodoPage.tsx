@@ -61,10 +61,8 @@ const TodoPage = ({
       refetchOnWindowFocus: false,
       staleTime: 600 * 1000,
       cacheTime: 600 * 1000,
-      // refetchOnMount: false,
     }
   );
-  console.log(todoQuery);
 
   return (
     <Suspense fallback={<Loading />}>

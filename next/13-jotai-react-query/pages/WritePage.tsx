@@ -6,13 +6,12 @@ import { HStack } from '@/styles/styled';
 import { TodoAPIDataInterface, TodoInterface } from '@/types/todo';
 import { useAtom } from 'jotai';
 import { useResetAtom } from 'jotai/utils';
-import React, { useEffect } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import React, { Suspense, useEffect } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 const WritePage = () => {
   const queryClient = useQueryClient();
-  const todosData: undefined | TodoAPIDataInterface = queryClient.getQueryData('todosData');
   const resetAtom = useResetAtom(inputAtom);
 
   const [inputValue, setInputValue] = useAtom(inputAtom);
@@ -22,35 +21,32 @@ const WritePage = () => {
   };
 
   const addTodo = useMutation<TodoInterface, Error, TodoInterface>(
-    () => {
+    (data): Promise<TodoInterface> => {
       return fetch('https://dummyjson.com/todos/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          todo: 'Use DummyJSON in the project',
-          completed: false,
-          userId: 5,
-        }),
+        body: JSON.stringify(data),
       }).then((res) => res.json());
     },
     {
-      onMutate: (data) => {
-        if (todosData) {
+      onMutate: async (data) => {
+        await queryClient.cancelQueries('todosData');
+        const previousTodos: TodoAPIDataInterface | undefined =
+          queryClient.getQueryData('todosData');
+
+        if (previousTodos) {
           queryClient.setQueryData('todosData', () => {
             return {
-              ...todosData,
-              todos: [...todosData.todos, data],
+              ...previousTodos,
+              todos: [...previousTodos.todos, data],
             };
           });
         }
-
-        return todosData;
       },
       onSuccess: () => {
         resetAtom();
       },
       onError: (error, values, context) => {
-        console.log('here: ', error, values, context);
         alert('앗! API 호출이 되지 않았어요. 🥲');
       },
     }
@@ -61,7 +57,7 @@ const WritePage = () => {
       id: 9999,
       todo: inputValue,
       completed: false,
-      userId: 9999,
+      userId: 15,
     });
   };
 
@@ -69,10 +65,16 @@ const WritePage = () => {
     <>
       <ReactQueryDevtools />
       <HStack center css={fullHeight}>
-        <Input onInput={onInput} inputValue={inputValue} />
-        <Button onClick={onSubmit} metaCSS={[flexCenter, pxMargin(16, 'left')]}>
-          입력
-        </Button>
+        {addTodo.isLoading ? (
+          <div>{inputValue} 할일 추가 중입니다.</div>
+        ) : (
+          <>
+            <Input onInput={onInput} inputValue={inputValue} mock={addTodo.data} />
+            <Button onClick={onSubmit} metaCSS={[flexCenter, pxMargin(16, 'left')]}>
+              입력
+            </Button>
+          </>
+        )}
       </HStack>
     </>
   );

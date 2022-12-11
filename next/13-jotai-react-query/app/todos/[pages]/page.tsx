@@ -33,7 +33,6 @@ export default async function Page({ params }: { params: ITodoPageParams }) {
       }, 500)
     ),
   ]);
-  console.log(result);
 
   return (
     <Suspense fallback={<Loading />}>
