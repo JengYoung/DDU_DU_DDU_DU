@@ -1,3 +1,3 @@
-import { atom } from 'jotai';
+import { atomWithReset } from 'jotai/utils';
 
-export const inputAtom = atom('');
+export const inputAtom = atomWithReset('');
