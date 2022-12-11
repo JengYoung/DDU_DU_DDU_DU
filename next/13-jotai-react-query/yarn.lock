@@ -9,6 +9,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "13-jotai-react-query@workspace:."
   dependencies:
+    "@next/font": ^13.0.6
     "@types/node": 18.11.11
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
@@ -320,6 +321,13 @@ __metadata:
   dependencies:
     glob: 7.1.7
   checksum: 0f6964513af4fd6051974e6c1542d2660ac9cc0e89c4774e793ede0e3e3f8e158826bf9ae06aa29741c4c4a22bed7ddf3db265ee21a8593ba7d53f39014764f0
+  languageName: node
+  linkType: hard
+
+"@next/font@npm:^13.0.6":
+  version: 13.0.6
+  resolution: "@next/font@npm:13.0.6"
+  checksum: 8c6ee82763d8b4de30ba45f902f66c5e74159e26dc0262349961bc48d2360ba11df1a080cfc99f07001b1f66e7d01342dbde93bda2f16f05e19044fcf7c2db45
   languageName: node
   linkType: hard
 

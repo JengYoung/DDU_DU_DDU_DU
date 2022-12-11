@@ -8,6 +8,12 @@ import { ThemeProvider } from 'styled-components';
 import Header from '@/components/layout/Header';
 import { globalTheme } from '@/styles/css/global';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Roboto } from '@next/font/google';
+
+const roboto = Roboto({
+  weight: ['400', '700', '900'],
+  subsets: ['latin'],
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
@@ -21,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={globalTheme}>
         <html>
-          <body>
+          <body className={roboto.className}>
             {isMounted && (
               <VStack css={fullHeight}>
                 <Header />
