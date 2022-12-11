@@ -3,7 +3,8 @@
   "packageManager": "yarn@3.3.0",
   "workspaces": [
     "vanilla-js",
-    "react/*"
+    "react/*",
+    "next/*"
   ],
   "scripts": {
     "postinstall": "husky install",

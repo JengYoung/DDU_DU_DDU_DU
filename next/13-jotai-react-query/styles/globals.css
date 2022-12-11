@@ -1,0 +1,38 @@
+html,
+body {
+  min-height: 100vh;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+  margin: 0;
+}
+/**
+  * Next13
+  * If you navigate inside nested layouts, Next.js needs to restore the scroll position or scroll the loaded element into view.
+  * it will not work for older browsers unfortunately.
+  * 
+  * @see: https://github.com/vercel/next.js/issues/42345
+  */
+[data-nextjs-scroll-focus-boundary] {
+  display: contents;
+}
