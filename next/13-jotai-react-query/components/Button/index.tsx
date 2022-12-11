@@ -1,10 +1,11 @@
 import { borderWidth, borderRadius, flexCenter, pxPadding } from '@/styles/css/structures';
 import React from 'react';
-import { css } from 'styled-components';
+import { css, CSSProp, FlattenInterpolation } from 'styled-components';
 
 interface ButtonPropsInterface {
   children: React.ReactNode;
   onClick: () => void;
+  metaCSS: CSSProp[];
 }
 
 const Skins = {
@@ -23,7 +24,7 @@ const Skins = {
   `,
 };
 
-const Button = ({ children, onClick }: ButtonPropsInterface) => {
+const Button = ({ children, onClick, metaCSS }: ButtonPropsInterface) => {
   return (
     <button
       onClick={onClick}
@@ -33,7 +34,7 @@ const Button = ({ children, onClick }: ButtonPropsInterface) => {
         pxPadding([12, 16, 12, 16]),
         borderRadius(10),
         Skins.container,
-      ]}
+      ].concat(metaCSS)}
     >
       {children}
     </button>
