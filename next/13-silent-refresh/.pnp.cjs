@@ -32,13 +32,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.18"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
+            ["@types/uuid", "npm:9.0.0"],\
             ["eslint", "npm:8.32.0"],\
             ["eslint-config-next", "virtual:379ac9f704e020c211c7cfc5c05e1e98a0f86731e96493988dcb7344f02f72bbfc5ed947c9c3c3bc10b7f5ea41faa14fca9944fd8a1fc47e73ecddb881ffa6b2#npm:13.1.2"],\
             ["next", "virtual:379ac9f704e020c211c7cfc5c05e1e98a0f86731e96493988dcb7344f02f72bbfc5ed947c9c3c3bc10b7f5ea41faa14fca9944fd8a1fc47e73ecddb881ffa6b2#npm:13.1.2"],\
             ["prettier", "npm:2.8.3"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:379ac9f704e020c211c7cfc5c05e1e98a0f86731e96493988dcb7344f02f72bbfc5ed947c9c3c3bc10b7f5ea41faa14fca9944fd8a1fc47e73ecddb881ffa6b2#npm:18.2.0"],\
-            ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
+            ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -365,6 +367,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-scheduler-npm-0.16.2-ba3a7d8c68-b6b4dcfeae.zip/node_modules/@types/scheduler/",\
           "packageDependencies": [\
             ["@types/scheduler", "npm:0.16.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/uuid", [\
+        ["npm:9.0.0", {\
+          "packageLocation": "./.yarn/cache/@types-uuid-npm-9.0.0-979023c16f-59ae56d954.zip/node_modules/@types/uuid/",\
+          "packageDependencies": [\
+            ["@types/uuid", "npm:9.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2426,13 +2437,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.18"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
+            ["@types/uuid", "npm:9.0.0"],\
             ["eslint", "npm:8.32.0"],\
             ["eslint-config-next", "virtual:379ac9f704e020c211c7cfc5c05e1e98a0f86731e96493988dcb7344f02f72bbfc5ed947c9c3c3bc10b7f5ea41faa14fca9944fd8a1fc47e73ecddb881ffa6b2#npm:13.1.2"],\
             ["next", "virtual:379ac9f704e020c211c7cfc5c05e1e98a0f86731e96493988dcb7344f02f72bbfc5ed947c9c3c3bc10b7f5ea41faa14fca9944fd8a1fc47e73ecddb881ffa6b2#npm:13.1.2"],\
             ["prettier", "npm:2.8.3"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:379ac9f704e020c211c7cfc5c05e1e98a0f86731e96493988dcb7344f02f72bbfc5ed947c9c3c3bc10b7f5ea41faa14fca9944fd8a1fc47e73ecddb881ffa6b2#npm:18.2.0"],\
-            ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
+            ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -3243,6 +3256,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["uri-js", "npm:4.4.1"],\
             ["punycode", "npm:2.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["uuid", [\
+        ["npm:9.0.0", {\
+          "packageLocation": "./.yarn/cache/uuid-npm-9.0.0-46c41e3e43-8dd2c83c43.zip/node_modules/uuid/",\
+          "packageDependencies": [\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
