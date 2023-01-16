@@ -10,13 +10,12 @@ type Data = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const code_challenge = '1234';
-  const code = 'code';
-
   try {
-    if (code_challenge !== req.query.code_verifier) throw new Error('code_verifier not matched');
-    if (code !== req.query.code) throw new Error('code is different');
-    if (req.query.client_id !== 'seeyouletter') throw new Error('client_id is not seeyouletter');
+    const data = JSON.parse(req.body);
+
+    if (!data.id || !data.password) {
+      throw new Error('ID and Password is required!');
+    }
 
     return res.status(200).send({
       access_token:

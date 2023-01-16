@@ -7,9 +7,10 @@ type Data = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
-    console.log('redirect - http://localhost:3000/?code=code&state=state');
+    console.log('ㅠㅠㅠㅠ');
     return res.status(302).redirect('http://localhost:3000/silent?code=code&state=state');
   } catch (e) {
-    console.log('request new token is failed: ', (e as Error).message);
+    /* eslint-disable-next-line no-console */
+    console.error('request new token is failed: ', (e as Error).message);
   }
 }

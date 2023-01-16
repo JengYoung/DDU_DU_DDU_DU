@@ -19,7 +19,10 @@ export default function Home() {
 
   const onAuthorizeButtonClick = async () => {
     try {
-      await fetch('/api/authorize');
+      const res = await fetch(
+        `/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}`
+      );
+      console.log(res);
     } catch (e) {
       console.error('ButtonClickError: ', e);
     }
@@ -32,12 +35,12 @@ export default function Home() {
 
   return (
     <main>
-      <iframe
+      {/* <iframe
         ref={iframeRef}
         src={`/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}</main>`}
-      ></iframe>
+     /> */}
       <h2>로그인해주세요 🙇🏻‍♂️</h2>
-      <button onClick={onAuthorizeButtonClick}>토큰 발급 받기</button>
+      <button onClick={onAuthorizeButtonClick}>로그인하기</button>
     </main>
   );
 }

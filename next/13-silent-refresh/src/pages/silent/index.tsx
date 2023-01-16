@@ -1,21 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { UserAuthContext } from '../context/UserAuth';
 
 export default function SilentPage() {
+  const { setUser } = useContext(UserAuthContext);
+
   useEffect(() => {
     async function getToken() {
-      console.log(window.location);
       const qs = new URLSearchParams(window.location.search);
 
       const code = qs.get('code');
-      const state = qs.get('state');
-      console.log(qs.get('code'), qs.get('state'));
+
       const code_verifier = '1234';
+
       const res = await fetch(
         `/api/token?client_id=seeyouletter&code=${code}&code_verifier=${code_verifier}&grant_type=authorization_code&redirect_uri=http://localhost:3000/silent`
       );
 
       if (res.ok) {
-        console.log(await res.json());
+        const data = await res.json();
+        setUser(() => data);
       }
     }
     getToken();
