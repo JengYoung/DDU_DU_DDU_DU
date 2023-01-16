@@ -2,9 +2,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
+import { UserAuthContext, useUserAuthContext } from '../../context/UserAuth';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,32 +18,34 @@ export default function Home() {
   const state = '1234';
   const nonce = 'abc';
 
-  console.log('rendering');
-
-  const onAuthorizeButtonClick = async () => {
-    try {
-      const res = await fetch(
-        `/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}`
-      );
-      console.log(res);
-    } catch (e) {
-      console.error('ButtonClickError: ', e);
-    }
-  };
+  const { user, setUser } = useUserAuthContext();
 
   useEffect(() => {
-    if (!window) return;
-    if (iframeRef.current === null) return;
-  }, [iframeRef]);
+    const handleUserAuth = (e: CustomEventInit) => {
+      if (e.detail) {
+        setUser(() => e.detail.data);
+      }
+    };
+
+    iframeRef.current?.contentWindow?.addEventListener('USER_AUTH', handleUserAuth);
+
+    return () => {
+      if (iframeRef.current?.contentWindow) {
+        /* eslint-disable-next-line react-hooks/exhaustive-deps */
+        iframeRef.current.contentWindow.removeEventListener('USER_AUTH', handleUserAuth);
+      }
+    };
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
 
   return (
     <main>
       <iframe
+        style={{ display: 'none' }}
         ref={iframeRef}
-        src={`http://localhost:3000/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}`}
+        src={`/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}`}
       />
-      <h2>로그인해주세요 🙇🏻‍♂️</h2>
-      <button onClick={onAuthorizeButtonClick}>로그인하기</button>
+      <h2>TODOLIST 🙇🏻‍♂️</h2>
     </main>
   );
 }

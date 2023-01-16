@@ -1,4 +1,12 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 const initialState = {
   access_token: null,
@@ -7,6 +15,13 @@ const initialState = {
   scope: null,
   token_type: null,
 };
+
+export const UserAuthContext = createContext<UserAuthContextInterface>({
+  user: initialState,
+  setUser: () => {},
+});
+
+export const useUserAuthContext = () => useContext(UserAuthContext);
 
 interface UserAuthContextInterface {
   user: typeof initialState;
@@ -18,8 +33,3 @@ export const UserAuthProvider = ({ children }: PropsWithChildren) => {
 
   return <UserAuthContext.Provider value={{ user, setUser }}>{children}</UserAuthContext.Provider>;
 };
-
-export const UserAuthContext = createContext<UserAuthContextInterface>({
-  user: initialState,
-  setUser: () => {},
-});

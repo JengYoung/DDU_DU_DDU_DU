@@ -1,9 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { UserAuthContext } from '../context/UserAuth';
+import { useUserAuthContext } from '../../../context/UserAuth';
 
 export default function RedirectPage() {
-  const { setUser } = useContext(UserAuthContext);
-
   useEffect(() => {
     async function getToken() {
       const qs = new URLSearchParams(window.location.search);
@@ -18,9 +16,11 @@ export default function RedirectPage() {
 
       if (res.ok) {
         const data = await res.json();
-        setUser(() => data);
+        const customEvent = new CustomEvent('USER_AUTH', { detail: { data } });
+        window.dispatchEvent(customEvent);
       }
     }
+
     getToken();
     /* eslint-disable-next-line */
   }, []);

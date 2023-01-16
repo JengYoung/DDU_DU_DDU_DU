@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState, FormEvent } from 'react';
 
-import { UserAuthContext } from '../context/UserAuth';
+import { UserAuthContext } from '../../../context/UserAuth';
 import { useRouter } from 'next/router';
 
 export default function Home() {
