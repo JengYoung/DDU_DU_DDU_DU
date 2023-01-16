@@ -15,9 +15,11 @@ export default function RedirectPage() {
       );
 
       if (res.ok) {
-        const data = await res.json();
-        const customEvent = new CustomEvent('USER_AUTH', { detail: { data } });
-        window.dispatchEvent(customEvent);
+        const cache = await caches.open('tokens');
+        cache.put('user', res);
+        // const data = await res.json();
+        // const customEvent = new CustomEvent('USER_AUTH', { detail: { data } });
+        // window.dispatchEvent(customEvent);
       }
     }
 

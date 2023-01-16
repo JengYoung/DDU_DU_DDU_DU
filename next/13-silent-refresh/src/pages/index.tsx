@@ -1,13 +1,6 @@
-import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from '@next/font/google';
-import styles from '@/styles/Home.module.css';
-import { useContext, useEffect, useRef } from 'react';
-
-import { v4 as uuidv4 } from 'uuid';
-import { UserAuthContext, useUserAuthContext } from '../../context/UserAuth';
-
-const inter = Inter({ subsets: ['latin'] });
+import { useEffect, useRef } from 'react';
+import { useUserAuthContext } from '../../context/UserAuth';
 
 export default function Home() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
@@ -20,23 +13,23 @@ export default function Home() {
 
   const { user, setUser } = useUserAuthContext();
 
-  useEffect(() => {
-    const handleUserAuth = (e: CustomEventInit) => {
-      if (e.detail) {
-        setUser(() => e.detail.data);
-      }
-    };
+  // useEffect(() => {
+  //   const handleUserAuth = (e: CustomEventInit) => {
+  //     if (e.detail) {
+  //       setUser(() => e.detail.data);
+  //     }
+  //   };
 
-    iframeRef.current?.contentWindow?.addEventListener('USER_AUTH', handleUserAuth);
+  //   iframeRef.current?.contentWindow?.addEventListener('USER_AUTH', handleUserAuth);
 
-    return () => {
-      if (iframeRef.current?.contentWindow) {
-        /* eslint-disable-next-line react-hooks/exhaustive-deps */
-        iframeRef.current.contentWindow.removeEventListener('USER_AUTH', handleUserAuth);
-      }
-    };
-    /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  }, []);
+  //   return () => {
+  //     if (iframeRef.current?.contentWindow) {
+  //       /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  //       iframeRef.current.contentWindow.removeEventListener('USER_AUTH', handleUserAuth);
+  //     }
+  //   };
+  //   /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  // }, []);
 
   return (
     <main>
