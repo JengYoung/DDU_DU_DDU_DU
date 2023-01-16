@@ -17,6 +17,8 @@ export default function Home() {
   const state = '1234';
   const nonce = 'abc';
 
+  console.log('rendering');
+
   const onAuthorizeButtonClick = async () => {
     try {
       const res = await fetch(
@@ -31,14 +33,14 @@ export default function Home() {
   useEffect(() => {
     if (!window) return;
     if (iframeRef.current === null) return;
-  }, []);
+  }, [iframeRef]);
 
   return (
     <main>
-      {/* <iframe
+      <iframe
         ref={iframeRef}
-        src={`/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}</main>`}
-     /> */}
+        src={`http://localhost:3000/api/authorize?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope}&response_type=code&code_challenge=${code_challenge}&code_challenge_method=S256&state=${state}&nonce=${nonce}`}
+      />
       <h2>로그인해주세요 🙇🏻‍♂️</h2>
       <button onClick={onAuthorizeButtonClick}>로그인하기</button>
     </main>

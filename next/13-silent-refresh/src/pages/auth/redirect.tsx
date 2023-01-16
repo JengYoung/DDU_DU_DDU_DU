@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { UserAuthContext } from '../context/UserAuth';
 
-export default function SilentPage() {
+export default function RedirectPage() {
   const { setUser } = useContext(UserAuthContext);
 
   useEffect(() => {
@@ -22,6 +22,8 @@ export default function SilentPage() {
       }
     }
     getToken();
-  });
-  return <div>SilentPage</div>;
+    /* eslint-disable-next-line */
+  }, []);
+
+  return <div>Redirect</div>;
 }

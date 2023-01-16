@@ -7,8 +7,9 @@ type Data = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   try {
-    console.log('ㅠㅠㅠㅠ');
-    return res.status(302).redirect('http://localhost:3000/silent?code=code&state=state');
+    res.setHeader('Location', 'http://localhost:3000/auth/redirect?code=code&state=state');
+    res.setHeader('X-Frame-Options', 'sameorigin');
+    return res.status(308).redirect('http://localhost:3000/auth/redirect?code=code&state=state');
   } catch (e) {
     /* eslint-disable-next-line no-console */
     console.error('request new token is failed: ', (e as Error).message);
