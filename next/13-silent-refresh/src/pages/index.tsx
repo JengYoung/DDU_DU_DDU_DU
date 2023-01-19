@@ -1,7 +1,6 @@
 import { Inter } from '@next/font/google';
 import { useEffect, useRef } from 'react';
 import { useUserAuthContext } from '../../context/UserAuth';
-import { createHash } from 'crypto';
 import { useRouter } from 'next/router';
 
 export default function Home() {
@@ -14,30 +13,13 @@ export default function Home() {
   const state = '1234';
   const nonce = 'abc';
 
-  const { user, setUser } = useUserAuthContext();
-  const code_verifier = createHash('sha256').update(code_challenge).digest('hex');
-  console.log(code_verifier);
+  const { user, checked } = useUserAuthContext();
 
   useEffect(() => {
-    async function getToken() {
-      try {
-        const cache = await caches.open('tokens');
-        const token = await cache.match('/auth/user');
-        const data = await token?.json();
-
-        if (!data) {
-          throw new Error();
-        }
-
-        setUser(data);
-      } catch (e) {
-        await router.replace('/login');
-      }
+    if (checked && !user.access_token) {
+      router.replace('/login');
     }
-
-    getToken();
-    /* eslint-disable-next-line */
-  }, []);
+  }, [user, checked, router]);
 
   return (
     <main>

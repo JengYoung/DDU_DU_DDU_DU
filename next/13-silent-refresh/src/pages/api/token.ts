@@ -13,14 +13,24 @@ type Data = {
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data | string>) {
   const code_challenge = '1234';
   const code = 'code';
+  const header = req.headers.authorization;
 
   try {
+    if (!header) throw new Error('header is omitted');
+
     const sha256CodeChallenge = createHash('sha256').update(code_challenge).digest('hex');
 
-    if (sha256CodeChallenge !== req.query.code_verifier)
+    if (sha256CodeChallenge !== req.query.code_verifier) {
       throw new Error('code_verifier not matched');
-    if (code !== req.query.code) throw new Error('code is different');
-    if (req.query.client_id !== 'seeyouletter') throw new Error('client_id is not seeyouletter');
+    }
+
+    if (code !== req.query.code) {
+      throw new Error('code is different');
+    }
+
+    if (req.query.client_id !== 'seeyouletter') {
+      throw new Error('client_id is not seeyouletter');
+    }
 
     return res.status(200).send({
       access_token:
@@ -33,7 +43,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data |
     });
   } catch (e) {
     /* eslint-disable-next-line no-console */
-    console.error('request new token is failed: ', (e as Error).message);
+    console.error('failed checking token: ', (e as Error).message);
     res.status(401).send('request new token is failed');
   }
 }

@@ -27,8 +27,13 @@ export default function Home() {
       if (!res.ok) {
         throw new Error('Login API request failed');
       }
+      const cacheData = await caches.open('tokens');
+      await cacheData.put('/auth/user', res);
 
-      const data = await res.json();
+      const cachedToken = await cacheData.match('/auth/user');
+      if (!cachedToken) return;
+
+      const data = await cachedToken.json();
       setUser(() => data);
 
       await router.push('/');
