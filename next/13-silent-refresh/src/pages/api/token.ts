@@ -16,9 +16,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data |
 
   try {
     const sha256CodeChallenge = createHash('sha256').update(code_challenge).digest('hex');
-    console.log('challenge: ', sha256CodeChallenge);
-    console.log('verifier: ', req.query.code_verifier);
-    console.log(req.query.code);
+
     if (sha256CodeChallenge !== req.query.code_verifier)
       throw new Error('code_verifier not matched');
     if (code !== req.query.code) throw new Error('code is different');

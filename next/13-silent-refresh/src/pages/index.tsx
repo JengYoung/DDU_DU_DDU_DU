@@ -2,8 +2,10 @@ import { Inter } from '@next/font/google';
 import { useEffect, useRef } from 'react';
 import { useUserAuthContext } from '../../context/UserAuth';
 import { createHash } from 'crypto';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const client_id = 'seeyouletter';
   const redirect_uri = 'http://localhost:3000/silent';
@@ -16,23 +18,26 @@ export default function Home() {
   const code_verifier = createHash('sha256').update(code_challenge).digest('hex');
   console.log(code_verifier);
 
-  // useEffect(() => {
-  //   const handleUserAuth = (e: CustomEventInit) => {
-  //     if (e.detail) {
-  //       setUser(() => e.detail.data);
-  //     }
-  //   };
+  useEffect(() => {
+    async function getToken() {
+      try {
+        const cache = await caches.open('tokens');
+        const token = await cache.match('/auth/user');
+        const data = await token?.json();
 
-  //   iframeRef.current?.contentWindow?.addEventListener('USER_AUTH', handleUserAuth);
+        if (!data) {
+          throw new Error();
+        }
 
-  //   return () => {
-  //     if (iframeRef.current?.contentWindow) {
-  //       /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  //       iframeRef.current.contentWindow.removeEventListener('USER_AUTH', handleUserAuth);
-  //     }
-  //   };
-  //   /* eslint-disable-next-line react-hooks/exhaustive-deps */
-  // }, []);
+        setUser(data);
+      } catch (e) {
+        await router.replace('/login');
+      }
+    }
+
+    getToken();
+    /* eslint-disable-next-line */
+  }, []);
 
   return (
     <main>
