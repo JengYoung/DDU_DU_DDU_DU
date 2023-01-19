@@ -1,6 +1,7 @@
 import { Inter } from '@next/font/google';
 import { useEffect, useRef } from 'react';
 import { useUserAuthContext } from '../../context/UserAuth';
+import { createHash } from 'crypto';
 
 export default function Home() {
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
@@ -12,6 +13,8 @@ export default function Home() {
   const nonce = 'abc';
 
   const { user, setUser } = useUserAuthContext();
+  const code_verifier = createHash('sha256').update(code_challenge).digest('hex');
+  console.log(code_verifier);
 
   // useEffect(() => {
   //   const handleUserAuth = (e: CustomEventInit) => {

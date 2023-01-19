@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,12 +10,17 @@ type Data = {
   expires_in: number;
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default function handler(req: NextApiRequest, res: NextApiResponse<Data | string>) {
   const code_challenge = '1234';
   const code = 'code';
 
   try {
-    if (code_challenge !== req.query.code_verifier) throw new Error('code_verifier not matched');
+    const sha256CodeChallenge = createHash('sha256').update(code_challenge).digest('hex');
+    console.log('challenge: ', sha256CodeChallenge);
+    console.log('verifier: ', req.query.code_verifier);
+    console.log(req.query.code);
+    if (sha256CodeChallenge !== req.query.code_verifier)
+      throw new Error('code_verifier not matched');
     if (code !== req.query.code) throw new Error('code is different');
     if (req.query.client_id !== 'seeyouletter') throw new Error('client_id is not seeyouletter');
 
@@ -30,5 +36,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
   } catch (e) {
     /* eslint-disable-next-line no-console */
     console.error('request new token is failed: ', (e as Error).message);
+    res.status(401).send('request new token is failed');
   }
 }
