@@ -12,7 +12,8 @@
     "commit": "cz-customizable",
     "dev:vanilla-js": "yarn workspace vanilla-js dev",
     "dev:react-18-rxjs": "yarn workspace react-18-rxjs dev",
-    "dev:next13-silent-refresh": "yarn workspace next-silent-refresh dev"
+    "dev:next13-silent-refresh": "yarn workspace next-silent-refresh dev",
+    "dev:next13-indexedDB": "yarn workspace next13-indexeddb dev"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
