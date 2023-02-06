@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { MouseEvent, useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { openDB, IDBPDatabase } from 'idb';
@@ -19,10 +19,13 @@ export default function Home() {
 
   useEffect(() => {
     async function openDataBase() {
-      const db = await openDB('todos', 1, {
+      const db = await openDB('todos', 2, {
         upgrade(db, oldVersion) {
           if (oldVersion < 1) {
             db.createObjectStore('todo', { autoIncrement: true });
+          }
+          if (oldVersion < 2) {
+            db.createObjectStore('garbages', { autoIncrement: true });
           }
         },
       });
@@ -75,6 +78,42 @@ export default function Home() {
       console.error(e);
     }
   };
+
+  useEffect(() => {
+    if (todosDB === null) return;
+
+    const onKeydown = async (e: KeyboardEvent) => {
+      const tx = todosDB.transaction('garbages', 'readwrite');
+      const nextTodos = [...todos];
+
+      const value = nextTodos.pop();
+
+      if (e.key === 'z' && e.metaKey && e.shiftKey) {
+        const res = await tx.store.getAll();
+        const value = res.pop();
+
+        const restoredTodos = [...todos, value];
+        await updateTodosData(restoredTodos);
+        setTodos(() => restoredTodos);
+        return;
+      }
+
+      if (e.key === 'z' && e.metaKey) {
+        tx.store.add(value);
+
+        console.log(nextTodos);
+
+        await updateTodosData(nextTodos);
+        setTodos(() => nextTodos);
+      }
+    };
+
+    window.addEventListener('keydown', onKeydown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeydown);
+    };
+  }, [todos, setTodos]);
 
   return (
     <>
