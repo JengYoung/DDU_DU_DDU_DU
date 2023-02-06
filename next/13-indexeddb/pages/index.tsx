@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { MouseEvent, useRef, useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+
+import { openDB, IDBPDatabase } from 'idb';
 
 interface ITodo {
   id: string;
@@ -13,22 +15,66 @@ interface ITodo {
 export default function Home() {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [todosDB, setTodosDB] = useState<IDBPDatabase | null>(null);
 
-  const onClickButton = (e: MouseEvent) => {
-    e.preventDefault();
-    setTodos((state) => [
-      ...state,
-      {
-        id: uuidv4(),
-        content: inputValue,
-        completed: false,
-      },
-    ]);
+  useEffect(() => {
+    async function openDataBase() {
+      const db = await openDB('todos', 1, {
+        upgrade(db, oldVersion) {
+          if (oldVersion < 1) {
+            db.createObjectStore('todo', { autoIncrement: true });
+          }
+        },
+      });
 
-    setInputValue(() => '');
+      setTodosDB(() => db);
+
+      const tx = db.transaction('todo', 'readwrite');
+
+      const res = await tx.store.getAll();
+
+      if (res.length === 0) {
+        await tx.store.add([]);
+      }
+
+      const todosData = await tx.store.get(1);
+      setTodos(() => todosData);
+    }
+
+    openDataBase();
+  }, []);
+
+  const updateTodosData = async (nextTodos: ITodo[]) => {
+    if (todosDB === null) return;
+
+    const tx = todosDB.transaction('todo', 'readwrite');
+    await tx.store.put(nextTodos, 1);
   };
 
-  console.log(todos);
+  const onClickButton = async (e: MouseEvent) => {
+    e.preventDefault();
+    if (inputValue.length === 0) return;
+
+    try {
+      const nextTodos = [
+        ...todos,
+        {
+          id: uuidv4(),
+          content: inputValue,
+          completed: false,
+        },
+      ];
+
+      await updateTodosData(nextTodos);
+
+      setTodos(() => nextTodos);
+
+      setInputValue(() => '');
+    } catch (e) {
+      // eslint-disable-next-line
+      console.error(e);
+    }
+  };
 
   return (
     <>
