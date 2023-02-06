@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import styles from '@/styles/Home.module.css';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface ITodo {
@@ -10,10 +10,9 @@ interface ITodo {
   completed: boolean;
 }
 
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Home() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const [inputValue, setInputValue] = useState('');
 
   const onClickButton = (e: MouseEvent) => {
     e.preventDefault();
@@ -21,11 +20,15 @@ export default function Home() {
       ...state,
       {
         id: uuidv4(),
-        content: (e.target as HTMLInputElement).value,
+        content: inputValue,
         completed: false,
       },
     ]);
+
+    setInputValue(() => '');
   };
+
+  console.log(todos);
 
   return (
     <>
@@ -40,7 +43,13 @@ export default function Home() {
         <form className={styles.form}>
           <label htmlFor="input" className={styles.label}>
             <div className={styles['todo__title']}>할 일 입력하기</div>
-            <input type="text" className={styles['todo__input']} id="input" />
+            <input
+              type="text"
+              className={styles['todo__input']}
+              id="input"
+              onChange={(e) => setInputValue(e.target.value)}
+              value={inputValue}
+            />
           </label>
 
           <button type="submit" className={styles['todo__button']} onClick={onClickButton}>
@@ -48,9 +57,11 @@ export default function Home() {
           </button>
         </form>
 
-        <ul className="list">
+        <ul className={styles['todo-list']}>
           {todos.map((todo) => (
-            <div key={todo.id}>{todo.content}</div>
+            <li className={styles['todo-list__item']} key={todo.id}>
+              {todo.content}
+            </li>
           ))}
         </ul>
       </main>
