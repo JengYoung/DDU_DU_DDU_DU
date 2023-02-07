@@ -6535,6 +6535,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.33.0"],\
             ["eslint-config-next", "virtual:bfa8846e566c53f9494dd5c2582dd58f1a131e8ece3c8c68bb28a3fa1babcf023b4a7f3edb9b14e121305eafa2bf36471559f0bace7e950a47924c49f3eaec1c#npm:13.1.6"],\
             ["next", "virtual:bfa8846e566c53f9494dd5c2582dd58f1a131e8ece3c8c68bb28a3fa1babcf023b4a7f3edb9b14e121305eafa2bf36471559f0bace7e950a47924c49f3eaec1c#npm:13.1.6"],\
+            ["prettier", "npm:2.8.3"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:bfa8846e566c53f9494dd5c2582dd58f1a131e8ece3c8c68bb28a3fa1babcf023b4a7f3edb9b14e121305eafa2bf36471559f0bace7e950a47924c49f3eaec1c#npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=d73830"]\

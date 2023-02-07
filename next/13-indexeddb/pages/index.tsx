@@ -116,7 +116,8 @@ export default function Home() {
     return () => {
       window.removeEventListener('keydown', onKeydown);
     };
-  }, [todos, setTodos]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [todosDB, todos, setTodos]);
 
   return (
     <>
