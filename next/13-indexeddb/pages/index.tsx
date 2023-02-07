@@ -14,6 +14,8 @@ interface ITodo {
 
 export default function Home() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+
+  console.log(todos);
   const [inputValue, setInputValue] = useState('');
   const [todosDB, setTodosDB] = useState<IDBPDatabase | null>(null);
 
@@ -34,14 +36,14 @@ export default function Home() {
 
       const tx = db.transaction('todo', 'readwrite');
 
-      const res = await tx.store.getAll();
+      const todosData = await tx.store.openCursor(null, 'prev');
 
-      if (res.length === 0) {
+      if (!todosData) {
         await tx.store.add([]);
+        return;
       }
 
-      const todosData = await tx.store.get(1);
-      setTodos(() => todosData);
+      setTodos(() => todosData.value);
     }
 
     openDataBase();
@@ -83,25 +85,26 @@ export default function Home() {
     if (todosDB === null) return;
 
     const onKeydown = async (e: KeyboardEvent) => {
-      const tx = todosDB.transaction('garbages', 'readwrite');
+      const garbagesTx = todosDB.transaction('garbages', 'readwrite');
       const nextTodos = [...todos];
 
       const value = nextTodos.pop();
 
       if (e.key === 'z' && e.metaKey && e.shiftKey) {
-        const res = await tx.store.getAll();
-        const value = res.pop();
+        const prevTodo = await garbagesTx.store.openCursor(null, 'prev');
+        if (!prevTodo) return;
 
-        const restoredTodos = [...todos, value];
+        const restoredTodos = [...todos, prevTodo.value];
         await updateTodosData(restoredTodos);
+
+        const garbagesTx2 = todosDB.transaction('garbages', 'readwrite');
+        await garbagesTx2.store.delete(prevTodo.key);
         setTodos(() => restoredTodos);
         return;
       }
 
       if (e.key === 'z' && e.metaKey) {
-        tx.store.add(value);
-
-        console.log(nextTodos);
+        garbagesTx.store.add(value);
 
         await updateTodosData(nextTodos);
         setTodos(() => nextTodos);
@@ -143,7 +146,7 @@ export default function Home() {
         </form>
 
         <ul className={styles['todo-list']}>
-          {todos.map((todo) => (
+          {todos?.map((todo) => (
             <li className={styles['todo-list__item']} key={todo.id}>
               {todo.content}
             </li>
