@@ -4,7 +4,7 @@ const { existsSync } = require(`fs`);
 const { createRequire } = require(`module`);
 const { resolve } = require(`path`);
 
-const relPnpApiPath = "../../../../.pnp.cjs";
+const relPnpApiPath = '../../../../.pnp.cjs';
 
 const absPnpApiPath = resolve(__dirname, relPnpApiPath);
 const absRequire = createRequire(absPnpApiPath);
@@ -18,7 +18,7 @@ const moduleWrapper = (tsserver) => {
   const pnpApi = require(`pnpapi`);
 
   const isVirtual = (str) => str.match(/\/(\$\$virtual|__virtual__)\//);
-  const isPortal = (str) => str.startsWith("portal:/");
+  const isPortal = (str) => str.startsWith('portal:/');
   const normalize = (str) => str.replace(/\\/g, `/`).replace(/^\/?/, `/`);
 
   const dependencyTreeRoots = new Set(
@@ -199,7 +199,7 @@ const moduleWrapper = (tsserver) => {
 
   Object.assign(Session.prototype, {
     onMessage(/** @type {string | object} */ message) {
-      const isStringMessage = typeof message === "string";
+      const isStringMessage = typeof message === 'string';
       const parsedMessage = isStringMessage ? JSON.parse(message) : message;
 
       if (
@@ -232,7 +232,7 @@ const moduleWrapper = (tsserver) => {
       const processedMessageJSON = JSON.stringify(
         parsedMessage,
         (key, value) => {
-          return typeof value === "string" ? fromEditorPath(value) : value;
+          return typeof value === 'string' ? fromEditorPath(value) : value;
         }
       );
 
