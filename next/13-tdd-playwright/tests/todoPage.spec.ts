@@ -44,11 +44,17 @@ test.describe('todo-input', () => {
 
 test.describe('todo-button', () => {
   let button: Locator | undefined;
+  let input: Locator | undefined;
 
   test.beforeEach(({ page }) => {
     button = page.locator('.todo-button');
+    input = page.locator('#todo-input');
     if (button === undefined) {
       expect('button이 렌더링되지 않았다.').toBe(false);
+      return;
+    }
+    if (input === undefined) {
+      expect('input이 렌더링되지 않았다.').toBe(false);
       return;
     }
   });
@@ -56,16 +62,30 @@ test.describe('todo-button', () => {
   test('버튼을 눌렀을 때, 적혀 있던 input값이 초기화되어야 한다.', async ({
     page,
   }) => {
-    if (!button) return;
-
-    const input = page.locator('#todo-input');
+    if (!button || !input) return;
 
     await input.focus();
     await input.type('test');
+
+    expect(button).toBeEnabled();
+
     await button.click();
 
     const inputValue = await input.inputValue();
 
     expect(inputValue).toBe('');
+  });
+
+  test('사용자가 input 값을 입력하지 않았다면 버튼이 비활성화된다.', async () => {
+    if (!button || !input) return;
+
+    const inputValue = await input.inputValue();
+
+    if (inputValue) {
+      await expect('inputValue가 초기에 값이 없어야 한다.').toBe(false);
+      return;
+    }
+
+    await expect(button).toBeDisabled();
   });
 });

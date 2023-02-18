@@ -114,6 +114,7 @@ export default function Home() {
             className="todo-form__submit-button todo-button"
             type="submit"
             onClick={onSubmit}
+            disabled={!inputRef?.current?.value}
           >
             추가하기
           </button>
