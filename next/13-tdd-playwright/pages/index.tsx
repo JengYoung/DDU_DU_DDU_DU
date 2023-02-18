@@ -16,7 +16,9 @@ export default function Home() {
         <title>Todo List</title>
       </Head>
 
-      <main className="todo-page"></main>
+      <main className="todo-page">
+        <input id="todo-input" placeholder="할 일을 입력하세요!" />
+      </main>
     </>
   );
 }
