@@ -1,11 +1,97 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from '@next/font/google';
-import styles from '@/styles/Home.module.css';
+import { useReducer, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const inter = Inter({ subsets: ['latin'] });
 
+interface ITodo {
+  id: string;
+  title: string;
+  completed: boolean;
+}
+
+interface CreateAction {
+  type: 'create';
+  payload: {
+    title: ITodo['title'];
+  };
+}
+
+interface UpdateCompleteAction {
+  type: 'update';
+  payload: {
+    id: ITodo['id'];
+    completed: ITodo['completed'];
+  };
+}
+
+interface DeleteAction {
+  type: 'delete';
+  payload: {
+    id: ITodo['id'];
+  };
+}
+
+type ITodosReducerAction = CreateAction | UpdateCompleteAction | DeleteAction;
+
+const initialTodosState: ITodo[] = [];
+const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
+  switch (action.type) {
+    case 'create': {
+      const { title } = (action as CreateAction).payload;
+
+      return [
+        ...state,
+        {
+          id: uuidv4(),
+          title,
+          completed: false,
+        },
+      ];
+    }
+
+    case 'update': {
+      const { id, completed } = (action as UpdateCompleteAction).payload;
+
+      return state.map((todo) =>
+        todo.id === id ? { ...todo, completed } : todo
+      );
+    }
+
+    case 'delete': {
+      const { id } = (action as DeleteAction).payload;
+
+      return state.filter((todo) => todo.id !== id);
+    }
+
+    default: {
+      return state;
+    }
+  }
+};
+
 export default function Home() {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [todosState, dispatch] = useReducer(todosReducer, initialTodosState);
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!inputRef.current) return;
+
+    const value = inputRef.current.value;
+
+    dispatch({
+      type: 'create',
+      payload: {
+        title: value,
+      },
+    });
+
+    inputRef.current.value = '';
+  };
+
   return (
     <>
       <Head>
@@ -17,7 +103,21 @@ export default function Home() {
       </Head>
 
       <main className="todo-page">
-        <input id="todo-input" placeholder="할 일을 입력하세요!" />
+        <form id="todo-form" onSubmit={onSubmit}>
+          <input
+            ref={inputRef}
+            id="todo-input"
+            className="todo-form__input "
+            placeholder="할 일을 입력하세요!"
+          />
+          <button
+            className="todo-form__submit-button todo-button"
+            type="submit"
+            onClick={onSubmit}
+          >
+            추가하기
+          </button>
+        </form>
       </main>
     </>
   );

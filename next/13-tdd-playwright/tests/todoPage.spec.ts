@@ -15,6 +15,13 @@ test.describe('todo-page: ', () => {
     const input = page.locator('#todo-input');
     await expect(input).toBeVisible();
   });
+
+  test('페이지에 들어가면 input의 할 일을 등록하기 위한 button이 나와야 한다.', async ({
+    page,
+  }) => {
+    const button = page.locator('.todo-button');
+    await expect(button).toBeVisible();
+  });
 });
 
 test.describe('todo-input', () => {
@@ -32,5 +39,33 @@ test.describe('todo-input', () => {
 
     const placeholder = await input.getAttribute('placeholder');
     expect(placeholder).toBe('할 일을 입력하세요!');
+  });
+});
+
+test.describe('todo-button', () => {
+  let button: Locator | undefined;
+
+  test.beforeEach(({ page }) => {
+    button = page.locator('.todo-button');
+    if (button === undefined) {
+      expect('button이 렌더링되지 않았다.').toBe(false);
+      return;
+    }
+  });
+
+  test('버튼을 눌렀을 때, 적혀 있던 input값이 초기화되어야 한다.', async ({
+    page,
+  }) => {
+    if (!button) return;
+
+    const input = page.locator('#todo-input');
+
+    await input.focus();
+    await input.type('test');
+    await button.click();
+
+    const inputValue = await input.inputValue();
+
+    expect(inputValue).toBe('');
   });
 });
