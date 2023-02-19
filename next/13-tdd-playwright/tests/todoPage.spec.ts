@@ -84,6 +84,21 @@ test.describe('todo-button', () => {
     expect(inputValue).toBe('');
   });
 
+  test('버튼을 눌러 할 일을 추가했다면, 할 일이 todo-list에서 보여야 한다.', async ({
+    page,
+  }) => {
+    if (!button || !input) return;
+
+    await input.focus();
+    await input.fill('test');
+
+    await button.click();
+
+    const todoItem = page.locator('.todo-item');
+
+    await expect(todoItem).toHaveText('test');
+  });
+
   test('사용자가 input 값을 입력하지 않았다면 버튼이 비활성화된다.', async () => {
     if (!button || !input) return;
 
