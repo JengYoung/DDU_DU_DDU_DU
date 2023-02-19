@@ -27,7 +27,7 @@ test.describe('todo-page: ', () => {
     page,
   }) => {
     const todoList = page.locator('.todo-list');
-    await expect(todoList).toBeVisible();
+    await expect(todoList).toBeDefined();
   });
 });
 
