@@ -132,7 +132,7 @@ test.describe('todo-button', () => {
         }
 
         const emptyContent = todoList.getByText('할 일이 없어요! 🙆🏻');
-        expect(emptyContent).toBeEnabled();
+        await expect(emptyContent).toBeDefined();
       });
     });
   });

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import { useMemo, useReducer, useRef } from 'react';
+import { useEffect, useMemo, useReducer, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -33,6 +33,10 @@ interface DeleteTodoAction {
   };
 }
 
+interface InitializeTodoAction {
+  type: 'initialize';
+}
+
 type TInputValue = string;
 
 interface WriteInputAction {
@@ -49,12 +53,25 @@ interface InitializeInputAction {
 type ITodosReducerAction =
   | CreateTodoAction
   | UpdateTodoCompleteAction
-  | DeleteTodoAction;
+  | DeleteTodoAction
+  | InitializeTodoAction;
+
 type IInputReducerAction = WriteInputAction | InitializeInputAction;
 
 const initialTodosState: ITodo[] = [];
 const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
   switch (action.type) {
+    case 'initialize': {
+      const value = window.localStorage.getItem('todos');
+      if (!value) {
+        window.localStorage.setItem('todos', JSON.stringify([]));
+      }
+
+      const todos = value ? JSON.parse(value) : [];
+
+      return todos;
+    }
+
     case 'create': {
       const { title } = (action as CreateTodoAction).payload;
 
@@ -116,6 +133,12 @@ export default function Home() {
   );
   const [todosState, dispatch] = useReducer(todosReducer, initialTodosState);
 
+  useEffect(() => {
+    dispatch({
+      type: 'initialize',
+    });
+  }, []);
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -175,7 +198,9 @@ export default function Home() {
           </button>
         </form>
 
-        <ul className="todo-list">12321</ul>
+        <ul className="todo-list">
+          {todosState.length ? <div></div> : <p>할 일이 없어요! 🙇🏻‍♂️</p>}
+        </ul>
       </main>
     </>
   );
