@@ -112,7 +112,7 @@ test.describe('todo-button', () => {
       await expect(todoList).toBeDefined();
     });
 
-    test.afterEach(async ({ page }) => {
+    test.afterAll(async ({ page }) => {
       await setInitialTodo(page);
     });
 
@@ -127,7 +127,7 @@ test.describe('todo-button', () => {
           todos = await getTodo(page);
         }
 
-        expect(todos?.length).toBe(0);
+        await expect(todos?.length).toBe(0);
       });
 
       test('"할 일이 없어요! 🙆🏻"라는 문구가 나와야 한다.', async ({ page }) => {
@@ -142,33 +142,35 @@ test.describe('todo-button', () => {
     });
 
     test.describe('초기에 할 일이 있다면', () => {
-      let todos: undefined | ITodo[] | null;
+      // let todos: undefined | ITodo[] | null;
 
       test.beforeEach(async ({ page }) => {
-        await setTodo(page, {
-          id: '1',
-          title: '할 일1',
-          completed: false,
-        });
+        await page.evaluate(`window.localStorage.setItem('todos', JSON.stringify([
+          {
+            id: '할일1',
+            title: '할일 1',
+            completed: false,
+          },
+          {
+            id: '할일2',
+            title: '할일 2',
+            completed: false,
+          },
+          {
+            id: '할일3',
+            title: '할일 3',
+            completed: false,
+          }
+        ]))`);
 
-        await setTodo(page, {
-          id: '2',
-          title: '할 일2',
-          completed: false,
-        });
+        // await page.waitForSelector('.todo-item', { state: 'visible' })
 
-        await setTodo(page, {
-          id: '3',
-          title: '할 일3',
-          completed: false,
-        });
+        const todos = await getTodo(page);
 
-        todos = await getTodo(page);
-
-        expect(todos?.length).toBe(3);
+        await expect(todos?.length).toBe(3);
       });
 
-      test('"할 일이 없다는 문구가 나오지 않아야 한다."', async () => {
+      test('"할 일이 없다는 문구가 나오지 않아야 한다."', async ({ page }) => {
         if (!todoList) {
           expect('TodoList가 없습니다.').toBe(false);
           return;
@@ -176,6 +178,24 @@ test.describe('todo-button', () => {
 
         const emptyContent = todoList.getByText('할 일이 없어요! 🙆🏻');
         await expect(emptyContent).not.toBeVisible();
+      });
+
+      test('할 일들이 나와야 한다.', async ({ page }) => {
+        const todos = await getTodo(page);
+        expect(todos.length).toBe(3);
+
+        if (!todoList) {
+          throw new Error('todoList가 없습니다.');
+        }
+
+        if (todos === null || todos === undefined) {
+          throw new Error('todos가 없습니다.');
+        }
+
+        const todoItem = page.locator('.todo-item');
+        const todoItemCount = await todoItem.count();
+
+        await expect(todoItemCount).toEqual(3);
       });
     });
   });
@@ -202,3 +222,12 @@ async function setInitialTodo(page: Page) {
     window.localStorage.setItem('todos', JSON.stringify([]));
   });
 }
+
+// async function checkTodoMounted(page: Page) {
+//   return await page.evaluate(() => {
+//     const todos = window.localStorage.getItem('todos');
+//     if (!todos) {
+//       todos
+//     }
+//   });
+// }

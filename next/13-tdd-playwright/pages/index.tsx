@@ -199,7 +199,15 @@ export default function Home() {
         </form>
 
         <ul className="todo-list">
-          {todosState.length ? <div></div> : <p>할 일이 없어요! 🙇🏻‍♂️</p>}
+          {todosState.length ? (
+            todosState.map((todo) => (
+              <li key={todo.id} id={todo.id} className="todo-item">
+                {todo.title}
+              </li>
+            ))
+          ) : (
+            <p>할 일이 없어요! 🙇🏻‍♂️</p>
+          )}
         </ul>
       </main>
     </>
