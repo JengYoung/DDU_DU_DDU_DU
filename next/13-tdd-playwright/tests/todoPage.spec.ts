@@ -22,6 +22,14 @@ test.describe('todo-page: ', () => {
     const button = page.locator('.todo-button');
     await expect(button).toBeVisible();
   });
+
+  test('페이지에 들어가면 input의 할 일을 모아 놓은 todo-list가 나와야 한다.', async ({
+    page,
+  }) => {
+    const todoList = page.locator('.todo-list');
+    console.log(todoList);
+    await expect(todoList).toBeVisible();
+  });
 });
 
 test.describe('todo-input', () => {
