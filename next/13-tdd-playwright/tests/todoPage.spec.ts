@@ -209,6 +209,29 @@ test.describe('todo-button', () => {
           );
         });
       });
+
+      test.describe('todo-item', () => {
+        test('todo-item의 내용을 2번 클릭하면 원래대로 돌아와야 한다.', async ({
+          page,
+        }) => {
+          await addTodoScenario(page, '할일 1');
+          await addTodoScenario(page, '할일 2');
+          await addTodoScenario(page, '할일 3');
+
+          if (!todoList) {
+            expect('todoList가 없습니다.').toBe(false);
+            return;
+          }
+
+          const todoItem2 = await todoList.locator('.todo-item', {
+            hasText: '할일 2',
+          });
+          await todoItem2.click();
+          await todoItem2.click();
+
+          await expect(todoItem2).toHaveCSS('text-decoration-line', 'none');
+        });
+      });
     });
   });
 });
