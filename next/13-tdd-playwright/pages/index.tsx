@@ -81,6 +81,7 @@ const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
   switch (action.type) {
     case 'initialize': {
       const value = window.localStorage.getItem('todos');
+
       if (!value) {
         window.localStorage.setItem('todos', JSON.stringify([]));
       }
@@ -165,16 +166,21 @@ export default function Home() {
     inputReducer,
     initialInputState
   );
-  const [todosState, dispatch] = useReducer(todosReducer, initialTodosState);
+  const [todosState, dispatchTodo] = useReducer(
+    todosReducer,
+    initialTodosState
+  );
 
   useEffect(() => {
-    dispatch({
+    dispatchTodo({
       type: 'initialize',
     });
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem('todos', JSON.stringify(todosState));
+    if (todosState.length) {
+      window.localStorage.setItem('todos', JSON.stringify(todosState));
+    }
   }, [todosState]);
 
   const onSubmit = (e: React.FormEvent) => {
@@ -184,7 +190,7 @@ export default function Home() {
 
     const value = inputRef.current.value;
 
-    dispatch({
+    dispatchTodo({
       type: 'create',
       payload: {
         title: value,
@@ -214,7 +220,7 @@ export default function Home() {
     id: ITodo['id'],
     nowCompleted: boolean
   ) => {
-    dispatch({
+    dispatchTodo({
       type: nowCompleted ? 'notComplete' : 'complete',
       payload: {
         id,

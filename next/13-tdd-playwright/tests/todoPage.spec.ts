@@ -30,6 +30,31 @@ test.describe('todo-page: ', () => {
     const todoList = page.locator('.todo-list');
     await expect(todoList).toBeDefined();
   });
+
+  test('입력 후 페이지를 껐다가 들어와도 할 일들이 유지되어야 한다.', async ({
+    context,
+  }) => {
+    const nowPage = await context.newPage();
+    await nowPage.goto('http://localhost:3000');
+
+    await addTodoScenario(nowPage, '할일 1');
+    await addTodoScenario(nowPage, '할일 2');
+    await addTodoScenario(nowPage, '할일 3');
+
+    await nowPage.close();
+
+    const nextPage = await context.newPage();
+    await nextPage.goto('http://localhost:3000');
+
+    const nextPageTodoItems = await nextPage
+      .locator('.todo-item')
+      .allTextContents();
+    expect(
+      nextPageTodoItems.every((text) =>
+        ['할일 1', '할일 2', '할일 3'].includes(text)
+      )
+    ).toBeTruthy();
+  });
 });
 
 test.describe('todo-input', () => {
@@ -208,9 +233,7 @@ test.describe('todo-button', () => {
             'line-through'
           );
         });
-      });
 
-      test.describe('todo-item', () => {
         test('todo-item의 내용을 2번 클릭하면 원래대로 돌아와야 한다.', async ({
           page,
         }) => {
