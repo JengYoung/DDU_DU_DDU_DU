@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const inter = Inter({ subsets: ['latin'] });
 
-interface ITodo {
+export interface ITodo {
   id: string;
   title: string;
   completed: boolean;

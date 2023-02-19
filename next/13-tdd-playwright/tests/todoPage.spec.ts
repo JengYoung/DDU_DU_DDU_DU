@@ -1,4 +1,5 @@
-import { test, expect, Locator } from '@playwright/test';
+import { ITodo } from '@/pages';
+import { test, expect, Locator, type Page } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000');
@@ -95,4 +96,58 @@ test.describe('todo-button', () => {
 
     await expect(button).toBeDisabled();
   });
+
+  test.describe('todo-list', () => {
+    let input: Locator | undefined;
+    let button: Locator | undefined;
+    let todoList: Locator | undefined;
+
+    test.beforeEach(async ({ page }) => {
+      input = page.locator('#todo-input');
+      button = page.locator('.todo-button');
+      todoList = page.locator('.todo-list');
+
+      await expect(input).toBeDefined();
+      await expect(button).toBeDefined();
+      await expect(todoList).toBeDefined();
+    });
+
+    test.describe('초기에 할 일이 없다면', () => {
+      let todos: undefined | ITodo[] | null;
+
+      test.beforeEach(async ({ page }) => {
+        todos = await getTodo(page);
+        if (!todos?.length) {
+          setInitialTodo(page);
+          todos = await getTodo(page);
+        }
+
+        expect(todos?.length).toBe(0);
+      });
+
+      test('"할 일이 없어요! 🙆🏻"라는 문구가 나와야 한다.', async ({ page }) => {
+        if (!todoList) {
+          expect('TodoList가 없습니다.').toBe(false);
+          return;
+        }
+
+        const emptyContent = todoList.getByText('할 일이 없어요! 🙆🏻');
+        expect(emptyContent).toBeEnabled();
+      });
+    });
+  });
 });
+
+async function getTodo(page: Page) {
+  return await page.evaluate(() => {
+    const todos = window.localStorage.getItem('todos');
+
+    return todos ? JSON.parse(todos) : todos;
+  });
+}
+
+async function setInitialTodo(page: Page) {
+  return await page.evaluate(() => {
+    window.localStorage.setItem('todos', JSON.stringify([]));
+  });
+}
