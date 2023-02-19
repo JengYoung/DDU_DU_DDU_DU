@@ -112,13 +112,18 @@ test.describe('todo-button', () => {
       await expect(todoList).toBeDefined();
     });
 
+    test.afterEach(async ({ page }) => {
+      await setInitialTodo(page);
+    });
+
     test.describe('초기에 할 일이 없다면', () => {
       let todos: undefined | ITodo[] | null;
 
       test.beforeEach(async ({ page }) => {
         todos = await getTodo(page);
+
         if (!todos?.length) {
-          setInitialTodo(page);
+          await setInitialTodo(page);
           todos = await getTodo(page);
         }
 
@@ -135,6 +140,44 @@ test.describe('todo-button', () => {
         await expect(emptyContent).toBeDefined();
       });
     });
+
+    test.describe('초기에 할 일이 있다면', () => {
+      let todos: undefined | ITodo[] | null;
+
+      test.beforeEach(async ({ page }) => {
+        await setTodo(page, {
+          id: '1',
+          title: '할 일1',
+          completed: false,
+        });
+
+        await setTodo(page, {
+          id: '2',
+          title: '할 일2',
+          completed: false,
+        });
+
+        await setTodo(page, {
+          id: '3',
+          title: '할 일3',
+          completed: false,
+        });
+
+        todos = await getTodo(page);
+
+        expect(todos?.length).toBe(3);
+      });
+
+      test('"할 일이 없다는 문구가 나오지 않아야 한다."', async () => {
+        if (!todoList) {
+          expect('TodoList가 없습니다.').toBe(false);
+          return;
+        }
+
+        const emptyContent = todoList.getByText('할 일이 없어요! 🙆🏻');
+        await expect(emptyContent).not.toBeVisible();
+      });
+    });
   });
 });
 
@@ -144,6 +187,14 @@ async function getTodo(page: Page) {
 
     return todos ? JSON.parse(todos) : todos;
   });
+}
+
+async function setTodo(page: Page, item: ITodo) {
+  return await page.evaluate((e) => {
+    const value = window.localStorage.getItem('todos');
+    const todos = value ? JSON.parse(value) : [];
+    window.localStorage.setItem('todos', JSON.stringify([...todos, e]));
+  }, item);
 }
 
 async function setInitialTodo(page: Page) {
