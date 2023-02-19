@@ -27,7 +27,6 @@ test.describe('todo-page: ', () => {
     page,
   }) => {
     const todoList = page.locator('.todo-list');
-    console.log(todoList);
     await expect(todoList).toBeVisible();
   });
 });
@@ -73,9 +72,9 @@ test.describe('todo-button', () => {
     if (!button || !input) return;
 
     await input.focus();
-    await input.type('test');
+    await input.fill('test');
 
-    expect(button).toBeEnabled();
+    await expect(button).toBeEnabled();
 
     await button.click();
 

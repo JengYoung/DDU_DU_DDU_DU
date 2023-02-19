@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
-import { useReducer, useRef } from 'react';
+import { useMemo, useReducer, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -11,14 +11,14 @@ interface ITodo {
   completed: boolean;
 }
 
-interface CreateAction {
+interface CreateTodoAction {
   type: 'create';
   payload: {
     title: ITodo['title'];
   };
 }
 
-interface UpdateCompleteAction {
+interface UpdateTodoCompleteAction {
   type: 'update';
   payload: {
     id: ITodo['id'];
@@ -26,20 +26,37 @@ interface UpdateCompleteAction {
   };
 }
 
-interface DeleteAction {
+interface DeleteTodoAction {
   type: 'delete';
   payload: {
     id: ITodo['id'];
   };
 }
 
-type ITodosReducerAction = CreateAction | UpdateCompleteAction | DeleteAction;
+type TInputValue = string;
+
+interface WriteInputAction {
+  type: 'write';
+  payload: {
+    content: TInputValue;
+  };
+}
+
+interface InitializeInputAction {
+  type: 'initialize';
+}
+
+type ITodosReducerAction =
+  | CreateTodoAction
+  | UpdateTodoCompleteAction
+  | DeleteTodoAction;
+type IInputReducerAction = WriteInputAction | InitializeInputAction;
 
 const initialTodosState: ITodo[] = [];
 const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
   switch (action.type) {
     case 'create': {
-      const { title } = (action as CreateAction).payload;
+      const { title } = (action as CreateTodoAction).payload;
 
       return [
         ...state,
@@ -52,7 +69,7 @@ const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
     }
 
     case 'update': {
-      const { id, completed } = (action as UpdateCompleteAction).payload;
+      const { id, completed } = (action as UpdateTodoCompleteAction).payload;
 
       return state.map((todo) =>
         todo.id === id ? { ...todo, completed } : todo
@@ -60,7 +77,7 @@ const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
     }
 
     case 'delete': {
-      const { id } = (action as DeleteAction).payload;
+      const { id } = (action as DeleteTodoAction).payload;
 
       return state.filter((todo) => todo.id !== id);
     }
@@ -71,8 +88,32 @@ const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
   }
 };
 
+const initialInputState: string = '';
+const inputReducer = (
+  state: TInputValue,
+  action: IInputReducerAction
+): TInputValue => {
+  switch (action.type) {
+    case 'write': {
+      return action.payload.content;
+    }
+
+    case 'initialize': {
+      return '';
+    }
+
+    default: {
+      return state;
+    }
+  }
+};
+
 export default function Home() {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [inputState, dispatchInput] = useReducer(
+    inputReducer,
+    initialInputState
+  );
   const [todosState, dispatch] = useReducer(todosReducer, initialTodosState);
 
   const onSubmit = (e: React.FormEvent) => {
@@ -89,7 +130,20 @@ export default function Home() {
       },
     });
 
+    dispatchInput({
+      type: 'initialize',
+    });
+
     inputRef.current.value = '';
+  };
+
+  const onChangeInput = (e: React.FormEvent) => {
+    dispatchInput({
+      type: 'write',
+      payload: {
+        content: (e.target as HTMLInputElement).value,
+      },
+    });
   };
 
   return (
@@ -109,16 +163,19 @@ export default function Home() {
             id="todo-input"
             className="todo-form__input "
             placeholder="할 일을 입력하세요!"
+            onChange={onChangeInput}
           />
           <button
-            className="todo-form__submit-button todo-button"
+            className="todo-button"
             type="submit"
             onClick={onSubmit}
-            disabled={!inputRef?.current?.value}
+            disabled={!inputState}
           >
             추가하기
           </button>
         </form>
+
+        <ul className="todo-list">12321</ul>
       </main>
     </>
   );
