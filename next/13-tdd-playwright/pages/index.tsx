@@ -3,6 +3,8 @@ import { Inter } from '@next/font/google';
 import { useEffect, useMemo, useReducer, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import styles from '../styles/Home.module.css';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export interface ITodo {
@@ -46,6 +48,20 @@ interface WriteInputAction {
   };
 }
 
+interface CompleteTodoAction {
+  type: 'complete';
+  payload: {
+    id: ITodo['id'];
+  };
+}
+
+interface NotCompleteTodoAction {
+  type: 'notComplete';
+  payload: {
+    id: ITodo['id'];
+  };
+}
+
 interface InitializeInputAction {
   type: 'initialize';
 }
@@ -54,7 +70,9 @@ type ITodosReducerAction =
   | CreateTodoAction
   | UpdateTodoCompleteAction
   | DeleteTodoAction
-  | InitializeTodoAction;
+  | InitializeTodoAction
+  | CompleteTodoAction
+  | NotCompleteTodoAction;
 
 type IInputReducerAction = WriteInputAction | InitializeInputAction;
 
@@ -102,6 +120,22 @@ const todosReducer = (state: ITodo[], action: ITodosReducerAction): ITodo[] => {
     default: {
       return state;
     }
+
+    case 'complete': {
+      const { id } = (action as CompleteTodoAction).payload;
+
+      return state.map((todo) =>
+        todo.id === id ? { ...todo, completed: true } : todo
+      );
+    }
+
+    case 'notComplete': {
+      const { id } = (action as NotCompleteTodoAction).payload;
+
+      return state.map((todo) =>
+        todo.id === id ? { ...todo, completed: false } : todo
+      );
+    }
   }
 };
 
@@ -139,6 +173,10 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    window.localStorage.setItem('todos', JSON.stringify(todosState));
+  }, [todosState]);
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -153,6 +191,8 @@ export default function Home() {
       },
     });
 
+    // localStorage.setItem('todos', JSON.stringify(todosState))
+
     dispatchInput({
       type: 'initialize',
     });
@@ -165,6 +205,19 @@ export default function Home() {
       type: 'write',
       payload: {
         content: (e.target as HTMLInputElement).value,
+      },
+    });
+  };
+
+  const onClickTodoItem = (
+    e: React.MouseEvent,
+    id: ITodo['id'],
+    nowCompleted: boolean
+  ) => {
+    dispatch({
+      type: nowCompleted ? 'notComplete' : 'complete',
+      payload: {
+        id,
       },
     });
   };
@@ -201,7 +254,14 @@ export default function Home() {
         <ul className="todo-list">
           {todosState.length ? (
             todosState.map((todo) => (
-              <li key={todo.id} id={todo.id} className="todo-item">
+              <li
+                key={todo.id}
+                id={todo.id}
+                className={`todo-item ${styles['todo-item']} ${
+                  todo.completed ? styles.completed : ''
+                }`}
+                onClick={(e) => onClickTodoItem(e, todo.id, todo.completed)}
+              >
                 {todo.title}
               </li>
             ))

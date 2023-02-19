@@ -94,7 +94,7 @@ test.describe('todo-button', () => {
 
     await button.click();
 
-    const todoItem = page.locator('.todo-item');
+    const todoItem = await page.locator('.todo-item');
 
     await expect(todoItem).toHaveText('test');
   });
@@ -157,35 +157,11 @@ test.describe('todo-button', () => {
     });
 
     test.describe('초기에 할 일이 있다면', () => {
-      // let todos: undefined | ITodo[] | null;
-
-      test.beforeEach(async ({ page }) => {
-        await page.evaluate(`window.localStorage.setItem('todos', JSON.stringify([
-          {
-            id: '할일1',
-            title: '할일 1',
-            completed: false,
-          },
-          {
-            id: '할일2',
-            title: '할일 2',
-            completed: false,
-          },
-          {
-            id: '할일3',
-            title: '할일 3',
-            completed: false,
-          }
-        ]))`);
-
-        // await page.waitForSelector('.todo-item', { state: 'visible' })
-
-        const todos = await getTodo(page);
-
-        await expect(todos?.length).toBe(3);
-      });
-
       test('"할 일이 없다는 문구가 나오지 않아야 한다."', async ({ page }) => {
+        await addTodoScenario(page, '할일 1');
+        await addTodoScenario(page, '할일 2');
+        await addTodoScenario(page, '할일 3');
+
         if (!todoList) {
           expect('TodoList가 없습니다.').toBe(false);
           return;
@@ -196,21 +172,42 @@ test.describe('todo-button', () => {
       });
 
       test('할 일들이 나와야 한다.', async ({ page }) => {
-        const todos = await getTodo(page);
-        expect(todos.length).toBe(3);
+        await addTodoScenario(page, '할일 1');
+        await addTodoScenario(page, '할일 2');
+        await addTodoScenario(page, '할일 3');
 
         if (!todoList) {
           throw new Error('todoList가 없습니다.');
         }
 
-        if (todos === null || todos === undefined) {
-          throw new Error('todos가 없습니다.');
-        }
-
-        const todoItem = page.locator('.todo-item');
+        const todoItem = await page.locator('.todo-item');
         const todoItemCount = await todoItem.count();
-
         await expect(todoItemCount).toEqual(3);
+      });
+
+      test.describe('todo-item', () => {
+        test('todo-item의 내용을 클릭하면 완료한 것처럼 내용에 줄이 그어져야 한다.', async ({
+          page,
+        }) => {
+          await addTodoScenario(page, '할일 1');
+          await addTodoScenario(page, '할일 2');
+          await addTodoScenario(page, '할일 3');
+
+          if (!todoList) {
+            expect('todoList가 없습니다.').toBe(false);
+            return;
+          }
+
+          const todoItem2 = await todoList.locator('.todo-item', {
+            hasText: '할일 2',
+          });
+          await todoItem2.click();
+
+          await expect(todoItem2).toHaveCSS(
+            'text-decoration-line',
+            'line-through'
+          );
+        });
       });
     });
   });
@@ -224,25 +221,15 @@ async function getTodo(page: Page) {
   });
 }
 
-async function setTodo(page: Page, item: ITodo) {
-  return await page.evaluate((e) => {
-    const value = window.localStorage.getItem('todos');
-    const todos = value ? JSON.parse(value) : [];
-    window.localStorage.setItem('todos', JSON.stringify([...todos, e]));
-  }, item);
-}
-
 async function setInitialTodo(page: Page) {
   return await page.evaluate(() => {
     window.localStorage.setItem('todos', JSON.stringify([]));
   });
 }
+async function addTodoScenario(page: Page, todo: ITodo['title']) {
+  const input = page.locator('#todo-input');
 
-// async function checkTodoMounted(page: Page) {
-//   return await page.evaluate(() => {
-//     const todos = window.localStorage.getItem('todos');
-//     if (!todos) {
-//       todos
-//     }
-//   });
-// }
+  // Create 1st todo.
+  await input.fill(todo);
+  await input.press('Enter');
+}
