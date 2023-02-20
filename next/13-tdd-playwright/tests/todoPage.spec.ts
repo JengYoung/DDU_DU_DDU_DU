@@ -182,11 +182,13 @@ test.describe('todo-button', () => {
     });
 
     test.describe('초기에 할 일이 있다면', () => {
-      test('"할 일이 없다는 문구가 나오지 않아야 한다."', async ({ page }) => {
+      test.beforeEach(async ({ page }) => {
         await addTodoScenario(page, '할일 1');
         await addTodoScenario(page, '할일 2');
         await addTodoScenario(page, '할일 3');
+      });
 
+      test('"할 일이 없다는 문구가 나오지 않아야 한다."', async ({ page }) => {
         if (!todoList) {
           expect('TodoList가 없습니다.').toBe(false);
           return;
@@ -197,10 +199,6 @@ test.describe('todo-button', () => {
       });
 
       test('할 일들이 나와야 한다.', async ({ page }) => {
-        await addTodoScenario(page, '할일 1');
-        await addTodoScenario(page, '할일 2');
-        await addTodoScenario(page, '할일 3');
-
         if (!todoList) {
           throw new Error('todoList가 없습니다.');
         }
@@ -211,13 +209,7 @@ test.describe('todo-button', () => {
       });
 
       test.describe('todo-item', () => {
-        test('todo-item의 내용을 클릭하면 완료한 것처럼 내용에 줄이 그어져야 한다.', async ({
-          page,
-        }) => {
-          await addTodoScenario(page, '할일 1');
-          await addTodoScenario(page, '할일 2');
-          await addTodoScenario(page, '할일 3');
-
+        test('todo-item의 내용을 클릭하면 완료한 것처럼 내용에 줄이 그어져야 한다.', async () => {
           if (!todoList) {
             expect('todoList가 없습니다.').toBe(false);
             return;
@@ -234,13 +226,7 @@ test.describe('todo-button', () => {
           );
         });
 
-        test('todo-item의 내용을 2번 클릭하면 원래대로 돌아와야 한다.', async ({
-          page,
-        }) => {
-          await addTodoScenario(page, '할일 1');
-          await addTodoScenario(page, '할일 2');
-          await addTodoScenario(page, '할일 3');
-
+        test('todo-item의 내용을 2번 클릭하면 원래대로 돌아와야 한다.', async () => {
           if (!todoList) {
             expect('todoList가 없습니다.').toBe(false);
             return;
@@ -253,6 +239,20 @@ test.describe('todo-button', () => {
           await todoItem2.click();
 
           await expect(todoItem2).toHaveCSS('text-decoration-line', 'none');
+        });
+      });
+
+      test.describe('todo__delete-button', () => {
+        test('각 할 일들에는 삭제 버튼이 있어야 한다.', async () => {
+          if (!todoList) {
+            expect('todoList가 없습니다.').toBe(false);
+            return;
+          }
+
+          const todoDeleteBtns = await todoList
+            .locator('.todo-item > .todo__delete-button')
+            .all();
+          await expect(todoDeleteBtns.length).toBe(3);
         });
       });
     });
