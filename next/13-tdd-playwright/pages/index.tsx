@@ -268,7 +268,8 @@ export default function Home() {
                 }`}
                 onClick={(e) => onClickTodoItem(e, todo.id, todo.completed)}
               >
-                {todo.title}
+                <p>{todo.title}</p>
+                <button className="todo__delete-button">❌</button>
               </li>
             ))
           ) : (

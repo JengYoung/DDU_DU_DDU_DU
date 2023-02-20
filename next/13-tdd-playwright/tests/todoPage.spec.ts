@@ -47,7 +47,7 @@ test.describe('todo-page: ', () => {
     await nextPage.goto('http://localhost:3000');
 
     const nextPageTodoItems = await nextPage
-      .locator('.todo-item')
+      .locator('.todo-item > p')
       .allTextContents();
     expect(
       nextPageTodoItems.every((text) =>
@@ -119,9 +119,9 @@ test.describe('todo-button', () => {
 
     await button.click();
 
-    const todoItem = await page.locator('.todo-item');
+    const todoItemTextContent = await page.locator('.todo-item > p');
 
-    await expect(todoItem).toHaveText('test');
+    await expect(todoItemTextContent).toHaveText('test');
   });
 
   test('사용자가 input 값을 입력하지 않았다면 버튼이 비활성화된다.', async () => {
