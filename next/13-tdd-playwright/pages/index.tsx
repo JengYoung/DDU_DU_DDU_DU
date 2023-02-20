@@ -228,6 +228,15 @@ export default function Home() {
     });
   };
 
+  const onClickDeleteButton = (e: React.MouseEvent, id: ITodo['id']) => {
+    dispatchTodo({
+      type: 'delete',
+      payload: {
+        id,
+      },
+    });
+  };
+
   return (
     <>
       <Head>
@@ -269,7 +278,12 @@ export default function Home() {
                 onClick={(e) => onClickTodoItem(e, todo.id, todo.completed)}
               >
                 <p>{todo.title}</p>
-                <button className="todo__delete-button">❌</button>
+                <button
+                  className="todo__delete-button"
+                  onClick={(e) => onClickDeleteButton(e, todo.id)}
+                >
+                  ❌
+                </button>
               </li>
             ))
           ) : (
