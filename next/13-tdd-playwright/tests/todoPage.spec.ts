@@ -254,6 +254,21 @@ test.describe('todo-button', () => {
             .all();
           await expect(todoDeleteBtns.length).toBe(3);
         });
+
+        test('삭제 버튼을 클릭하면 todo-item이 사라져야 한다.', async () => {
+          if (!todoList) {
+            expect('todoList가 없습니다.').toBe(false);
+            return;
+          }
+
+          const todo2DeleteBtn = await todoList
+            .locator('.todo-item > .todo__delete-button')
+            .nth(1);
+          await todo2DeleteBtn.click();
+
+          const todoItemCnt = await todoList.locator('.todo-item').count();
+          expect(todoItemCnt).toBe(2);
+        });
       });
     });
   });
