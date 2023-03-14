@@ -14,7 +14,9 @@
     "dev:react-18-rxjs": "yarn workspace react-18-rxjs dev",
     "dev:next13-silent-refresh": "yarn workspace next-silent-refresh dev",
     "dev:next13-indexedDB": "yarn workspace next13-indexeddb dev",
-    "dev:tdd-playwright": "yarn workspace 13-tdd-playwright dev"
+    "dev:tdd-playwright": "yarn workspace 13-tdd-playwright dev",
+    "dev:nest:backend": "yarn workspace nest-backend dev",
+    "dev:nest:frontend": "yarn workspace nest-front dev"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
