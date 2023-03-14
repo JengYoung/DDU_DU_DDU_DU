@@ -1,6 +1,6 @@
 export interface ITodo {
   id: string;
-  type: ETodos;
+  type: ETodo;
   content: string;
   completed: boolean;
   createdAt: Date;
@@ -12,7 +12,7 @@ export interface IWriteTodo {
   content: ITodo['content'];
 }
 
-export enum ETodos {
+export enum ETodo {
   public = 'PUBLIC',
   private = 'PRIVATE',
 }

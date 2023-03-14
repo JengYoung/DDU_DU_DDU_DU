@@ -1,6 +1,9 @@
+import { GetTodoByIdDTO } from './dto/getTodoById.dto';
 import { TodosService } from './todos.service';
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ITodo, IWriteTodo } from './todos.model';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { ITodo } from './todos.model';
+import { WriteTodoDTO } from './dto/writeTodo.dto';
+import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -12,10 +15,18 @@ export class TodosController {
   }
 
   @Post('/')
-  writeTodo(
-    @Body('content') content: IWriteTodo['content'],
-    @Body('type') type: IWriteTodo['type'],
-  ): ITodo {
-    return this.todosService.writeTodo({ type, content });
+  writeTodo(@Body() writeTodoDTO: WriteTodoDTO): ITodo {
+    return this.todosService.writeTodo(writeTodoDTO);
+  }
+
+  @Get('/:id')
+  getTodoById(@Param() getTodoByIdDTO: GetTodoByIdDTO): ITodo {
+    console.log('id: ', getTodoByIdDTO);
+    return this.todosService.getTodoById(getTodoByIdDTO);
+  }
+
+  @Delete('/:id')
+  deleteTodoById(@Param() deleteTodoByIdDTO: DeleteTodoByIdDTO): void {
+    this.todosService.deleteTodoById(deleteTodoByIdDTO);
   }
 }
