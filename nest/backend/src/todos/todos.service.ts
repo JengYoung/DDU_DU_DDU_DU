@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { v4 as uuidV4 } from 'uuid';
 import { GetTodoByIdDTO } from './dto/getTodoById.dto';
 import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
+import { UpdateTodoDTO } from './dto/updateTodoDTO.dto';
 
 @Injectable()
 export class TodosService {
@@ -17,6 +18,8 @@ export class TodosService {
     const now = new Date();
 
     const { content, type } = writeTodoDTO;
+
+    console.log(writeTodoDTO);
 
     const todo: ITodo = {
       id: uuidV4(),
@@ -42,5 +45,20 @@ export class TodosService {
     );
 
     return;
+  }
+
+  updateTodo(updateTodoDTO: UpdateTodoDTO) {
+    console.log(updateTodoDTO.id);
+    this.todos = this.todos.map((todo) => {
+      return todo.id === updateTodoDTO.id
+        ? {
+            ...todo,
+            ...updateTodoDTO,
+            updatedAt: new Date(),
+          }
+        : todo;
+    });
+
+    return this.todos;
   }
 }
