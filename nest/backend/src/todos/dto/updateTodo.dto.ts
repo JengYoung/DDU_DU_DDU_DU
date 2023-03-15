@@ -1,4 +1,4 @@
-import { ITodo } from './../todos.model';
+import { ITodo } from '../todos.model';
 export class UpdateTodoDTO {
   id: ITodo['id'];
   type?: ITodo['type'];

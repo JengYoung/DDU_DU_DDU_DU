@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { v4 as uuidV4 } from 'uuid';
 import { GetTodoByIdDTO } from './dto/getTodoById.dto';
 import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
-import { UpdateTodoDTO } from './dto/updateTodoDTO.dto';
+import { UpdateTodoDTO } from './dto/updateTodo.dto';
 
 @Injectable()
 export class TodosService {

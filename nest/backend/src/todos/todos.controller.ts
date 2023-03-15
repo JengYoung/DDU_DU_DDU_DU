@@ -8,11 +8,13 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ITodo } from './todos.model';
 import { WriteTodoDTO } from './dto/writeTodo.dto';
 import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
-import { UpdateTodoDTO } from './dto/updateTodoDTO.dto';
+import { UpdateTodoDTO } from './dto/updateTodo.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -24,6 +26,7 @@ export class TodosController {
   }
 
   @Post('/')
+  @UsePipes(ValidationPipe)
   writeTodo(@Body() writeTodoDTO: WriteTodoDTO): ITodo {
     return this.todosService.writeTodo(writeTodoDTO);
   }
