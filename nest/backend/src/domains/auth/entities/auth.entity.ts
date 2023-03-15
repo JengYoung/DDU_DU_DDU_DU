@@ -11,7 +11,7 @@ export class Auth extends BaseEntity {
   id: number;
 
   @Column()
-  emailId: string;
+  email: string;
 
   @Column()
   password: string;

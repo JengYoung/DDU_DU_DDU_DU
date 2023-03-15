@@ -4,7 +4,7 @@ import { Auth } from './entities/auth.entity';
 
 export const authProviders = [
   {
-    provide: repositoryToken.todos,
+    provide: repositoryToken.auth,
     useFactory: (dataSource: DataSource) => dataSource.getRepository(Auth),
     inject: [databaseToken.postgresql],
   },
