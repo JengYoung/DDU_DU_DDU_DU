@@ -11,10 +11,11 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { ITodo } from './todos.model';
+import { ETodo, ITodo } from './todos.model';
 import { WriteTodoDTO } from './dto/writeTodo.dto';
 import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
 import { UpdateTodoDTO } from './dto/updateTodo.dto';
+import { TodoValidationPipe } from './pipes/TodoValidation.pipe';
 
 @Controller('todos')
 export class TodosController {
@@ -43,7 +44,12 @@ export class TodosController {
   }
 
   @Put('/')
-  updateTodo(@Body() updateTodoDTO: UpdateTodoDTO): void {
+  updateTodo(
+    @Body() updateTodoDTO: UpdateTodoDTO,
+    @Body('type', TodoValidationPipe) type: ETodo,
+  ) {
     this.todosService.updateTodo(updateTodoDTO);
+
+    return type;
   }
 }

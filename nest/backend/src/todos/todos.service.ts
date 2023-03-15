@@ -1,6 +1,10 @@
 import { WriteTodoDTO } from './dto/writeTodo.dto';
 import { ITodo } from './todos.model';
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { v4 as uuidV4 } from 'uuid';
 import { GetTodoByIdDTO } from './dto/getTodoById.dto';
 import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
@@ -36,7 +40,13 @@ export class TodosService {
   }
 
   getTodoById(getTodoByIdDTO: GetTodoByIdDTO) {
-    return this.todos.find(({ id: tId }) => tId === getTodoByIdDTO.id);
+    const result = this.todos.find(({ id: tId }) => tId === getTodoByIdDTO.id);
+
+    if (!result) {
+      throw new NotFoundException(`Cannot find Todo with ${getTodoByIdDTO.id}`);
+    }
+
+    return result;
   }
 
   deleteTodoById(deleteTodoByIdDTO: DeleteTodoByIdDTO) {
@@ -48,7 +58,10 @@ export class TodosService {
   }
 
   updateTodo(updateTodoDTO: UpdateTodoDTO) {
-    console.log(updateTodoDTO.id);
+    if (!updateTodoDTO.id) {
+      throw new BadRequestException('Id is Required in the Body');
+    }
+
     this.todos = this.todos.map((todo) => {
       return todo.id === updateTodoDTO.id
         ? {
