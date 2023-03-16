@@ -13,8 +13,10 @@ export interface ILoginPayload {
 }
 
 export const login = async ({ email, password }: ILoginPayload) => {
-  const res = await request.post('/auth/login', {
+  const res = request.post('/auth/login', {
     email,
     password,
   });
+
+  return res;
 };
