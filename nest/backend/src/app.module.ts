@@ -10,7 +10,9 @@ import env from './common/env';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env.development'],
+      envFilePath: [
+        process.env.NODE_ENV === 'DEV' ? '.env.development' : '.env.production',
+      ],
       load: [env],
     }),
     TodosModule,

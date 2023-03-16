@@ -5,6 +5,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Put,
@@ -24,14 +25,24 @@ import { GetTodosByEmailDTO } from './dto/getTodosByEmail.dto';
 @Controller('todos')
 @UseGuards(AuthGuard())
 export class TodosController {
-  constructor(private todosService: TodosService) {}
+  private logger: Logger;
+  constructor(private todosService: TodosService) {
+    this.logger = new Logger('TodosController...');
+  }
+
   @Get('/')
   getTodos() {
     return this.todosService.getTodos();
   }
 
   @Get('/:id')
-  getTodosByUserId(@Param() getTodosByUserIdDTO: GetTodosByEmailDTO) {
+  getTodosByUserId(
+    @Param() getTodosByUserIdDTO: GetTodosByEmailDTO,
+    @GetUser() user: Auth,
+  ) {
+    this.logger.verbose(
+      `id ${user.id} user is trying to get id ${getTodosByUserIdDTO.id} user's Todos`,
+    );
     return this.todosService.getTodosByEmail(getTodosByUserIdDTO);
   }
 
@@ -41,6 +52,9 @@ export class TodosController {
     @Body() writeTodoDTO: WriteTodoDTO,
     @GetUser() user: Auth,
   ): Promise<Todos> {
+    this.logger.verbose(`
+      id ${user.id} user created ${writeTodoDTO.type} Todo.
+    `);
     return this.todosService.writeTodo(writeTodoDTO, user);
   }
 
