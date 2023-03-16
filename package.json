@@ -4,7 +4,8 @@
   "workspaces": [
     "vanilla-js",
     "react/*",
-    "next/*"
+    "next/*",
+    "nest/*"
   ],
   "scripts": {
     "postinstall": "husky install",
@@ -25,7 +26,8 @@
     "cz-customizable": "^7.0.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "typescript": "4.9.3"
   },
   "dependenciesMeta": {
     "cz-customizable@7.0.0": {
