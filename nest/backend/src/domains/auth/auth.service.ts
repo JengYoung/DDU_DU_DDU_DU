@@ -3,6 +3,7 @@ import {
   Inject,
   Injectable,
   InternalServerErrorException,
+  Logger,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -16,11 +17,14 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
+  private logger: Logger;
   constructor(
     @Inject(repositoryToken.auth)
     private authRepository: Repository<Auth>,
     private jwtService: JwtService,
-  ) {}
+  ) {
+    this.logger = new Logger();
+  }
 
   async getUserById(getUserByIdDTO: AuthIdDTO) {
     const user = await this.authRepository.findOneBy({ id: getUserByIdDTO.id });
@@ -82,6 +86,7 @@ export class AuthService {
       const userTokenData = { email };
       const accessToken = await this.jwtService.sign(userTokenData);
 
+      this.logger.verbose(`${user.id} user Login success.`);
       return { accessToken };
     } catch (e) {
       const statusCode = e?.response?.statusCode;
