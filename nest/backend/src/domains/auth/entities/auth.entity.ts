@@ -1,4 +1,10 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  Index,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 /**
  * @description
@@ -10,6 +16,7 @@ export class Auth extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Index({ unique: true })
   @Column()
   email: string;
 
