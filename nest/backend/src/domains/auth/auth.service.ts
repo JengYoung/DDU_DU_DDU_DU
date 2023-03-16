@@ -2,9 +2,10 @@ import {
   ConflictException,
   Inject,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { validate } from 'class-validator';
+
 import { repositoryToken } from 'src/common/tokens';
 import { Repository } from 'typeorm';
 import { AuthIdDTO, CreateUserDTO } from './dtos/auth.dto';
@@ -40,9 +41,11 @@ export class AuthService {
 
       await this.authRepository.save(user);
     } catch (e) {
-      const errors = await validate(createUserDTO);
-      console.log(createUserDTO, errors);
-      throw new ConflictException('Already registered ID');
+      if (e.code === '23505') {
+        throw new ConflictException('Already registered ID');
+      } else {
+        throw new InternalServerErrorException();
+      }
     }
   }
 }

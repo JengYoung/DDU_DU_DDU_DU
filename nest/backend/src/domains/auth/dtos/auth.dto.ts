@@ -7,6 +7,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Unique } from 'typeorm';
 import { Auth } from '../entities/auth.entity';
 
 const PASSWORD_REGEX = /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
@@ -36,6 +37,7 @@ export class AuthIdDTO implements Pick<AuthDTO, 'id'> {
   id: number;
 }
 
+@Unique(['email'])
 export class CreateUserDTO implements Pick<AuthDTO, 'email' | 'password'> {
   @IsEmail()
   email: AuthDTO['email'];

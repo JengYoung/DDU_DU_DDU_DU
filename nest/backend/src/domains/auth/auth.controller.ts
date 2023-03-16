@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthIdDTO, CreateUserDTO } from './dtos/auth.dto';
-import { EmailValidationPipe } from './pipes/emailValidation.pipe';
 
 @Controller('auth')
 export class AuthController {
@@ -22,7 +21,7 @@ export class AuthController {
   }
 
   @Post('/register')
-  @UsePipes(ValidationPipe, EmailValidationPipe)
+  @UsePipes(ValidationPipe)
   registerUser(@Body() createUserDTO: CreateUserDTO): Promise<void> {
     return this.authService.register(createUserDTO);
   }
