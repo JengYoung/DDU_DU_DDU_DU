@@ -53,3 +53,26 @@ export class CreateUserDTO implements Pick<AuthDTO, 'email' | 'password'> {
   })
   password: AuthDTO['password'];
 }
+
+export class LoginPayloadDTO implements Pick<AuthDTO, 'email' | 'password'> {
+  @IsEmail()
+  email: AuthDTO['email'];
+
+  @IsString()
+  @MinLength(4)
+  @MaxLength(20)
+  @Matches(PASSWORD_REGEX, {
+    message: '아이디나 비밀번호를 확인해주세요.',
+  })
+  @Matches(PASSWORD_SPECIAL_CHARACTOR, {
+    message: '아이디나 비밀번호를 확인해주세요.',
+  })
+  password: AuthDTO['password'];
+}
+
+class JwtResponseDTO {
+  public accessToken: string;
+}
+export class LoginResponseDTO implements JwtResponseDTO {
+  accessToken: string;
+}

@@ -13,6 +13,8 @@ import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
 import { UpdateTodoDTO } from './dto/updateTodo.dto';
 import { repositoryToken } from 'src/common/tokens';
 import { Todos } from './entities/todos.entity';
+import { Auth } from '../auth/entities/auth.entity';
+import { GetTodosByEmailDTO } from './dto/getTodosByEmail.dto';
 
 @Injectable()
 export class TodosService {
@@ -25,7 +27,15 @@ export class TodosService {
     return await this.todosRepository.find();
   }
 
-  async writeTodo(writeTodoDTO: WriteTodoDTO): Promise<Todos> {
+  async getTodosByEmail(emailDTO: GetTodosByEmailDTO) {
+    const query = this.todosRepository.createQueryBuilder('todos');
+    query.where('todos.userId = :userId', { userId: emailDTO.id });
+    const todos = await query.getMany();
+
+    return todos;
+  }
+
+  async writeTodo(writeTodoDTO: WriteTodoDTO, user: Auth): Promise<Todos> {
     const now = new Date();
 
     const { content, type } = writeTodoDTO;
@@ -37,6 +47,10 @@ export class TodosService {
       completed: false,
       createdAt: now,
       updatedAt: now,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
     });
 
     await this.todosRepository.save(todo);

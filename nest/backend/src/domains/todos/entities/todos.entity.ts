@@ -1,5 +1,12 @@
 import { ETodoTypes } from './../../../common/models/todos.model';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Auth } from 'src/domains/auth/entities/auth.entity';
 
 /**
  * @description
@@ -28,4 +35,7 @@ export class Todos extends BaseEntity {
 
   @Column()
   updatedAt: Date;
+
+  @ManyToOne(() => Auth, (auth) => auth.todos, { eager: false })
+  user: Auth;
 }

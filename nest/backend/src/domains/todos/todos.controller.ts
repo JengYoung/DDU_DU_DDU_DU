@@ -8,6 +8,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -16,8 +17,12 @@ import { DeleteTodoByIdDTO } from './dto/deleteTodoById.dto';
 import { UpdateTodoDTO } from './dto/updateTodo.dto';
 import { TodoValidationPipe } from './pipes/TodoValidation.pipe';
 import { Todos } from './entities/todos.entity';
-
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { Auth } from '../auth/entities/auth.entity';
+import { GetTodosByEmailDTO } from './dto/getTodosByEmail.dto';
 @Controller('todos')
+@UseGuards(AuthGuard())
 export class TodosController {
   constructor(private todosService: TodosService) {}
   @Get('/')
@@ -25,13 +30,21 @@ export class TodosController {
     return this.todosService.getTodos();
   }
 
-  @Post('/')
-  @UsePipes(ValidationPipe)
-  writeTodo(@Body() writeTodoDTO: WriteTodoDTO): Promise<Todos> {
-    return this.todosService.writeTodo(writeTodoDTO);
+  @Get('/:id')
+  getTodosByUserId(@Param() getTodosByUserIdDTO: GetTodosByEmailDTO) {
+    return this.todosService.getTodosByEmail(getTodosByUserIdDTO);
   }
 
-  @Get('/:id')
+  @Post('/')
+  @UsePipes(ValidationPipe)
+  writeTodo(
+    @Body() writeTodoDTO: WriteTodoDTO,
+    @GetUser() user: Auth,
+  ): Promise<Todos> {
+    return this.todosService.writeTodo(writeTodoDTO, user);
+  }
+
+  @Get('/todo/:id')
   getTodoById(@Param() getTodoByIdDTO: GetTodoByIdDTO): Promise<Todos> {
     return this.todosService.getTodoById(getTodoByIdDTO);
   }
