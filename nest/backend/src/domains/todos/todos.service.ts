@@ -70,9 +70,13 @@ export class TodosService {
     return result;
   }
 
-  async deleteTodoById(deleteTodoByIdDTO: DeleteTodoByIdDTO) {
+  async deleteTodoById(deleteTodoByIdDTO: DeleteTodoByIdDTO, user: Auth) {
     const result = await this.todosRepository.delete({
       id: deleteTodoByIdDTO.id,
+      user: {
+        id: user.id,
+        email: user.email,
+      },
     });
 
     if (result.affected === 0) {

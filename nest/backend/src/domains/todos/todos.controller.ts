@@ -50,8 +50,11 @@ export class TodosController {
   }
 
   @Delete('/:id')
-  deleteTodoById(@Param() deleteTodoByIdDTO: DeleteTodoByIdDTO): Promise<void> {
-    return this.todosService.deleteTodoById(deleteTodoByIdDTO);
+  deleteTodoById(
+    @Param() deleteTodoByIdDTO: DeleteTodoByIdDTO,
+    @GetUser() user: Auth,
+  ): Promise<void> {
+    return this.todosService.deleteTodoById(deleteTodoByIdDTO, user);
   }
 
   @Put('/')
