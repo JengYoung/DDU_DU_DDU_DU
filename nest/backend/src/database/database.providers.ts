@@ -1,13 +1,13 @@
 import { databaseToken } from 'src/common/tokens';
 import { DataSource } from 'typeorm';
 
-const port = Number(process.env.POSTGRES_PORT);
-if (typeof port !== 'number') throw new Error('Wrong Port Number: ' + port);
-
 export const databaseProviders = [
+  // ConfigService,
   {
     provide: databaseToken.postgresql,
     useFactory: async () => {
+      const port = Number(process.env.POSTGRES_PORT);
+
       const dataSource = new DataSource({
         host: 'localhost',
         type: 'postgres',
