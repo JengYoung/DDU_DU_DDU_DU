@@ -1,12 +1,4 @@
-import wrapPromise from '@/pages/api/wrapPromise';
-import axios from 'axios';
-
-const baseInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_END_POINT,
-  timeout: 3000,
-});
-
-const request = baseInstance;
+import { request } from './index';
 
 export interface ILoginPayload {
   email: string;
