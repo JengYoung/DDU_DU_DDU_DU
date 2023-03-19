@@ -14,6 +14,10 @@ export interface IWriteTodo extends ITodosAPIReqeust {
   content: string;
 }
 
+export interface IDeleteTodo extends ITodosAPIReqeust {
+  id: ITodo['id'];
+}
+
 export const getTodos = ({ token }: ITodosAPIReqeust) => {
   const res = request.get<ITodo[]>('/todos', {
     headers: {
@@ -37,6 +41,16 @@ export const writeTodo = ({ type, content, token }: IWriteTodo) => {
       },
     }
   );
+
+  return res;
+};
+
+export const deleteTodo = ({ id, token }: IDeleteTodo) => {
+  const res = request.delete<ITodo[]>(`/todos/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return res;
 };

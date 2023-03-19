@@ -13,7 +13,7 @@ export enum ETodoType {
 
 export interface ITodo {
   type: ETodoType;
-  id: string;
+  id: number;
   todoId: string;
   content: string;
   completed: boolean;
