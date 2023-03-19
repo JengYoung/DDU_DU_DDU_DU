@@ -6,9 +6,15 @@ export enum ETodos {
   'private' = 'PRIVATE',
   'public' = 'PUBLIC',
 }
+
 export interface ITodosAPIReqeust {
   token: string;
 }
+
+export interface IUpdateTodo extends ITodosAPIReqeust {
+  payload: ITodo;
+}
+
 export interface IWriteTodo extends ITodosAPIReqeust {
   type: ETodos;
   content: string;
@@ -51,6 +57,22 @@ export const deleteTodo = ({ id, token }: IDeleteTodo) => {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  return res;
+};
+
+export const updateTodo = ({ token, payload }: IUpdateTodo) => {
+  const res = request.put<ITodo[]>(
+    `/todos`,
+    {
+      ...payload,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   return res;
 };
