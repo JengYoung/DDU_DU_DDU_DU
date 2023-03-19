@@ -1,6 +1,6 @@
 {
   "name": "ddu-du-ddu-du",
-  "packageManager": "yarn@3.3.1",
+  "packageManager": "yarn@3.5.0",
   "workspaces": [
     "vanilla-js",
     "react/*",
