@@ -1,10 +1,11 @@
 {
   "name": "ddu-du-ddu-du",
-  "packageManager": "yarn@3.3.1",
+  "packageManager": "yarn@3.5.0",
   "workspaces": [
     "vanilla-js",
     "react/*",
-    "next/*"
+    "next/*",
+    "nest/*"
   ],
   "scripts": {
     "postinstall": "husky install",
@@ -14,7 +15,9 @@
     "dev:react-18-rxjs": "yarn workspace react-18-rxjs dev",
     "dev:next13-silent-refresh": "yarn workspace next-silent-refresh dev",
     "dev:next13-indexedDB": "yarn workspace next13-indexeddb dev",
-    "dev:tdd-playwright": "yarn workspace 13-tdd-playwright dev"
+    "dev:tdd-playwright": "yarn workspace 13-tdd-playwright dev",
+    "dev:nest:backend": "yarn workspace nest-backend start:dev",
+    "dev:nest:frontend": "yarn workspace nest-frontend dev"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
@@ -23,7 +26,8 @@
     "cz-customizable": "^7.0.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "typescript": "4.9.3"
   },
   "dependenciesMeta": {
     "cz-customizable@7.0.0": {
