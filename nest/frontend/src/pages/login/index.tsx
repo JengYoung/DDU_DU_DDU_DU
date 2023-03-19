@@ -56,7 +56,7 @@ export default function Login() {
     if (value) {
       router.replace('/todos');
     }
-  }, []);
+  }, [router]);
 
   return (
     <div>
@@ -68,21 +68,7 @@ export default function Login() {
           onChange={(e) => onChange(e, EInputs.password)}
         />
 
-        <DefaultErrorBoundary
-          renderFallback={(error, onReset) => {
-            const errorMessage = error.message ?? error;
-            return (
-              <div>
-                {errorMessage}
-                <button onClick={onReset}>다시 시도하기</button>
-              </div>
-            );
-          }}
-        >
-          <Suspense fallback={<button disabled>로그인 중입니다...</button>}>
-            <button onClick={onSubmit}>로그인</button>
-          </Suspense>
-        </DefaultErrorBoundary>
+        <button onClick={onSubmit}>로그인</button>
       </form>
     </div>
   );

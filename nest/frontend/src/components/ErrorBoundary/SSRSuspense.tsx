@@ -16,5 +16,6 @@ export default function SSRSafeSuspense(props: ComponentProps<typeof Suspense>) 
   if (isMounted) {
     return <Suspense {...props} />;
   }
+
   return <>{props.fallback}</>;
 }
