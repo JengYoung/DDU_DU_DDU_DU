@@ -1,20 +1,42 @@
 import { ITodo } from '@/types/todo';
 import axios from 'axios';
-// import { request } from './index';
+import { request } from './index';
 
-const baseInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_END_POINT,
-  timeout: 3000,
-});
+export enum ETodos {
+  'private' = 'PRIVATE',
+  'public' = 'PUBLIC',
+}
+export interface ITodosAPIReqeust {
+  token: string;
+}
+export interface IWriteTodo extends ITodosAPIReqeust {
+  type: ETodos;
+  content: string;
+}
 
-export const request = baseInstance;
-
-export const getTodos = (token: string) => {
+export const getTodos = ({ token }: ITodosAPIReqeust) => {
   const res = request.get<ITodo[]>('/todos', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  return res;
+};
+
+export const writeTodo = ({ type, content, token }: IWriteTodo) => {
+  const res = request.post<ITodo[]>(
+    '/todos',
+    {
+      type,
+      content,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   return res;
 };

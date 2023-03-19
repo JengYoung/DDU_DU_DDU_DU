@@ -12,7 +12,7 @@ const TodoList = ({ token }: ITodoListProps) => {
   const fetchData = async () => {
     if (!token) return;
 
-    const res = await getTodos(token).then((result) => result.data);
+    const res = await getTodos({ token }).then((result) => result.data);
 
     return res;
   };
