@@ -1,3 +1,6 @@
+const path = require('path');
+const withAntdLess = require('next-plugin-antd-less');
+
 module.exports = withAntdLess({
   experimental: {
     scrollRestoration: true,
@@ -19,7 +22,6 @@ module.exports = withAntdLess({
       alias: {
         '#': path.resolve(__dirname, 'src'),
         '#assets': path.resolve(__dirname, 'src/assets/'),
-        '#data': path.resolve(__dirname, 'src/data/'),
         '#apis': path.resolve(__dirname, 'src/apis/'),
         '#store': path.resolve(__dirname, 'src/store/'),
         '#utils': path.resolve(__dirname, 'src/utils/'),
@@ -52,11 +54,6 @@ module.exports = withAntdLess({
         },
         ...(typeof origExternals[0] === 'function' ? [] : origExternals),
       ];
-
-      config.module.rules.unshift({
-        test: antStyles,
-        use: 'null-loader',
-      });
     }
 
     return config;

@@ -1,0 +1,31 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ],
+    ["import", { "libraryName": "antd", "libraryDirectory": "lib", "style": true }],
+    ["@babel/plugin-proposal-optional-chaining"],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias": {
+          "#": "./src",
+          "#assets": "./src/assets",
+          "#apis": "./src/apis",
+          "#utils": "./src/utils",
+          "#store": "./src/store",
+          "#pages": "./src/pages",
+          "#hooks": "./src/hooks",
+          "#components": "./src/components"
+        }
+      }
+    ]
+  ]
+}

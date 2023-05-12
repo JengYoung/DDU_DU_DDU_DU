@@ -1,3 +1,9 @@
+import { DefaultInput } from '../components/Input/DefaultInput';
+
 export default function IndexPage() {
-  return <div>인덱스 페이지</div>;
+  return (
+    <div>
+      <DefaultInput />
+    </div>
+  );
 }
