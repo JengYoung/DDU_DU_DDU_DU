@@ -2,7 +2,8 @@
   "name": "next10-antd4",
   "packageManager": "yarn@3.5.0",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "build": "next build"
   },
   "dependencies": {
     "antd": "4.18.8",
