@@ -29,6 +29,7 @@ DefaultCard.Container = styled(Card)`
   border-radius: 10px;
 
   .ant-card-body {
+    margin: 0;
     padding: 0;
   }
 `;

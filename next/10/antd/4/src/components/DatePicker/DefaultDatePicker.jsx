@@ -1,6 +1,6 @@
 import React from 'react';
 import { DatePicker } from 'antd';
 
-export function DefaultDatePicker({ onChange }) {
-  return <DatePicker onChange={onChange} />;
+export function DefaultDatePicker({ value, onChange }) {
+  return <DatePicker value={value} onChange={onChange} />;
 }

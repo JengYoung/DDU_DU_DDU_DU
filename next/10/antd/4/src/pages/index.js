@@ -1,20 +1,33 @@
 import { useState } from 'react';
 
-import { DefaultInput, DefaultDatePicker } from '#components';
+import { DefaultInput, DefaultDatePicker, InputForm, DefaultCard } from '#components';
 import { dateFormat, getDate } from '#utils';
-import { DefaultCard } from '../components/Card';
 
 export default function IndexPage() {
   const [todoDate, setTodoDate] = useState(getDate(new Date(), dateFormat.default));
+  const [inputValue, setInputValue] = useState('');
 
   const onChangeDatePicker = (date) => {
-    setTodoDate(getDate(date, dateFormat.default));
+    setTodoDate(getDate(date ?? new Date(), dateFormat.default));
+  };
+
+  const onChangeInput = (e) => {
+    console.log(e.target.value);
+    setInputValue(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    console.log(e);
+    setInputValue('');
   };
 
   return (
     <div>
       <DefaultDatePicker onChange={onChangeDatePicker} />
-      <DefaultInput />
+      <InputForm
+        Input={<DefaultInput value={inputValue} onChange={onChangeInput} />}
+        onSubmit={onSubmit}
+      />
 
       <DefaultCard
         loading={false}
