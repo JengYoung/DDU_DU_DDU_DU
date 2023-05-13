@@ -1,6 +1,11 @@
 import { Input } from 'antd';
 import React from 'react';
+import styled from 'styled-components';
 
 export function DefaultInput() {
-  return <Input placeholder="Basic usage" />;
+  return <DefaultInput.Style placeholder="Basic usage" />;
 }
+
+DefaultInput.Style = styled(Input)`
+  background-color: black;
+`;

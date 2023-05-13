@@ -39,7 +39,18 @@ module.exports = withAntdLess({
     });
 
     if (isServer) {
-      const antStyles = /antd\/.*?\/style.*?/;
+      config.node = {
+        fs: 'empty',
+      };
+    }
+
+    config.module.rules.push({
+      test: /\.md$/,
+      use: 'raw-loader',
+    });
+
+    if (isServer) {
+      const antStyles = /(antd\/.*?\/style).*(?<![.]js)$/;
       const origExternals = [...config.externals];
       config.externals = [
         (context, request, callback) => {
@@ -54,6 +65,11 @@ module.exports = withAntdLess({
         },
         ...(typeof origExternals[0] === 'function' ? [] : origExternals),
       ];
+
+      config.module.rules.unshift({
+        test: antStyles,
+        use: 'null-loader',
+      });
     }
 
     return config;
