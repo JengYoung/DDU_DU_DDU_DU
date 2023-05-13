@@ -44,6 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:17.0.2"],\
             ["react-is", "npm:18.2.0"],\
+            ["sass", "npm:1.62.1"],\
             ["styled-components", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:5.3.3"],\
             ["styled-reset", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:4.3.4"]\
           ],\
@@ -1555,6 +1556,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["readdirp", "npm:3.5.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:3.5.3", {\
+          "packageLocation": "./.yarn/cache/chokidar-npm-3.5.3-c5f9b0a56a-b49fcde401.zip/node_modules/chokidar/",\
+          "packageDependencies": [\
+            ["chokidar", "npm:3.5.3"],\
+            ["anymatch", "npm:3.1.3"],\
+            ["braces", "npm:3.0.2"],\
+            ["fsevents", "patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"],\
+            ["glob-parent", "npm:5.1.2"],\
+            ["is-binary-path", "npm:2.1.0"],\
+            ["is-glob", "npm:4.0.3"],\
+            ["normalize-path", "npm:3.0.0"],\
+            ["readdirp", "npm:3.6.0"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["chownr", [\
@@ -2741,6 +2757,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["immutable", [\
+        ["npm:4.3.0", {\
+          "packageLocation": "./.yarn/cache/immutable-npm-4.3.0-6120b6947c-bbd7ea99e2.zip/node_modules/immutable/",\
+          "packageDependencies": [\
+            ["immutable", "npm:4.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["imurmurhash", [\
         ["npm:0.1.4", {\
           "packageLocation": "./.yarn/cache/imurmurhash-npm-0.1.4-610c5068a0-7cae75c8cd.zip/node_modules/imurmurhash/",\
@@ -3599,7 +3624,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:17.0.2"],\
             ["react-is", "npm:16.13.1"],\
             ["react-refresh", "npm:0.8.3"],\
-            ["sass", null],\
+            ["sass", "npm:1.62.1"],\
             ["stream-browserify", "npm:3.0.0"],\
             ["stream-http", "npm:3.1.1"],\
             ["string_decoder", "npm:1.3.0"],\
@@ -3661,6 +3686,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:17.0.2"],\
             ["react-dom", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:17.0.2"],\
             ["react-is", "npm:18.2.0"],\
+            ["sass", "npm:1.62.1"],\
             ["styled-components", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:5.3.3"],\
             ["styled-reset", "virtual:bfb251ef1a69f68129fb03ecf429d006999d0f6a474b71a4cf079ddcb27a7183d7dd70cd1975960bb05067d38b1d33dd290e66d703cb8ae24c9df8b34441ae9d#npm:4.3.4"]\
           ],\
@@ -5484,6 +5510,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["picomatch", "npm:2.3.1"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:3.6.0", {\
+          "packageLocation": "./.yarn/cache/readdirp-npm-3.6.0-f950cc74ab-1ced032e6e.zip/node_modules/readdirp/",\
+          "packageDependencies": [\
+            ["readdirp", "npm:3.6.0"],\
+            ["picomatch", "npm:2.3.1"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["regenerator-runtime", [\
@@ -5576,6 +5610,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/safer-buffer-npm-2.1.2-8d5c0b705e-cab8f25ae6.zip/node_modules/safer-buffer/",\
           "packageDependencies": [\
             ["safer-buffer", "npm:2.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["sass", [\
+        ["npm:1.62.1", {\
+          "packageLocation": "./.yarn/cache/sass-npm-1.62.1-c16d65fd28-1b1b3584b3.zip/node_modules/sass/",\
+          "packageDependencies": [\
+            ["sass", "npm:1.62.1"],\
+            ["chokidar", "npm:3.5.3"],\
+            ["immutable", "npm:4.3.0"],\
+            ["source-map-js", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5763,6 +5809,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["source-map", "npm:0.8.0-beta.0"],\
             ["whatwg-url", "npm:7.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["source-map-js", [\
+        ["npm:1.0.2", {\
+          "packageLocation": "./.yarn/cache/source-map-js-npm-1.0.2-ee4f9f9b30-c049a7fc4d.zip/node_modules/source-map-js/",\
+          "packageDependencies": [\
+            ["source-map-js", "npm:1.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
