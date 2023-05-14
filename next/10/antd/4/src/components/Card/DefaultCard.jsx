@@ -20,7 +20,7 @@ export function DefaultCard({ loading, title, avatarUrl, description, date }) {
 
 DefaultCard.Container = styled(Card)`
   position: relative;
-  width: 400px;
+
   height: 160px;
 
   padding: 20px;
