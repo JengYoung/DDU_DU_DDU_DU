@@ -4,6 +4,7 @@ import { DefaultInput, DefaultDatePicker, InputForm, DefaultCard, DefaultModal }
 import { dateFormat, getDate } from '#utils';
 import { createPortal } from 'react-dom';
 import { DefaultList } from '../components';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const data = [
   {
@@ -39,6 +40,8 @@ const data = [
 export default function IndexPage() {
   const [todoDate, setTodoDate] = useState(getDate(new Date(), dateFormat.default));
   const [inputValue, setInputValue] = useState('');
+
+  const [todos, setTodos] = useLocalStorage('todos', []);
 
   const [visible, setVisible] = useState(true);
 
