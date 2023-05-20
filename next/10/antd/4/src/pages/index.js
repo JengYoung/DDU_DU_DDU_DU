@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import moment from 'moment';
 
 import { DefaultInput, DefaultDatePicker, InputForm, DefaultCard, DefaultModal } from '#components';
 import { dateFormat, getDate } from '#utils';
 import { createPortal } from 'react-dom';
 import { DefaultList } from '../components';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { getDateWithoutTime } from '../utils/date/getDate';
 
 const initialInputsState = {
   title: '',
@@ -16,12 +18,18 @@ const initialInputsState = {
 
 export default function IndexPage() {
   const [todoDate, setTodoDate] = useState(getDate(new Date(), dateFormat.default));
+  const filteredDate = moment(todoDate);
+
   const [inputs, setInputs] = useState({
     title: '',
     description: '',
   });
 
   const [todos, setTodos] = useLocalStorage('todos', []);
+
+  const filteredTodos = todos.filter((todo) => {
+    return getDateWithoutTime(todo.createdAt) === getDateWithoutTime(filteredDate);
+  });
 
   const [visible, setVisible] = useState(true);
 
@@ -61,18 +69,18 @@ export default function IndexPage() {
     createPortal(
       <>
         <div>
-          <DefaultDatePicker onChange={onChangeDatePicker} />
+          <DefaultDatePicker value={filteredDate} onChange={onChangeDatePicker} />
           <InputForm
             Input={
               <DefaultInput value={inputs.title} onChange={(e) => onChangeInput(e, 'title')} />
             }
             onSubmit={onSubmit}
           />
+
           <DefaultList
-            data={todos}
+            data={filteredTodos}
             render={(item) => (
               <DefaultList.Item>
-                {console.log(item)}
                 <DefaultCard
                   loading={false}
                   title={item.title}
