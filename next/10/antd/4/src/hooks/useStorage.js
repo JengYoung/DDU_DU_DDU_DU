@@ -4,7 +4,7 @@ const ERROR_MESSAGE = 'Get Storage Item Failed';
 
 export function useStorage(storageName, key, defaultValue) {
   const [storage, setStorage] = useState(null);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState(defaultValue);
 
   useEffect(() => {
     setStorage(window[storageName]);
@@ -15,7 +15,7 @@ export function useStorage(storageName, key, defaultValue) {
 
     try {
       storage.setItem(key, JSON.stringify(keyValue));
-      setValue(key, keyValue);
+      setValue(keyValue);
     } catch (e) {
       console.error(ERROR_MESSAGE);
     }
@@ -28,7 +28,7 @@ export function useStorage(storageName, key, defaultValue) {
 
     try {
       const stringfiedValue = storage.getItem(key);
-      console.log('stringfiedValue: ', stringfiedValue);
+
       if (stringfiedValue !== null) {
         setValue(JSON.parse(stringfiedValue));
       } else {
@@ -39,5 +39,5 @@ export function useStorage(storageName, key, defaultValue) {
     }
   }, [storage]);
 
-  return [value, setValue];
+  return [value, setData];
 }
