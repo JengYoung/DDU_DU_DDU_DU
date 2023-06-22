@@ -4,6 +4,7 @@ import { Noto_Sans_KR } from 'next/font/google';
 import styles from '#/styles/Home.module.css';
 
 import { TodoInput } from '#/components/Todo/Input/TodoInput';
+import { TodoForm } from '#/components/Todo/Form/TodoForm';
 
 const inter = Noto_Sans_KR({ weight: ['400', '700'], subsets: ['latin'] });
 
@@ -18,7 +19,9 @@ export default function Home() {
       </Head>
 
       <main className={`${inter.className}`}>
-        <TodoInput />
+        <TodoForm>
+          <></>
+        </TodoForm>
       </main>
     </>
   );
