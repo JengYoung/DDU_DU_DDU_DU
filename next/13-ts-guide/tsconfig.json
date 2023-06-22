@@ -18,6 +18,6 @@
       "#/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Todo/Card/TodoCard.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Todo/Card/TodoCard.jsx", "src/components/Todo/Form/TodoForm.jsx", "src/components/Todo/List/TodoLIst.jsx", "src/pages/index.jsx"],
   "exclude": ["node_modules"]
 }

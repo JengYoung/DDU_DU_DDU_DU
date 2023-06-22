@@ -32,13 +32,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.13"],\
             ["@types/react-dom", "npm:18.2.6"],\
             ["@types/styled-components", "npm:5.1.26"],\
+            ["@types/uuid", "npm:9.0.2"],\
             ["eslint", "npm:8.43.0"],\
             ["eslint-config-next", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:13.4.7"],\
             ["next", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:13.4.7"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:18.2.0"],\
             ["styled-components", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:6.0.0-rc.2-4007"],\
-            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"]\
+            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"],\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -52,13 +54,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.13"],\
             ["@types/react-dom", "npm:18.2.6"],\
             ["@types/styled-components", "npm:5.1.26"],\
+            ["@types/uuid", "npm:9.0.2"],\
             ["eslint", "npm:8.43.0"],\
             ["eslint-config-next", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:13.4.7"],\
             ["next", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:13.4.7"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:18.2.0"],\
             ["styled-components", "virtual:0fb4757481b7e46ef602dd8d50922319335197d17b907f55255ba388c367ffa4409ee4bf1a91f8d7273ff996acf113d83be4c100556502b30186e92c98d8b952#npm:6.0.0-rc.2-4007"],\
-            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"]\
+            ["typescript", "patch:typescript@npm%3A5.1.3#~builtin<compat/typescript>::version=5.1.3&hash=5da071"],\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -3135,6 +3139,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/hoist-non-react-statics", "npm:3.3.1"],\
             ["@types/react", "npm:18.2.13"],\
             ["csstype", "npm:3.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/uuid", [\
+        ["npm:9.0.2", {\
+          "packageLocation": "./.yarn/cache/@types-uuid-npm-9.0.2-f2a5f65979-1754bcf344.zip/node_modules/@types/uuid/",\
+          "packageDependencies": [\
+            ["@types/uuid", "npm:9.0.2"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -7557,6 +7570,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/util-deprecate-npm-1.0.2-e3fe1a219c-474acf1146.zip/node_modules/util-deprecate/",\
           "packageDependencies": [\
             ["util-deprecate", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["uuid", [\
+        ["npm:9.0.0", {\
+          "packageLocation": "./.yarn/cache/uuid-npm-9.0.0-46c41e3e43-8dd2c83c43.zip/node_modules/uuid/",\
+          "packageDependencies": [\
+            ["uuid", "npm:9.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
