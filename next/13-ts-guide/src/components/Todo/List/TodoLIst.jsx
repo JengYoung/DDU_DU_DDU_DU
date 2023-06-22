@@ -1,5 +1,6 @@
 import React from 'react';
+import * as S from './TodoList.style'
 
-export const TodoLIst = () => {
-  return <div>TodoLIst</div>;
+export const TodoList = ({ children }) => {
+  return <S.TodoList>{ children }</S.TodoList>;
 };
