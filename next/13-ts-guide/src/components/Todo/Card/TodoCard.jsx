@@ -1,10 +1,11 @@
 import React from 'react';
+import * as S from './TodoCard.style'
 
 export const TodoCard = ({ title, description }) => {
   return (
-    <div>
-      <p>{title}</p>
-      <p>{description}</p>
-    </div>
+    <S.TodoCard>
+      <S.Title>{title}</S.Title>
+      <S.Description>{description}</S.Description>
+    </S.TodoCard>
   );
 };
