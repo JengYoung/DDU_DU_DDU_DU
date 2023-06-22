@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TodoInput } from '#/components/Todo/Input/TodoInput';
 import { TodoForm } from '#/components/Todo/Form/TodoForm';
 import { SubmitButton } from '#/components/Todo/Form/SubmitButton';
-import { TodoList } from '#/components/Todo/List/TodoLIst';
+import { TodoList } from '#/components/Todo/List/TodoList';
 import { TodoCard } from '#/components/Todo/Card/TodoCard';
 
 const inter = Noto_Sans_KR({ weight: ['400', '700'], subsets: ['latin'] });
@@ -16,6 +16,13 @@ const createTodoDTO = ({ title }) => {
     title,
     description: "",
     date: new Date()
+  }
+}
+
+const getInitialTodoState = (dto) => {
+  return {
+    ...dto,
+    isEditable: false
   }
 }
 
@@ -40,15 +47,27 @@ export default function Home() {
 
     e.preventDefault();
 
+    const dto = createTodoDTO({ title: inputRef.current.value });
+
     setTodos(state => [
       ...state,
-      createTodoDTO({ title: inputValue })
+      getInitialTodoState(dto)
     ]);
 
     initializeInput();
   }
 
-  console.log(inputValue)
+  const handleRemoveTodo = (id) => () => {
+    setTodos(state => state.filter(todo => todo.id !== id))
+  }
+
+  const handlePutTodo = (id) => ({ title, description }) => {
+    setTodos(state => state.map(todo => todo.id === id ? {
+      ...state,
+      title,
+      description
+    } : state))
+  }
 
   return (
     <>
@@ -66,12 +85,14 @@ export default function Home() {
           <SubmitButton onSubmit={onSubmit}>할 일 입력</SubmitButton>
         </TodoForm>
 
-        <TodoList>
+        <TodoList margin="20px 0 0 0">
           {todos.map( (todo) => (
-            <TodoCard 
+            <TodoCard
               key={todo.id} 
               title={todo.title} 
               description={todo.description === "" ? '내용이 없어요 🙇🏻‍♂️' : todo.description} 
+              onRemove={handleRemoveTodo(todo.id)}
+              onEdit={handlePutTodo(todo.id)}
             />
           ))}
         </TodoList>
