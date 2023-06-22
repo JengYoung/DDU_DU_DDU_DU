@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var dateFormat = {\n  \"default\": 'YYYY-MM-DD'\n};","map":null,"metadata":{},"sourceType":"module"}

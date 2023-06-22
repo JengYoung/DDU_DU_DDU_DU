@@ -1,0 +1,1 @@
+{"ast":null,"code":"import moment from 'moment';\nexport var getDate = function getDate(date, format) {\n  return moment(date).format(format);\n};","map":null,"metadata":{},"sourceType":"module"}
