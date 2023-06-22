@@ -1,8 +1,17 @@
 import { styled } from 'styled-components';
 
 const TodoForm = styled.form`
-  width: 500px;
-  height: 80px;
+  height: 40px;
 `;
 
-export { TodoForm };
+const SubmitButton = styled.button`
+  width: 120px;
+  height: 100%;
+
+  margin-left: 10px;
+
+  border: none;
+  border-radius: 10px;
+`;
+
+export { TodoForm, SubmitButton };
