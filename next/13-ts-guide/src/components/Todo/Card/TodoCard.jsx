@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const TodoCard = ({ title, description }) => {
   return (
@@ -6,5 +6,5 @@ export const TodoCard = ({ title, description }) => {
       <p>{title}</p>
       <p>{description}</p>
     </div>
-  )
-}
+  );
+};
