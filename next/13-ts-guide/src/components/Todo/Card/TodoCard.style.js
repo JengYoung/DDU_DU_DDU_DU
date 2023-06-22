@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 const TodoCard = styled.div`
+  position: relative;
+
   width: 300px;
-  height: 120px;
+  height: 100px;
 
   padding: 20px;
 
@@ -18,11 +20,83 @@ const TodoCard = styled.div`
 `;
 
 const Title = styled.h5`
+  margin: 0;
+
+  font-size: 24px;
   color: '#333';
 `;
 
 const Description = styled.p`
+  margin: 16px 0 0 0;
   color: '#333';
 `;
 
-export { TodoCard, Title, Description };
+const EditButton = styled.button`
+  cursor: pointer;
+
+  width: 24px;
+  height: 24px;
+
+  margin-right: 4px;
+
+  background-color: transparent;
+
+  border: none;
+  border-radius: 50%;
+
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: skyblue;
+  }
+`;
+const Buttons = styled.div`
+  position: absolute;
+  z-index: 1;
+
+  right: 20px;
+  top: 20px;
+
+  display: flex;
+`;
+
+const RemoveButton = styled.button`
+  cursor: pointer;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: transparent;
+
+  border: none;
+  border-radius: 50%;
+
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: pink;
+  }
+`;
+
+const EditInput = styled.input``;
+
+const EditTextArea = styled.textarea`
+  width: 100%;
+  height: 54px;
+
+  margin-top: 16px;
+`;
+
+const EditCancelButton = styled(RemoveButton)``;
+
+export {
+  TodoCard,
+  Title,
+  Description,
+  Buttons,
+  EditButton,
+  EditCancelButton,
+  RemoveButton,
+  EditInput,
+  EditTextArea,
+};
