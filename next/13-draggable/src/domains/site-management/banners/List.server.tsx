@@ -6,6 +6,7 @@ import { Draggable } from "#/components/Draggable";
 import { Receiver } from "#/components/Receiver";
 import React from "react";
 import { Divider } from "#/components/Divider";
+import { useBannersContext } from "./hooks/banner.context";
 
 type TList = {
   data: TBannerResponse[];
@@ -21,7 +22,7 @@ export const List = ({ data }: TList) => {
           </Draggable>
 
           <Receiver>
-            <Divider width="8px" height="160px" reverse={false} />
+            <Divider width="8px" height="160px" reversed={false} />
           </Receiver>
         </React.Fragment>
       ))}

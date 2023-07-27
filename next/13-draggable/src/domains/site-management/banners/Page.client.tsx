@@ -1,11 +1,27 @@
+"use client";
+
 import React from 'react'
 import { Container } from './Page.styles'
 import { List } from './List.server'
+import { Slider } from './Slider'
+import { TBannerResponse } from './types'
+import { useBannersContext } from './hooks/banner.context'
 
-export const Page = ({ ...props }: any) => {
+export type TPageProps = {
+  data: TBannerResponse[]
+}
+
+export const Page = ({ data }: TPageProps) => {
+  const { activeList, inactiveList, setBanners } = useBannersContext();
+
+  React.useEffect(() => {
+    setBanners(data);
+  },[data, setBanners])
+
   return (
     <Container>
-      <List data={props.data}/>
+      <List data={activeList}/>
+      <Slider data={inactiveList} />
     </Container>
   )
 }

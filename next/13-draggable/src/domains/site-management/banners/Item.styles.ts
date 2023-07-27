@@ -59,7 +59,9 @@ export const Thumbnail = styled(Image)`
   display: block;
 `
 
-export const Text = styled.p<{ size?: string; marginTop?: string; }>`
+export const Text = styled.p.withConfig({
+  shouldForwardProp: (prop) => !['marginTop'].includes(prop),
+})<{ size?: string; marginTop?: string; }>`
   color: #FAFAFA;
 
   font-style: normal;
@@ -67,9 +69,11 @@ export const Text = styled.p<{ size?: string; marginTop?: string; }>`
   line-height: normal;
   font-size: ${props => props.size};
   margin-top: ${props => props.marginTop};
-`
+`;
 
-export const Tag = styled.div<{ size?: string; marginTop?: string; }>`
+export const Tag = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['isActive', 'marginTop'].includes(prop),
+})<{ isActive?: boolean; size?: string; marginTop?: string; }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,5 +86,5 @@ export const Tag = styled.div<{ size?: string; marginTop?: string; }>`
   margin-top: ${props => props.marginTop};
 
   border-radius: 12px;
-  background: #708DED;
+  background: ${props => props.isActive ? "#708DED" : "#BEBEBE"};
 `
