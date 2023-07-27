@@ -8,5 +8,6 @@ export const Container = styled.div.withConfig({
 })<TDividerProps>`
   width: ${props => !props.reversed ? props.width : props.height};
   height: ${props => !props.reversed ? props.height : props.width};
+
   background-color: ${props => props.backgroundColor};
 `

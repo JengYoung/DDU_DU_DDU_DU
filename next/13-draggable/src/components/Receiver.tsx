@@ -4,15 +4,13 @@ import * as S from './Receiver.styles'
 import { TDraggableEvent } from './Draggable.types';
 
 type TReceiverProps = {
+  isActive?: boolean;
+  onDragOver: TDraggableEvent;
   onDrop: TDraggableEvent;
 } & React.PropsWithChildren
 
-export const Receiver = ({ children, onDrop }: TReceiverProps) => {
-  const dragOver = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-  }
-
+export const Receiver = ({ isActive = false, children, onDragOver, onDrop }: TReceiverProps) => {
   return (
-    <S.Container onDragOver={dragOver} onDrop={onDrop}>{children}</S.Container>
+    <S.Container isActive={isActive} onDragOver={onDragOver} onDrop={onDrop}>{children}</S.Container>
   )
 }
