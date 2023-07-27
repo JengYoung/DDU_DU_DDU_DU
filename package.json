@@ -36,7 +36,6 @@
   },
   "lint-staged": {
     "*.{tsx,ts,js,vue}": [
-      "prettier --write **/*.{js,ts,tsx,vue} --ignore-unknown"
     ]
   },
   "config": {
