@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from './Page.styles'
-import { List } from './List'
+import { List } from './List.server'
 
 export const Page = ({ ...props }: any) => {
   return (

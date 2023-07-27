@@ -8,7 +8,6 @@ type TList = {
 };
 
 export const List = ({ data }: TList) => {
-  console.log({ data123: data })
   return (
     <S.List>
       {data.map((item) => (
