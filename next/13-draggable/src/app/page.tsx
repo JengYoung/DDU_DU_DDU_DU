@@ -1,4 +1,6 @@
 import { Page } from "#/domains/site-management/banners/Page.client";
+import { Main } from "#/layouts/Main";
+import { Slider } from "#/layouts/Slider";
 
 async function fetchData() {
   const res = await fetch(
@@ -14,6 +16,9 @@ export default async function Home() {
   const data = await fetchData();
 
   return (
-    <Page data={data}>{JSON.stringify(data)}</Page>
+    <Main>
+      <Page data={data}>{JSON.stringify(data)}</Page>
+      <Slider data={data} />
+    </Main>
   );
 }

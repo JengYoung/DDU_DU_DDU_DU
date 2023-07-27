@@ -1,7 +1,8 @@
 import React from 'react'
+import { Container } from './Page.styles'
 
 export const Page = ({ ...props }: any) => {
   return (
-    <div>??{JSON.stringify(props?.data)}1111</div>
+    <Container>{JSON.stringify(props?.data)}</Container>
   )
 }

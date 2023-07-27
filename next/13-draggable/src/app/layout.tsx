@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import StyledComponentsRegistry from '#/libs/registry'
-import { Main } from '#/layouts/Main';
-import { Body } from '#/layouts/Body';
+import "#/styles/global.css"
 
-const inter = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: '연구주제 1. Draggable 구현',
@@ -14,13 +13,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Body>
+      <body className={montserrat.className}>
         <StyledComponentsRegistry>
-          <Main>
-            {children}
-          </Main>
+          {children}
         </StyledComponentsRegistry>
-      </Body>
+      </body>
     </html>
   );
 }

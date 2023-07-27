@@ -1,9 +1,8 @@
-"use client";
+import React, { PropsWithChildren } from 'react'
+import * as S from './Main.styles';
 
-import { styled } from "styled-components";
-
-export const Main = styled.main`
-  width: 100%;
-  min-height: 100vh;
-  height: 100vh;
-`
+export const Main = ({ children }: PropsWithChildren) => {
+  return (
+    <S.Container>{children}</S.Container>
+  )
+}
