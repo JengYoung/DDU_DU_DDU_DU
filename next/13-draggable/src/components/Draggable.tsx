@@ -2,15 +2,16 @@
 
 import React, { DragEvent, PropsWithChildren } from 'react';
 import * as S from './Draggable.styles'
+import { TDraggableEvent } from './Draggable.types';
 
-export const Draggable = ({ children }: PropsWithChildren) => {
-  const dragStart = (e: DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData("x", JSON.stringify(e.clientX));
-    e.dataTransfer.setData("y", JSON.stringify(e.clientY));
-  }
+export type TDraggableProps = {
+  onDragStart?: TDraggableEvent;
+  onDrag?: TDraggableEvent;
+} & React.PropsWithChildren;
 
+export const Draggable = ({ children, onDragStart, onDrag }: TDraggableProps) => {
   return (
-    <S.Container draggable onDragStart={dragStart} onDrag={dragStart}>
+    <S.Container draggable onDragStart={onDragStart} onDrag={onDrag}>
       {children}
     </S.Container>
   )

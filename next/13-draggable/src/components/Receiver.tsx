@@ -1,22 +1,18 @@
-"use client";
-
 import React, { DragEvent, PropsWithChildren } from 'react'
 
 import * as S from './Receiver.styles'
+import { TDraggableEvent } from './Draggable.types';
 
-export const Receiver = ({children}: PropsWithChildren) => {
+type TReceiverProps = {
+  onDrop: TDraggableEvent;
+} & React.PropsWithChildren
+
+export const Receiver = ({ children, onDrop }: TReceiverProps) => {
   const dragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
   }
 
-  const drop = (e: DragEvent<HTMLDivElement>) => {
-    const x = e.dataTransfer.getData("x");
-    const y = e.dataTransfer.getData("y");
-
-    console.log({ x, y })
-  }
-
   return (
-    <S.Container onDragOver={dragOver} onDrop={drop}>{children}</S.Container>
+    <S.Container onDragOver={dragOver} onDrop={onDrop}>{children}</S.Container>
   )
 }

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { Container } from './Page.styles'
-import { List } from './List.server'
+import { List } from './List'
 import { Slider } from './Slider'
 import { TBannerResponse } from './types'
 import { useBannersContext } from './hooks/banner.context'
