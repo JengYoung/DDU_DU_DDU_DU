@@ -57,6 +57,10 @@ export const Thumbnail = styled(Image)`
   z-index: -1;
   top: 0;
   display: block;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `
 
 export const Text = styled.p.withConfig({

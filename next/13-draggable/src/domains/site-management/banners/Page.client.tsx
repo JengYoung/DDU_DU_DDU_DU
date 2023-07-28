@@ -21,7 +21,7 @@ export const Page = ({ data }: TPageProps) => {
   return (
     <Container>
       <List data={activeList}/>
-      <Slider data={inactiveList} />
+      <Slider />
     </Container>
   )
 }

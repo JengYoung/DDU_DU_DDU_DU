@@ -1,6 +1,6 @@
 "use client";
 
-import { styled } from 'styled-components'
+import { css, styled } from 'styled-components'
 import { TDividerProps } from './Divider.types'
 
 export const Container = styled.div.withConfig({
@@ -10,4 +10,8 @@ export const Container = styled.div.withConfig({
   height: ${props => !props.reversed ? props.height : props.width};
 
   background-color: ${props => props.backgroundColor};
+
+  ${(props) => props.reversed && css`
+    flex: 1;
+  `}
 `

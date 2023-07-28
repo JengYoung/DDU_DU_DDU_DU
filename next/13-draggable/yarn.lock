@@ -15,6 +15,7 @@ __metadata:
     "@types/styled-components": ^5.1.26
     eslint: 8.45.0
     eslint-config-next: 13.4.12
+    eslint-config-prettier: ^8.9.0
     next: 13.4.12
     prettier: ^3.0.0
     react: 18.2.0
@@ -2900,6 +2901,17 @@ __metadata:
     typescript:
       optional: true
   checksum: 633eccf920d94a1248c089ec08c52245d863b1b45d68be04deff93c0a0d60373c96610d69d005909b2c9beb81b0af7a12a777d03277cd4db60233e99ac8ef281
+  languageName: node
+  linkType: hard
+
+"eslint-config-prettier@npm:^8.9.0":
+  version: 8.9.0
+  resolution: "eslint-config-prettier@npm:8.9.0"
+  peerDependencies:
+    eslint: ">=7.0.0"
+  bin:
+    eslint-config-prettier: bin/cli.js
+  checksum: a675d0dabd76b700ef2d062b5ec6a634e105a8e8c070f95281fd2ccb614527fac60b4c758132058c50f0521fd19313f1f5be45ce9ebf081f2e5f77ae6eb7d8db
   languageName: node
   linkType: hard
 

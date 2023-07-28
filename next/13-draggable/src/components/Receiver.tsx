@@ -1,16 +1,21 @@
-import React, { DragEvent, PropsWithChildren } from 'react'
+import React from 'react'
 
 import * as S from './Receiver.styles'
 import { TDraggableEvent } from './Draggable.types';
+import { TReceiverProps } from './Receiver.types';
 
-type TReceiverProps = {
-  isActive?: boolean;
-  onDragOver: TDraggableEvent;
-  onDrop: TDraggableEvent;
-} & React.PropsWithChildren
 
-export const Receiver = ({ isActive = false, children, onDragOver, onDrop }: TReceiverProps) => {
+export const Receiver = ({ width = 'auto', height = 'auto', reversed = false, isActive = false, children, onDragOver, onDrop }: TReceiverProps) => {
   return (
-    <S.Container isActive={isActive} onDragOver={onDragOver} onDrop={onDrop}>{children}</S.Container>
+    <S.Container 
+      width={width}
+      height={height}
+      reversed={reversed}
+      isActive={isActive} 
+      onDragOver={onDragOver} 
+      onDrop={onDrop}
+    >
+      {children}
+    </S.Container>
   )
 }
