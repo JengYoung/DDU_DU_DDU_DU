@@ -9,7 +9,14 @@ export const metadata: Metadata = {
   title: '연구주제 1. Draggable 구현',
   description: 'Draggable을 구현해봅니다 🙆🏻',
 };
- 
+
+if (process.env.NODE_ENV === 'development') {
+  (async () => {
+    const { worker } = await import('../mocks/browser');
+    await worker.start()
+  })
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
