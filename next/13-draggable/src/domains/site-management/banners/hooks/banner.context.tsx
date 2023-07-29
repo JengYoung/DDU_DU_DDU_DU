@@ -46,14 +46,12 @@ export const BannersProvider = ({ children }: React.PropsWithChildren) => {
   const [inactiveList, setInactiveList] = React.useState<TBanners>([]);
 
   React.useEffect(() => {
-    const nowActiveList = getBanners({banners, isActive: true});
-    const nowInactiveList = getBanners({banners, isActive: false});
+    const nowActiveList = getBanners({banners, isActive: true}).map((banner, order) => ({ ...banner, order}));
+    const nowInactiveList = getBanners({banners, isActive: false}).map((banner, order) => ({ ...banner, order}));;
 
     setActiveList(nowActiveList);
     setInactiveList(nowInactiveList);
   }, [banners]);
-
-  console.log({activeList, inactiveList})
 
   return (
     <BannersContext.Provider value={{

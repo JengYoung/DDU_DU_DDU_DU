@@ -8,7 +8,8 @@ import { Draggable } from "#/components/Draggable";
 import { Receiver } from "#/components/Receiver";
 import React, { useState } from "react";
 import { Divider } from "#/components/Divider";
-import { TBannersContextState, TSetBanners, useBannersContext } from "./hooks/banner.context";
+import { TSetBanners, useBannersContext } from "./hooks/banner.context";
+import { Container as Card } from "./Item.styles";
 
 type TList = {
   data: TBannerResponse[];
@@ -66,6 +67,7 @@ export const List = ({ data, vertical = false }: TList) => {
   const removeBanner = (setter: TSetBanners, cmpBanner: TBannerResponse) => {
     setter((banners) => banners.filter((banner) => banner.title !== cmpBanner.title))
   }
+  
   const addBanner  = (setter: TSetBanners, nextBanner: TBannerResponse) =>  {
     setter((banners) => {
       const nextBanners = [...banners].filter(banner => banner.title !== nextBanner.title).concat(nextBanner);
@@ -108,8 +110,6 @@ export const List = ({ data, vertical = false }: TList) => {
       isActive,
     }
 
-    console.log({ banner, nextBanner})
-
     onUpdateBanners(banner, nextBanner);
   }
 
@@ -141,17 +141,31 @@ export const List = ({ data, vertical = false }: TList) => {
           >
             <Item item={item} />
           </Draggable>
-
-          <Receiver 
-            width="32px"
-            height={vertical ? "240px" : "100%"}
-            reversed={vertical}
-            isActive={orders.end === index + 1} 
-            onDragOver={handleDragOver(index + 1)} 
-            onDrop={handleDrop(index + 1, item.isActive)}
-          >
-            <Divider width="8px" height="160px" reversed={vertical} />
-          </Receiver>
+          
+          { index !== data.length - 1 ? 
+            <Receiver 
+              width="32px"
+              height={vertical ? "240px" : "100%"}
+              reversed={vertical}
+              isActive={orders.end === index + 1} 
+              onDragOver={handleDragOver(index + 1)} 
+              onDrop={handleDrop(index + 1, item.isActive)}
+            >
+              <Divider width="8px" height="160px" reversed={vertical} />
+            </Receiver>
+          : (
+            <Receiver
+              width="240px"
+              height="160px"
+              isActive={index === data.length - 1} 
+              onDragOver={handleDragOver(index + 1)} 
+              onDrop={handleDrop(index + 1, item.isActive)}
+            >
+              <S.DropCard vertical={vertical}>
+                {orders.end ? "드래그될 카드를 올려주세요" : "미사용할 배너를 드래그해주세요"}
+              </S.DropCard>
+            </Receiver>
+          )}
         </React.Fragment>
       ))}
     </S.List>

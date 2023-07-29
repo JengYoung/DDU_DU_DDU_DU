@@ -8,8 +8,6 @@ import { useBannersContext } from './hooks/banner.context';
 export const Slider = () => {
   const {inactiveList} = useBannersContext();
 
-  console.log(inactiveList)
-
   return (
     <>
       <S.Container>

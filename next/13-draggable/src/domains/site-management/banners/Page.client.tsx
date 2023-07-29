@@ -12,7 +12,7 @@ export type TPageProps = {
 }
 
 export const Page = ({ data }: TPageProps) => {
-  const { activeList, inactiveList, setBanners } = useBannersContext();
+  const { activeList, setBanners } = useBannersContext();
 
   React.useEffect(() => {
     setBanners(data);
