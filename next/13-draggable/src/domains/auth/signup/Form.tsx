@@ -52,6 +52,13 @@ export const SignUpForm = () => {
     .regex(idRegex, Hints.아이디_미일치)
     .safeParse(registerState.id)
 
+  const passwordValid = z
+    .string()
+    .min(8, Hints.비밀번호_미일치)
+    .regex(idRegex, Hints.비밀번호_미일치)
+    .safeParse(registerState.password)
+
+
   return (
     <div>
       <FormInput 
@@ -68,10 +75,14 @@ export const SignUpForm = () => {
 
       <FormInput 
         id={Ids.비밀번호입력} 
+        value={registerState.password}
         label="비밀번호" 
         placeholder={Placeholders.비밀번호입력}
-        value={registerState.password}
+        isError={focused.password && !passwordValid.success}
+        hint={(passwordValid as SafeParseError<string>)?.error?.issues?.[0]?.message}
         onFocus={handleFocusInput('password')}
+        onBlur={handleBlurInput('password')}
+        onChange={handleChangeInput('password')}
       />
 
       <FormInput 

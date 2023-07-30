@@ -14,3 +14,5 @@ export enum Hints {
 }
 
 export const idRegex = /^[a-zA-Z0-9]{8,20}$/
+
+export const pwRegex = /^[a-zA-Z0-9]$/

@@ -101,6 +101,6 @@ test("password hint should be rendered when focused Input with click Action", as
   const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력, true));
   
   given.run();
-  when.run();
+  await when.run();
   then.run();
 })
