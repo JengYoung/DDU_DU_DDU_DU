@@ -53,7 +53,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:18.2.0"],\
             ["styled-components", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:6.0.5"],\
             ["supports-color", "npm:9.4.0"],\
-            ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
+            ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
+            ["zod", "npm:3.21.4"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -88,7 +89,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-dom", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:18.2.0"],\
             ["styled-components", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:6.0.5"],\
             ["supports-color", "npm:9.4.0"],\
-            ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"]\
+            ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=5da071"],\
+            ["zod", "npm:3.21.4"]\
           ],\
           "linkType": "SOFT"\
         }]\

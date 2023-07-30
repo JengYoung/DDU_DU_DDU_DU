@@ -3,7 +3,7 @@ import { Given, Then, When } from "#/mocks/behaviors/scenarios"
 import { render, screen } from '@testing-library/react';
 
 import { noAction } from '#/mocks/behaviors/noAct';
-import { Placeholders } from './constants';
+import { Hints, Placeholders } from './constants';
 
 const renderForm = () => {
   render(<SignUpForm />)
@@ -40,6 +40,20 @@ test("Password Confirm placeholder is to be equal our Policy", () => {
   const when = new When(noAction)
   const then = new Then(checkPlaceholderByLabelText("비밀번호 확인", Placeholders.비밀번호확인))
 
+  given.run();
+  when.run();
+  then.run();
+})
+
+test("ID hint should be not rendered when user doesn't act", () => {
+  const given = new Given(renderForm)
+  const when = new When(noAction)
+  const then = new Then(checkPlaceholderByLabelText("비밀번호 확인", Placeholders.비밀번호확인));
+
+  const IdHint = screen.getByText(Hints.아이디_다시입력);
+
+  expect(IdHint).not.toBeInTheDocument();
+  
   given.run();
   when.run();
   then.run();
