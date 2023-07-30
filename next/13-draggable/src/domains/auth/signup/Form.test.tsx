@@ -7,6 +7,8 @@ import { noAction } from '#/mocks/behaviors/noAct';
 
 import { Hints, Placeholders } from './constants';
 
+import userEvent from '@testing-library/user-event'
+
 const renderForm = () => {
   render(<SignUpForm />)
 }
@@ -32,6 +34,20 @@ const checkHintsRendered = (screen: Screen, hint: string, shouldRendered: boolea
   }
 
   expect(IdHint).not.toBeInTheDocument();
+}
+
+function whenInputPassword(
+  screen: Screen, 
+  labels: { password: string, passwordConfirm: string }, 
+  values: { password: string, passwordConfirm: string }
+) {
+  return async function() {
+    const passwordInput = screen.getByLabelText(labels.password);
+    const passwordConfirmInput = screen.getByLabelText(labels.passwordConfirm);
+    
+    await userEvent.type(passwordInput, values.password)
+    await userEvent.type(passwordConfirmInput, values.passwordConfirm)
+  }
 }
 
 test("Id placeholder is to be equal our Policy", () => {
@@ -64,7 +80,7 @@ test("Password Confirm placeholder is to be equal our Policy", () => {
   then.run();
 })
 
-test("ID hint should be not rendered when user doesn't act", () => {
+test("ID hint should not be rendered when user doesn't act", () => {
   const given = new Given(renderForm)
   const when = new When(noAction)
   const then = new Then(checkHintsRendered(screen, Hints.아이디_미입력));
@@ -80,11 +96,11 @@ test("ID hint should be rendered when focused Input with click Action", async ()
   const then = new Then(checkHintsRendered(screen, Hints.아이디_미입력, true));
   
   given.run();
-  await when.run();
+  await when.waitRun();
   then.run();
 })
 
-test("password hint should be not rendered when user doesn't act", () => {
+test("password hint should not be rendered when user doesn't act", () => {
   const given = new Given(renderForm)
   const when = new When(noAction)
   const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력));
@@ -100,12 +116,12 @@ test("password hint should be rendered when focused Input with click Action", as
   const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력, true));
   
   given.run();
-  await when.run();
+  await when.waitRun();
   then.run();
 })
 
 
-test("passwordConfirm hint should be not rendered when user doesn't act", () => {
+test("passwordConfirm hint should not be rendered when user doesn't act", () => {
   const given = new Given(renderForm)
   const when = new When(noAction)
   const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력));
@@ -121,6 +137,34 @@ test("passwordConfirm hint should be rendered when focused Input with click Acti
   const then = new Then(checkHintsRendered(screen, Hints.비밀번호확인_미일치, true));
   
   given.run();
-  await when.run();
+  await when.waitRun();
+  then.run();
+})
+
+test("passwordConfirm hint should not be rendered when value equal with correct password", async () => {
+  const given = new Given(renderForm)
+  const when = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud1234' }
+  ))
+  const then = new Then(checkHintsRendered(screen, Hints.비밀번호확인_미일치));
+  
+  given.run();
+  await when.waitRun();
+  then.run();
+})
+
+test("passwordConfirm hint should be rendered when value inequal with correct password", async () => {
+  const given = new Given(renderForm)
+  const when = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud12345' }
+  ))
+  const then = new Then(checkHintsRendered(screen, Hints.비밀번호확인_미일치, true));
+  
+  given.run();
+  await when.waitRun();
   then.run();
 })
