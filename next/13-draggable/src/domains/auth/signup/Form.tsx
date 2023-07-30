@@ -58,6 +58,12 @@ export const SignUpForm = () => {
     .regex(idRegex, Hints.비밀번호_미일치)
     .safeParse(registerState.password)
 
+  const passwordConfirmValid = z
+    .string()
+    .min(8, Hints.비밀번호확인_미일치)
+    .regex(idRegex, Hints.비밀번호확인_미일치)
+    .refine((val) => val === registerState.password, Hints.비밀번호확인_미일치)
+    .safeParse(registerState.password)
 
   return (
     <div>
@@ -87,10 +93,14 @@ export const SignUpForm = () => {
 
       <FormInput 
         id={Ids.비밀번호확인} 
+        value={registerState.passwordConfirm}
         label="비밀번호 확인" 
         placeholder={Placeholders.비밀번호확인} 
-        value={registerState.passwordConfirm}
+        isError={focused.passwordConfirm && !passwordConfirmValid.success}
+        hint={(passwordConfirmValid as SafeParseError<string>)?.error?.issues?.[0]?.message}
         onFocus={handleFocusInput('passwordConfirm')}
+        onBlur={handleBlurInput('passwordConfirm')}
+        onChange={handleChangeInput('passwordConfirm')}
       />
     </div>
   )
