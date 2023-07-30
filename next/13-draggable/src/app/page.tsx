@@ -1,3 +1,4 @@
+import { check } from "#/domains/auth/apis/check";
 import { Page } from "#/domains/site-management/banners/Page.client";
 import { BannersProvider } from "#/domains/site-management/banners/hooks/banner.context";
 import { Main } from "#/layouts/Main";
@@ -33,7 +34,8 @@ async function fetchData() {
 }
 
 export default async function Home() {
-
+  await check();
+  
   const data = await fetchData();
 
   return (
