@@ -63,7 +63,7 @@ export const SignUpForm = () => {
     .min(8, Hints.비밀번호확인_미일치)
     .regex(idRegex, Hints.비밀번호확인_미일치)
     .refine((val) => val === registerState.password, Hints.비밀번호확인_미일치)
-    .safeParse(registerState.password)
+    .safeParse(registerState.passwordConfirm)
 
   return (
     <div>
@@ -102,6 +102,8 @@ export const SignUpForm = () => {
         onBlur={handleBlurInput('passwordConfirm')}
         onChange={handleChangeInput('passwordConfirm')}
       />
+
+      <button disabled={!idValid.success || !passwordValid.success || !passwordConfirmValid.success}>다음</button>
     </div>
   )
 }

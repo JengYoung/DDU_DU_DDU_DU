@@ -171,11 +171,18 @@ test("passwordConfirm hint should be rendered when value inequal with correct pa
 
 test("SubmitButton should be disabled when even one is invalid", async () => {
   const given = new Given(renderForm)
-  const when = new When(typeInputsWithInvalidConfirmValue)
+  const when1 = new When(typeInputsWithInvalidConfirmValue(screen))
+  const when2 = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud12345' }
+  ))
+
   const then = new Then(checkButtonDisabled(screen));
 
   given.run();
-  await when.waitRun();
+  await when1.waitRun();
+  await when2.waitRun();
   then.run();
 
   function checkButtonDisabled(screen: Screen) {
@@ -185,26 +192,32 @@ test("SubmitButton should be disabled when even one is invalid", async () => {
     }
   }
 
-  async function typeInputsWithInvalidConfirmValue() {
-    const idInput = screen.getByLabelText("아이디");
-    await userEvent.type(idInput, 'correctId1234')
-
-    await whenInputPassword(
-      screen, 
-      { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
-      { password: 'wodud1234', passwordConfirm: 'wodud12345' }
-    )
+  function typeInputsWithInvalidConfirmValue(screen: Screen) {
+    return async function() {
+      const idInput = screen.getByLabelText("아이디");
+      await userEvent.type(idInput, 'correctId1234')
+    }
   }
 })
 
 
 test("SubmitButton should not be disabled when all of input values are valid", async () => {
   const given = new Given(renderForm)
-  const when = new When(typeInputsWithInvalidConfirmValue)
+  
+  const when1 = new When(typeValidInputValue(screen))
+  const when2 = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud1234' }
+  ))
+
   const then = new Then(checkButtonDisabled(screen));
 
   given.run();
-  await when.waitRun();
+  
+  await when1.waitRun();
+  await when2.waitRun();
+
   then.run();
 
   function checkButtonDisabled(screen: Screen) {
@@ -214,14 +227,10 @@ test("SubmitButton should not be disabled when all of input values are valid", a
     }
   }
 
-  async function typeInputsWithInvalidConfirmValue() {
-    const idInput = screen.getByLabelText("아이디");
-    await userEvent.type(idInput, 'correctId1234')
-
-    await whenInputPassword(
-      screen, 
-      { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
-      { password: 'wodud1234', passwordConfirm: 'wodud1234' }
-    )
+  function typeValidInputValue(screen: Screen) {
+    return async function() {
+      const idInput = screen.getByLabelText("아이디");
+      await userEvent.type(idInput, 'correctId1234')
+    }
   }
 })
