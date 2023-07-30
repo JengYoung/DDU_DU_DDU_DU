@@ -1,6 +1,7 @@
 import { SignUpForm } from './Form';
+import mockRouter from 'next-router-mock';
 
-import { Screen, render, screen } from '@testing-library/react';
+import { Screen, fireEvent, render, screen } from '@testing-library/react';
 
 import { Given, Then, When } from "#/mocks/behaviors/scenarios"
 import { noAction } from '#/mocks/behaviors/noAct';
@@ -8,6 +9,9 @@ import { noAction } from '#/mocks/behaviors/noAct';
 import { Hints, Placeholders } from './constants';
 
 import userEvent from '@testing-library/user-event'
+
+jest.mock('next/navigation', () => require('next-router-mock'));
+
 
 const renderForm = () => {
   render(<SignUpForm />)
@@ -233,4 +237,118 @@ test("SubmitButton should not be disabled when all of input values are valid", a
       await userEvent.type(idInput, 'correctId1234')
     }
   }
+})
+
+
+test("SubmitButton should not be disabled when all of input values are valid", async () => {
+  const given = new Given(renderForm)
+  
+  const when1 = new When(typeValidInputValue(screen))
+  const when2 = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud1234' }
+  ))
+
+  const then = new Then(checkButtonDisabled(screen));
+
+  given.run();
+  
+  await when1.waitRun();
+  await when2.waitRun();
+
+  then.run();
+  
+
+  function checkButtonDisabled(screen: Screen) {
+    return function() {
+      const submitButton = screen.queryByText("다음")
+      expect(submitButton).not.toBeDisabled();
+    }
+  }
+
+  function typeValidInputValue(screen: Screen) {
+    return async function() {
+      const idInput = screen.getByLabelText("아이디");
+      await userEvent.type(idInput, 'correctId1234')
+    }
+  }
+})
+
+
+test("SubmitButton should push next path", async () => {
+  const given = new Given(renderForm)
+  
+  const when1 = new When(typeValidInputValue(screen))
+  const when2 = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud1234' }
+  ))
+
+  const then = new Then(checkButtonDisabled(screen));
+
+  given.run();
+  
+  await when1.waitRun();
+  await when2.waitRun();
+
+  then.run();
+  
+
+  function checkButtonDisabled(screen: Screen) {
+    return function() {
+      const submitButton = screen.queryByText("다음")
+      expect(submitButton).not.toBeDisabled();
+    }
+  }
+
+  function typeValidInputValue(screen: Screen) {
+    return async function() {
+      const idInput = screen.getByLabelText("아이디");
+      await userEvent.type(idInput, 'correctId1234')
+    }
+  }
+})
+
+test("SubmitButton should push next path", async () => {
+  const given = new Given(renderForm)
+  
+  const when1 = new When(typeValidInputValue(screen))
+  const when2 = new When(whenInputPassword(
+    screen, 
+    { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+    { password: 'wodud1234', passwordConfirm: 'wodud1234' }
+  ))
+
+  const then = new Then(checkButtonDisabled(screen));
+
+  given.run();
+  
+  await when1.waitRun();
+  await when2.waitRun();
+
+  then.run();
+  
+
+  function checkButtonDisabled(screen: Screen) {
+    return function() {
+      const submitButton = screen.queryByText("다음")
+      expect(submitButton).not.toBeDisabled();
+    }
+  }
+
+  function typeValidInputValue(screen: Screen) {
+    return async function() {
+      const idInput = screen.getByLabelText("아이디");
+      await userEvent.type(idInput, 'correctId1234')
+    }
+  }
+  
+  await fireEvent.click(screen.getByRole('button'));
+
+  expect(mockRouter).toMatchObject({ 
+    asPath: "/signin",
+    pathname: "/signin",
+  });
 })

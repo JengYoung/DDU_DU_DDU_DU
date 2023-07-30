@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-extended", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:4.0.0"],\
             ["msw", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:1.2.3"],\
             ["next", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:13.4.12"],\
+            ["next-router-mock", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:0.9.7"],\
             ["prettier", "npm:3.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:18.2.0"],\
@@ -86,6 +87,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["jest-extended", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:4.0.0"],\
             ["msw", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:1.2.3"],\
             ["next", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:13.4.12"],\
+            ["next-router-mock", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:0.9.7"],\
             ["prettier", "npm:3.0.0"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:18.2.0"],\
@@ -9187,6 +9189,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "react-dom",\
             "react",\
             "sass"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["next-router-mock", [\
+        ["npm:0.9.7", {\
+          "packageLocation": "./.yarn/cache/next-router-mock-npm-0.9.7-f41ac6057b-4732553cfb.zip/node_modules/next-router-mock/",\
+          "packageDependencies": [\
+            ["next-router-mock", "npm:0.9.7"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:0.9.7", {\
+          "packageLocation": "./.yarn/__virtual__/next-router-mock-virtual-42bce628a4/0/cache/next-router-mock-npm-0.9.7-f41ac6057b-4732553cfb.zip/node_modules/next-router-mock/",\
+          "packageDependencies": [\
+            ["next-router-mock", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:0.9.7"],\
+            ["@types/next", null],\
+            ["@types/react", "npm:18.2.17"],\
+            ["next", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:13.4.12"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/next",\
+            "@types/react",\
+            "next",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
