@@ -168,3 +168,60 @@ test("passwordConfirm hint should be rendered when value inequal with correct pa
   await when.waitRun();
   then.run();
 })
+
+test("SubmitButton should be disabled when even one is invalid", async () => {
+  const given = new Given(renderForm)
+  const when = new When(typeInputsWithInvalidConfirmValue)
+  const then = new Then(checkButtonDisabled(screen));
+
+  given.run();
+  await when.waitRun();
+  then.run();
+
+  function checkButtonDisabled(screen: Screen) {
+    return function() {
+      const submitButton = screen.queryByText("다음")
+      expect(submitButton).toBeDisabled();
+    }
+  }
+
+  async function typeInputsWithInvalidConfirmValue() {
+    const idInput = screen.getByLabelText("아이디");
+    await userEvent.type(idInput, 'correctId1234')
+
+    await whenInputPassword(
+      screen, 
+      { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+      { password: 'wodud1234', passwordConfirm: 'wodud12345' }
+    )
+  }
+})
+
+
+test("SubmitButton should not be disabled when all of input values are valid", async () => {
+  const given = new Given(renderForm)
+  const when = new When(typeInputsWithInvalidConfirmValue)
+  const then = new Then(checkButtonDisabled(screen));
+
+  given.run();
+  await when.waitRun();
+  then.run();
+
+  function checkButtonDisabled(screen: Screen) {
+    return function() {
+      const submitButton = screen.queryByText("다음")
+      expect(submitButton).not.toBeDisabled();
+    }
+  }
+
+  async function typeInputsWithInvalidConfirmValue() {
+    const idInput = screen.getByLabelText("아이디");
+    await userEvent.type(idInput, 'correctId1234')
+
+    await whenInputPassword(
+      screen, 
+      { password: '비밀번호', passwordConfirm: '비밀번호 확인' }, 
+      { password: 'wodud1234', passwordConfirm: 'wodud1234' }
+    )
+  }
+})
