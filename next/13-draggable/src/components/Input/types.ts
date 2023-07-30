@@ -6,6 +6,7 @@ export type TInputProps = {
   label?: string;
   placeholder: string;
   onFocus?: () => void;
+  onBlur?: () => void;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 

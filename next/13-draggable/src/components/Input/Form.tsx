@@ -11,6 +11,7 @@ export const FormInput = ({
   placeholder,
   isError = false, 
   onFocus,
+  onBlur,
   onChange,
 }: TFormInputProps) => {
   const errorMessageId = `${id} -error-message`;
@@ -25,6 +26,7 @@ export const FormInput = ({
         placeholder={placeholder} 
         aria-errormessage={errorMessageId}
         onFocus={onFocus}
+        onBlur={onBlur}
         onChange={onChange}
       />
       

@@ -40,11 +40,17 @@ export const SignUpForm = () => {
     }))
   }
 
-  const idFocusedValid = z.string().refine((val) => !val.length && focused.id, {
-    message: Hints.아이디_미입력
-  }).safeParse(registerState.id)
-  
-  const idFormatValid = z.string().regex(idRegex, Hints.아이디_미일치).safeParse(registerState.id);
+  const handleBlurInput = (key: TRegisterKeys) => () => {
+    setFocused((state) => ({
+      ...state,
+      [key]: false
+    }))
+  }
+
+  const idValid = z
+    .string()
+    .regex(idRegex, Hints.아이디_미일치)
+    .safeParse(registerState.id)
 
   return (
     <div>
@@ -53,9 +59,10 @@ export const SignUpForm = () => {
         value={registerState.id}
         label="아이디" 
         placeholder={Placeholders.아이디입력}
-        isError={focused.id && !idFormatValid.success}
-        hint={(idFocusedValid as SafeParseError<string>)?.error?.issues?.[0]?.message}
+        isError={focused.id && !idValid.success}
+        hint={(idValid as SafeParseError<string>)?.error?.issues?.[0]?.message}
         onFocus={handleFocusInput('id')}
+        onBlur={handleBlurInput('id')}
         onChange={handleChangeInput('id')}
       />
 

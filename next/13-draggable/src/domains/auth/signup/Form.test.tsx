@@ -1,7 +1,6 @@
 import { SignUpForm } from './Form';
 
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { Screen, render, screen } from '@testing-library/react';
 
 import { Given, Then, When } from "#/mocks/behaviors/scenarios"
 import { noAction } from '#/mocks/behaviors/noAct';
@@ -12,6 +11,11 @@ const renderForm = () => {
   render(<SignUpForm />)
 }
 
+const whenFocusInput = (labelText: string) => async () => {
+  const inputElem = screen.getByLabelText(labelText);
+  await inputElem.focus()
+}
+
 const checkPlaceholderByLabelText = <T extends string>(labelText: string, placeholder: T) => () => {
   const idInput: HTMLInputElement = screen.getByLabelText(labelText);
 
@@ -19,14 +23,15 @@ const checkPlaceholderByLabelText = <T extends string>(labelText: string, placeh
   expect(idInput.placeholder).toEqual(placeholder)
 }
 
-const checkHintsRendered = (hints: string) => () => {
-  const IdHint = screen.queryByText(hints);
+const checkHintsRendered = (screen: Screen, hint: string, shouldRendered: boolean = false) => () => {
+  const IdHint = screen.queryByText(hint);
+
+  if (shouldRendered) {
+    expect(IdHint).toBeInTheDocument();
+    return;
+  }
 
   expect(IdHint).not.toBeInTheDocument();
-}
-
-const clickAction = (elem: HTMLElement) => () => {
-  userEvent.click(elem);
 }
 
 test("Id placeholder is to be equal our Policy", () => {
@@ -62,24 +67,40 @@ test("Password Confirm placeholder is to be equal our Policy", () => {
 test("ID hint should be not rendered when user doesn't act", () => {
   const given = new Given(renderForm)
   const when = new When(noAction)
-  const then = new Then(checkHintsRendered(Hints.아이디_미입력));
+  const then = new Then(checkHintsRendered(screen, Hints.아이디_미입력));
   
   given.run();
   when.run();
   then.run();
 })
 
-test("ID hint should be rendered when focused Input with no Action", async () => {
+test("ID hint should be rendered when focused Input with click Action", async () => {
   const given = new Given(renderForm)
-  const when = new When(유저가_아이디를_클릭한_상황)
-  const then = new Then(checkHintsRendered(Hints.아이디_미입력));
+  const when = new When(whenFocusInput('아이디'))
+  const then = new Then(checkHintsRendered(screen, Hints.아이디_미입력, true));
+  
+  given.run();
+  await when.run();
+  then.run();
+})
+
+
+test("password hint should be not rendered when user doesn't act", () => {
+  const given = new Given(renderForm)
+  const when = new When(noAction)
+  const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력));
   
   given.run();
   when.run();
   then.run();
+})
 
-  function 유저가_아이디를_클릭한_상황() {
-    const inputElem = screen.getByLabelText("아이디");
-    return clickAction(inputElem)
-  }
+test("password hint should be rendered when focused Input with click Action", async () => {
+  const given = new Given(renderForm)
+  const when = new When(whenFocusInput('비밀번호'))
+  const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력, true));
+  
+  given.run();
+  when.run();
+  then.run();
 })
