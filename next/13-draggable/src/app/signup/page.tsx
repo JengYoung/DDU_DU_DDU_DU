@@ -11,10 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default async function SignupPage() {
-  const data = await check()
-
-  console.log({ data })
-
   return (
     <SignUpPage />
   )

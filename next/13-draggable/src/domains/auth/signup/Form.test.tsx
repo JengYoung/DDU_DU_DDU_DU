@@ -14,6 +14,7 @@ const renderForm = () => {
 
 const checkPlaceholderByLabelText = <T extends string>(labelText: string, placeholder: T) => () => {
   const idInput: HTMLInputElement = screen.getByLabelText(labelText);
+
   expect(idInput).toBeInTheDocument();
   expect(idInput.placeholder).toEqual(placeholder)
 }
@@ -69,13 +70,16 @@ test("ID hint should be not rendered when user doesn't act", () => {
 })
 
 test("ID hint should be rendered when focused Input with no Action", async () => {
-  const inputElem = screen.getByLabelText(Placeholders.아이디입력);
-
   const given = new Given(renderForm)
-  const when = new When(clickAction(inputElem))
+  const when = new When(유저가_아이디를_클릭한_상황)
   const then = new Then(checkHintsRendered(Hints.아이디_미입력));
   
   given.run();
   when.run();
   then.run();
+
+  function 유저가_아이디를_클릭한_상황() {
+    const inputElem = screen.getByLabelText("아이디");
+    return clickAction(inputElem)
+  }
 })
