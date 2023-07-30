@@ -34,3 +34,13 @@ test("Password placeholder is to be equal our Policy", () => {
   when.run();
   then.run();
 })
+
+test("Password Confirm placeholder is to be equal our Policy", () => {
+  const given = new Given(renderForm)
+  const when = new When(noAction)
+  const then = new Then(checkPlaceholderByLabelText("비밀번호 확인", Placeholders.비밀번호확인))
+
+  given.run();
+  when.run();
+  then.run();
+})
