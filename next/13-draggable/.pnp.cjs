@@ -30,6 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@swc/core", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:1.3.72"],\
             ["@swc/jest", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:0.2.27"],\
+            ["@testing-library/dom", "npm:9.3.1"],\
             ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@testing-library/react", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:14.0.0"],\
             ["@testing-library/user-event", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:14.4.3"],\
@@ -66,6 +67,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["13-draggable", "workspace:."],\
             ["@swc/core", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:1.3.72"],\
             ["@swc/jest", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:0.2.27"],\
+            ["@testing-library/dom", "npm:9.3.1"],\
             ["@testing-library/jest-dom", "npm:5.17.0"],\
             ["@testing-library/react", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:14.0.0"],\
             ["@testing-library/user-event", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:14.4.3"],\
@@ -3927,7 +3929,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/@testing-library-user-event-virtual-daa17c6976/0/cache/@testing-library-user-event-npm-14.4.3-2d1a75355f-852c48ea6d.zip/node_modules/@testing-library/user-event/",\
           "packageDependencies": [\
             ["@testing-library/user-event", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:14.4.3"],\
-            ["@testing-library/dom", null],\
+            ["@testing-library/dom", "npm:9.3.1"],\
             ["@types/testing-library__dom", null]\
           ],\
           "packagePeers": [\

@@ -23,8 +23,12 @@ export class Given implements Scenario {
 export class When implements Scenario {
   public callback: () => void;
 
-  constructor(callback: Given['callback']) {
+  constructor(callback: When['callback']) {
     this.callback = callback;
+  }
+
+  async waitRun() {
+    await this.callback();
   }
 
   run() {
@@ -36,7 +40,7 @@ export class When implements Scenario {
 export class Then implements Scenario {
   public callback: () => void;
 
-  constructor(callback: Given['callback']) {
+  constructor(callback: Then['callback']) {
     this.callback = callback;
   }
 

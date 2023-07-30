@@ -10,6 +10,9 @@ const customJestConfig = {
   transform: {
     '^.+\\.(t|j)sx?$': '@swc/jest',
   },
+  moduleNameMapper: {
+    '^#/(.*)$': '<rootDir>/src/$1',
+  },
 }
  
 // createJestConfig is exported in this way to ensure that next/jest can load the Next.js configuration, which is async

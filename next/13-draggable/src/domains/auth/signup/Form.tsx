@@ -1,6 +1,7 @@
 import React from 'react'
 import { Placeholders } from './constants'
 import { FormInput } from '#/components/Input/Form'
+import { z } from 'zod'
 
 export const Ids = {
   "아이디입력": "form__user-id",
@@ -14,7 +15,7 @@ export const SignUpForm = () => {
       <FormInput 
         id={Ids.아이디입력} 
         label="아이디" 
-        placeholder={Placeholders.아이디입력} 
+        placeholder={Placeholders.아이디입력}
       />
 
       <FormInput 
@@ -22,7 +23,7 @@ export const SignUpForm = () => {
         label="비밀번호" 
         placeholder={Placeholders.비밀번호입력} 
       />
-      
+
       <FormInput 
         id={Ids.비밀번호확인} 
         label="비밀번호 확인" 
