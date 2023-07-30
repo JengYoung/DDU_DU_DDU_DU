@@ -1,16 +1,34 @@
 "use client";
 
+import { useRouter } from 'next/navigation';
 import React, { ChangeEvent } from 'react'
-import { Hints, Placeholders, idRegex } from './constants'
+import { SafeParseError, ZodError, z } from 'zod'
+
 import { FormInput } from '#/components/Input/Form'
 
-import { SafeParseError, ZodError, z } from 'zod'
+import { Hints, Placeholders, idRegex } from './constants'
 import { TRegisterFocusState, TRegisterKeys, TRegisterState } from './types'
 
 export const Ids = {
   "아이디입력": "form__user-id",
   "비밀번호입력": "form__user-pw",
   "비밀번호확인": "form__user-pw-confirm"
+}
+
+type TPushButtonProps = {
+  disabled: boolean;
+  href: string;
+}
+export const PushButton = ({ disabled, href }: TPushButtonProps) => {
+  const router = useRouter();
+
+  const go = (destination: string) => () => {
+    router.push(destination)
+  }
+
+  return (
+    <button onClick={go(href)} disabled={disabled}>다음</button>
+  )
 }
 
 export const SignUpForm = () => {
@@ -65,6 +83,10 @@ export const SignUpForm = () => {
     .refine((val) => val === registerState.password, Hints.비밀번호확인_미일치)
     .safeParse(registerState.passwordConfirm)
 
+  const router = useRouter();
+
+  const isDisabledPushButton = !idValid.success || !passwordValid.success || !passwordConfirmValid.success;
+
   return (
     <div>
       <FormInput 
@@ -103,7 +125,7 @@ export const SignUpForm = () => {
         onChange={handleChangeInput('passwordConfirm')}
       />
 
-      <button disabled={!idValid.success || !passwordValid.success || !passwordConfirmValid.success}>다음</button>
+      <PushButton disabled={isDisabledPushButton} href="signin" />
     </div>
   )
 }
