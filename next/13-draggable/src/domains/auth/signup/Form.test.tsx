@@ -84,7 +84,6 @@ test("ID hint should be rendered when focused Input with click Action", async ()
   then.run();
 })
 
-
 test("password hint should be not rendered when user doesn't act", () => {
   const given = new Given(renderForm)
   const when = new When(noAction)
@@ -99,6 +98,27 @@ test("password hint should be rendered when focused Input with click Action", as
   const given = new Given(renderForm)
   const when = new When(whenFocusInput('비밀번호'))
   const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력, true));
+  
+  given.run();
+  await when.run();
+  then.run();
+})
+
+
+test("passwordConfirm hint should be not rendered when user doesn't act", () => {
+  const given = new Given(renderForm)
+  const when = new When(noAction)
+  const then = new Then(checkHintsRendered(screen, Hints.비밀번호_미입력));
+  
+  given.run();
+  when.run();
+  then.run();
+})
+
+test("passwordConfirm hint should be rendered when focused Input with click Action", async () => {
+  const given = new Given(renderForm)
+  const when = new When(whenFocusInput('비밀번호 확인'))
+  const then = new Then(checkHintsRendered(screen, Hints.비밀번호확인_미일치, true));
   
   given.run();
   await when.run();
