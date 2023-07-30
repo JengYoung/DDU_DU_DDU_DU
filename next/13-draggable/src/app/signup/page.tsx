@@ -1,5 +1,6 @@
 import { check } from '#/domains/auth/apis/check';
-import { SignUpPageContainer } from '#/domains/site-management/banners/components/Page'
+import { SignUpPage } from '#/domains/auth/signup/Page';
+
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -15,6 +16,6 @@ export default async function SignupPage() {
   console.log({ data })
 
   return (
-    <SignUpPageContainer />
+    <SignUpPage />
   )
 }

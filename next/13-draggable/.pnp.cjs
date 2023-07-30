@@ -38,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.17"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@types/styled-components", "npm:5.1.26"],\
+            ["@types/testing-library__jest-dom", "npm:5.14.9"],\
             ["encoding", "npm:0.1.13"],\
             ["eslint", "npm:8.45.0"],\
             ["eslint-config-next", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:13.4.12"],\
@@ -72,6 +73,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.17"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@types/styled-components", "npm:5.1.26"],\
+            ["@types/testing-library__jest-dom", "npm:5.14.9"],\
             ["encoding", "npm:0.1.13"],\
             ["eslint", "npm:8.45.0"],\
             ["eslint-config-next", "virtual:299f6a6d9a8a17e7344735b49d720467d4bf5800a40a33a113ce8be280f1096c6256fcf9264bea9b16ad299c59c33ba65dd9dd943415c050b824590c12d7bd94#npm:13.4.12"],\

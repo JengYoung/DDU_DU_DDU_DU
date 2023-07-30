@@ -1,5 +1,5 @@
 import { check } from '#/domains/auth/apis/check';
-import { SignUpPageContainer } from '#/domains/site-management/banners/components/Page'
+import { SignInPage } from '#/domains/auth/signin/Page';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -9,8 +9,8 @@ export const metadata: Metadata = {
   description: 'TDD로 Form을 구현해봅니다 🙆🏻',
 };
 
-export default async function SignInPage() {
+export default async function Page() {
   return (
-    <SignUpPageContainer />
+    <SignInPage />
   )
 }

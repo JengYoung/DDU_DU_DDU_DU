@@ -1,5 +1,5 @@
 import { server } from './src/mocks/server'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/extend-expect'
 
 const matchers = require('jest-extended');
 expect.extend(matchers);
